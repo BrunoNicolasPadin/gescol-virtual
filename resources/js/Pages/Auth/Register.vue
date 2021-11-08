@@ -29,6 +29,18 @@
                 <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
             </div>
 
+            <div class="mt-4">
+                <jet-label for="institucion">
+                    <div class="flex items-center">
+                        <jet-checkbox name="institucion" id="institucion" v-model:checked="form.institucion" />
+
+                        <div class="ml-2">
+                            Eres una institucion?
+                        </div>
+                    </div>
+                </jet-label>
+            </div>
+
             <div class="mt-4" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
                 <jet-label for="terms">
                     <div class="flex items-center">
@@ -86,6 +98,7 @@
                     password: '',
                     password_confirmation: '',
                     terms: false,
+                    institucion: false,
                 })
             }
         },
