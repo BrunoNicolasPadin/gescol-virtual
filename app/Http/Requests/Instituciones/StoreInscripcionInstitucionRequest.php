@@ -24,7 +24,7 @@ class StoreInscripcionInstitucionRequest extends FormRequest
     public function rules()
     {
         return [
-            'rol_id' => 'required|integer',
+            'rol_id' => 'required|max:36',
         ];
     }
 }

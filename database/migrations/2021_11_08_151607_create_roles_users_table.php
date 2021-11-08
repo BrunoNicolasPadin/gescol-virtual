@@ -17,7 +17,6 @@ class CreateRolesUsersTable extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('rol_id')->index()->constrained('roles')->onDelete('cascade');
             $table->foreignUuid('user_id')->index()->constrained('users')->onDelete('cascade');
-            $table->string('nombre');
             $table->timestamps();
         });
     }

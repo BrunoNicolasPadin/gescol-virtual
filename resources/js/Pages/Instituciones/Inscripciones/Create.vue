@@ -2,7 +2,7 @@
     <app-layout title="Instituciones - Inscripcion - Agregar">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Instituciones / {{ institucion.nombre }} / Agregar
+                Instituciones / {{ institucion.nombre }} / Inscripcion
             </h2>
         </template>
 
@@ -14,8 +14,8 @@
                             <estructura-input nombreLabel="Seleccionar tu rol en el colegio" info="Es obligatorio.">
                                 <template #inputComponente>
                                     <select v-model="form.rol_id" autofocus>
-                                        <option selected disabled value="">Seleccionar una opcion</option>
-                                        <option v-for="rol in roles" :key="rol.id" :value="rol.id">{{ rol.name }}</option>
+                                        <option selected disabled value="">Seleccionar un rol</option>
+                                        <option v-for="rol in roles" :key="rol.id" :value="rol.id">{{ rol.nombre }}</option>
                                     </select>
                                 </template>
                             </estructura-input>

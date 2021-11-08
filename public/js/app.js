@@ -26401,7 +26401,7 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   selected: "",
   disabled: "",
   value: ""
-}, "Seleccionar una opcion", -1
+}, "Seleccionar un rol", -1
 /* HOISTED */
 );
 
@@ -26419,7 +26419,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     title: "Instituciones - Inscripcion - Agregar"
   }, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_1, " Instituciones / " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.institucion.nombre) + " / Agregar ", 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_1, " Instituciones / " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.institucion.nombre) + " / Inscripcion ", 1
       /* TEXT */
       )];
     }),
@@ -26445,7 +26445,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
                   key: rol.id,
                   value: rol.id
-                }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(rol.name), 9
+                }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(rol.nombre), 9
                 /* TEXT, PROPS */
                 , _hoisted_5);
               }), 128

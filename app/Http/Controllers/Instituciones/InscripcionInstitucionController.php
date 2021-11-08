@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Instituciones;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Instituciones\StoreInscripcionInstitucionRequest;
 use App\Models\Instituciones\Institucion;
+use App\Models\Roles\Rol;
+use App\Models\Roles\RolUser;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
-use Spatie\Permission\Models\Role;
 
 class InscripcionInstitucionController extends Controller
 {
@@ -23,7 +23,7 @@ class InscripcionInstitucionController extends Controller
     {
         return Inertia::render('Instituciones/Inscripciones/Create', [
             'institucion' => Institucion::select('id', 'nombre')->findOrFail($institucion_id),
-            'roles' => Role::where('institucion_id', $institucion_id)->orderBy('name')->get(),
+            'roles' => Rol::where('institucion_id', $institucion_id)->orderBy('nombre')->get(),
         ]);
     }
 
@@ -35,9 +35,10 @@ class InscripcionInstitucionController extends Controller
      */
     public function store(StoreInscripcionInstitucionRequest $request, $institucion_id)
     {
-        $user = User::findOrFail(Auth::id());
-        $role = Role::findOrFail($request->rol_id);
-        $user->assignRole($role);
+        $rolUser = new RolUser();
+        $rolUser->rol()->associate($request->rol_id);
+        $rolUser->user()->associate(Auth::id());
+        $rolUser->save();
 
         echo 'Rol asignado al usuario';
     }
@@ -52,10 +53,11 @@ class InscripcionInstitucionController extends Controller
     {
         $user = User::where('id', $id)->first();
         return Inertia::render('Instituciones/Inscripciones/Edit', [
-            'institucion' => Institucion::select('id', 'nombre')->findOrFail($institucion_id),
-            'roles' => Role::where('institucion_id', $institucion_id)->orderBy('name')->get(),
-            'inscripcion' => $user->roles->where('institucion_id', $institucion_id),
-            'user_id' => $id,
+            'institucion' => Institucion::select('id', 'nombre')
+                ->findOrFail($institucion_id),
+            'roles' => Rol::where('institucion_id', $institucion_id)
+                ->orderBy('nombre')->get(),
+            'inscripcion' => RolUser::findOrFail($id),
         ]);
     }
 
@@ -68,13 +70,11 @@ class InscripcionInstitucionController extends Controller
      */
     public function update(StoreInscripcionInstitucionRequest $request, $institucion_id, $id)
     {
-        DB::table('model_has_roles')->where('model_id', $id)->where('role_id', $request->rol_viejo_id)->delete();
+        $rolUser = RolUser::findOrFail($id);
+        $rolUser->rol()->associate($request->rol_id);
+        $rolUser->save();
 
-        $user = User::findOrFail($id);
-        $role = Role::findOrFail($request->rol_id);
-        $user->assignRole($role);
-
-        echo 'Rol actualizado';
+        echo 'Inscripcion actualizada';
     }
 
     /**
@@ -85,6 +85,7 @@ class InscripcionInstitucionController extends Controller
      */
     public function destroy($institucion_id, $id)
     {
-        //
+        RolUser::destroy($id);
+        echo 'Inscripcion eliminada';
     }
 }
