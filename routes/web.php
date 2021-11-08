@@ -4,6 +4,7 @@ use App\Http\Controllers\Cursos\CursoController;
 use App\Http\Controllers\Instituciones\BuscadorInstitucionController;
 use App\Http\Controllers\Instituciones\InscripcionInstitucionController;
 use App\Http\Controllers\Instituciones\InstitucionController;
+use App\Http\Controllers\Materias\DocenteMateriaController;
 use App\Http\Controllers\Materias\MateriaController;
 use App\Http\Controllers\Roles\PermisoController;
 use App\Http\Controllers\Roles\RolController;
@@ -36,7 +37,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
-Route::get('buscador/instituciones', [BuscadorInstitucionController::class, 'mostrarBuscador'])->name('instituciones.mostrarBuscador');
+Route::get('buscador/instituciones', [BuscadorInstitucionController::class, 'mostrarBuscador'])
+    ->name('instituciones.mostrarBuscador');
 Route::post('buscador/instituciones/filtrar', [BuscadorInstitucionController::class, 'filtrarInstituciones'])
     ->name('instituciones.filtrarInstituciones');
 
@@ -58,8 +60,10 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::prefix('cursos/{curso_id}')->group(function () {
         Route::resource('materias', MateriaController::class);
         
-        /* Route::prefix('materias/{materia_id}')->group(function () {
+        Route::prefix('materias/{materia_id}')->group(function () {
             Route::resource('docentes', DocenteMateriaController::class)->names('materias.docentes');
-        }); */
+            Route::post('roles/docentes', [DocenteMateriaController::class, 'obtenerDocentes'])
+                ->name('materias.docentes.obtenerDocentes');
+        });
     });
 });

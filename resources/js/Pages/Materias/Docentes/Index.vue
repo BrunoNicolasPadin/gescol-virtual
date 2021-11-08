@@ -31,7 +31,7 @@
 
                             <td-componente>
                                 <template #td-contenido>
-                                    {{ docente.user.name }}
+                                    {{ docente.rol_user.user.name }}
                                 </template>
                             </td-componente>
 

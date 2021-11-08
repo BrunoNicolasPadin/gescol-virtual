@@ -2,7 +2,7 @@
 
 namespace App\Models\Materias;
 
-use App\Models\User;
+use App\Models\Roles\RolUser;
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,9 +12,9 @@ class DocenteMateria extends Model
 
     protected $table = 'docentes_materias';
 
-    public function user()
+    public function rolUser()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(RolUser::class);
     }
 
     public function materia()

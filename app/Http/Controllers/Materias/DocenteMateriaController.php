@@ -8,6 +8,8 @@ use App\Models\Cursos\Curso;
 use App\Models\Instituciones\Institucion;
 use App\Models\Materias\DocenteMateria;
 use App\Models\Materias\Materia;
+use App\Models\Roles\Rol;
+use App\Models\Roles\RolUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -29,7 +31,7 @@ class DocenteMateriaController extends Controller
                 ->findOrFail($curso_id),
             'materia' => Materia::findOrFail($materia_id),
             'docentes' => DocenteMateria::where('materia_id', $materia_id)
-                ->with('user')
+                ->with('rolUser.user')
                 ->get(),
         ]);
     }
@@ -47,8 +49,15 @@ class DocenteMateriaController extends Controller
             'curso' => Curso::select('id', 'nombre')
                 ->findOrFail($curso_id),
             'materia' => Materia::findOrFail($materia_id),
-            'docentes' => User::select('id', 'name')->role('Docente')->get(),
+            'roles' => Rol::where('institucion_id', $institucion_id)
+                ->orderBy('nombre')
+                ->get(),
         ]);
+    }
+
+    public function obtenerDocentes(Request $request, $institucion_id, $curso_id, $materia_id)
+    {
+        return RolUser::where('rol_id', $request->rol_id)->with('user:id,name')->get();
     }
 
     /**
@@ -61,7 +70,7 @@ class DocenteMateriaController extends Controller
     {
         for ($i = 0; $i < count($request->docentesMateria); $i++) { 
             $docenteMateria = new DocenteMateria();
-            $docenteMateria->user()->associate($request->docentesMateria[$i]['docente_id']);
+            $docenteMateria->rolUser()->associate($request->docentesMateria[$i]['docente_id']);
             $docenteMateria->materia()->associate($materia_id);
             $docenteMateria->save();
         }
