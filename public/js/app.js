@@ -21371,6 +21371,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     mostrarDocentes: function mostrarDocentes(materia_id) {
       this.$inertia.get(this.route('materias.docentes.index', [this.institucion.id, this.curso.id, materia_id]));
+    },
+    anotarse: function anotarse(materia_id) {
+      this.$inertia.post(this.route('materias.alumnos.store', [this.institucion.id, this.curso.id, materia_id]));
     }
   }
 }));
@@ -27163,10 +27166,11 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Acciones");
 
 var _hoisted_7 = ["onClick"];
+var _hoisted_8 = ["onClick"];
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Editar ");
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Editar ");
 
-var _hoisted_9 = ["onClick"];
+var _hoisted_10 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_th_componente = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("th-componente");
 
@@ -27208,7 +27212,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             /* STABLE */
 
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_th_componente, {
-            colspan: "3"
+            colspan: "4"
           }, {
             "th-contenido": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [_hoisted_6];
@@ -27250,12 +27254,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
                   type: "button",
                   onClick: function onClick($event) {
+                    return _ctx.anotarse(materia.id);
+                  },
+                  "class": "focus:outline-none text-white font-bold text-sm py-1 px-5 rounded-full bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
+                }, " Anotarse ", 8
+                /* PROPS */
+                , _hoisted_7)];
+              }),
+              _: 2
+              /* DYNAMIC */
+
+            }, 1024
+            /* DYNAMIC_SLOTS */
+            ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_td_componente, null, {
+              "td-contenido": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+                  type: "button",
+                  onClick: function onClick($event) {
                     return _ctx.mostrarDocentes(materia.id);
                   },
                   "class": "focus:outline-none text-white font-bold text-sm py-1 px-5 rounded-full bg-pink-500 hover:bg-pink-600 hover:shadow-lg"
                 }, " Docentes ", 8
                 /* PROPS */
-                , _hoisted_7)];
+                , _hoisted_8)];
               }),
               _: 2
               /* DYNAMIC */
@@ -27270,7 +27291,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                       href: _ctx.route('materias.edit', [_ctx.institucion.id, _ctx.curso.id, materia.id])
                     }, {
                       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                        return [_hoisted_8];
+                        return [_hoisted_9];
                       }),
                       _: 2
                       /* DYNAMIC */
@@ -27301,7 +27322,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                       }
                     }, "Eliminar", 8
                     /* PROPS */
-                    , _hoisted_9)];
+                    , _hoisted_10)];
                   }),
                   _: 2
                   /* DYNAMIC */

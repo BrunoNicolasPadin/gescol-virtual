@@ -4,6 +4,7 @@ use App\Http\Controllers\Cursos\CursoController;
 use App\Http\Controllers\Instituciones\BuscadorInstitucionController;
 use App\Http\Controllers\Instituciones\InscripcionInstitucionController;
 use App\Http\Controllers\Instituciones\InstitucionController;
+use App\Http\Controllers\Materias\AlumnoMateriaController;
 use App\Http\Controllers\Materias\DocenteMateriaController;
 use App\Http\Controllers\Materias\MateriaController;
 use App\Http\Controllers\Roles\PermisoController;
@@ -64,6 +65,8 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
             Route::resource('docentes', DocenteMateriaController::class)->names('materias.docentes');
             Route::post('roles/docentes', [DocenteMateriaController::class, 'obtenerDocentes'])
                 ->name('materias.docentes.obtenerDocentes');
+            
+            Route::resource('alumnos', AlumnoMateriaController::class)->names('materias.alumnos');
         });
     });
 });

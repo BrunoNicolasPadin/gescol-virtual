@@ -18,7 +18,7 @@
                             <template #th-contenido>Nombre</template>
                         </th-componente>
 
-                        <th-componente colspan=3>
+                        <th-componente colspan=4>
                             <template #th-contenido>Acciones</template>
                         </th-componente>
                     </template>
@@ -32,6 +32,15 @@
                             <td-componente>
                                 <template #td-contenido>
                                     {{ materia.nombre }}
+                                </template>
+                            </td-componente>
+
+                            <td-componente>
+                                <template #td-contenido>
+                                    <button type="button" @click="anotarse(materia.id)" 
+                                        class="focus:outline-none text-white font-bold text-sm py-1 px-5 rounded-full bg-blue-500 hover:bg-blue-600 hover:shadow-lg">
+                                        Anotarse
+                                    </button>
                                 </template>
                             </td-componente>
 
@@ -110,6 +119,10 @@
             mostrarDocentes(materia_id) {
                 this.$inertia.get(this.route('materias.docentes.index', [this.institucion.id, this.curso.id, materia_id]));
             },
+
+            anotarse(materia_id) {
+                this.$inertia.post(this.route('materias.alumnos.store', [this.institucion.id, this.curso.id, materia_id]));
+            }
         }
     })
 </script>
