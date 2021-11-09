@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Archivos\ArchivoController;
 use App\Http\Controllers\Cursos\CursoController;
 use App\Http\Controllers\Evaluaciones\EvaluacionController;
 use App\Http\Controllers\Instituciones\BuscadorInstitucionController;
@@ -75,3 +76,5 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
         });
     });
 });
+
+Route::resource('archivos', ArchivoController::class);

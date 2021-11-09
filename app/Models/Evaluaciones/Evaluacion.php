@@ -2,6 +2,7 @@
 
 namespace App\Models\Evaluaciones;
 
+use App\Models\Archivos\Archivo;
 use App\Models\Materias\Materia;
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
@@ -21,5 +22,10 @@ class Evaluacion extends Model
     public function materia()
     {
         return $this->belongsTo(Materia::class);
+    }
+
+    public function archivos()
+    {
+        return $this->morphMany(Archivo::class, 'fileable');
     }
 }

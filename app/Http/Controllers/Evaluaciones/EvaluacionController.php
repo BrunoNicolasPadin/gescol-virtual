@@ -113,6 +113,7 @@ class EvaluacionController extends Controller
                 'descripcion' => $evaluacion->descripcion,
                 'fechaHoraComienzo' => Carbon::parse($evaluacion->fechaHoraComienzo)->format('d/m/y - H:i:s'),
                 'fechaHoraFinalizacion' => Carbon::parse($evaluacion->fechaHoraFinalizacion)->format('d/m/y - H:i:s'),
+                'archivos' => $evaluacion->archivos,
             ],
         ]);
     }

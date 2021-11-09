@@ -7,9 +7,13 @@
             </h2>
         </template>
 
+        <!-- <button type="button" @click="cargarArchivos()">
+            Cargar archivos
+        </button> -->
+
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="">
+                <div class="my-3">
                     <h2 class="uppercase text-xl font-semibold text-gray-700 my-2">Informacion</h2>
 
                     <div class="bg-white border border-gray-200 p-3 text-lg">
@@ -30,6 +34,17 @@
                     <div class="bg-white border border-gray-200 p-3 text-lg">
                         <span class="font-semibold">Descripcion</span>:
                         <p class="whitespace-pre-line">{{ evaluacion.descripcion }}</p>
+                    </div>
+                </div>
+
+                <div class="my-3">
+                    <h2 class="uppercase text-xl font-semibold text-gray-700 my-2">Archivos</h2>
+
+                    <div v-for="archivo in evaluacion.archivos" :key="archivo.id" 
+                        class="bg-white border border-gray-200 p-3 text-md">
+                        <a :href="'http://127.0.0.1:8000/storage/app/Evaluaciones/' + archivo.archivo" target="_blank" rel="noopener noreferrer">
+                            {{ archivo.archivo }}
+                        </a>
                     </div>
                 </div>
             </div>
@@ -65,8 +80,20 @@
             evaluacion: Object,
         },
 
+        data() {
+            return {
+                datos: {
+                    id: this.evaluacion.id,
+                    type: 'App' + String.raw`\Models` + String.raw`\Evaluaciones` + String.raw`\Evaluacion`,
+                    carpeta: 'Evaluaciones/',
+                }
+            }
+        },
+
         methods: {
-            
+            cargarArchivos() {
+                this.$inertia.get(this.route('archivos.create'), this.datos)
+            }
         }
     })
 </script>
