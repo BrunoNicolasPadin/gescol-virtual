@@ -2,7 +2,7 @@
     <app-layout title="Materias">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Instituciones / {{ institucion.nombre }} / Cursos / {{ curso.nombre }} / Materias
+                Instituciones / {{ institucion.nombre }} / Cursos / {{ curso.nombre }} / Materias / {{ materia.nombre }} / Evaluaciones
             </h2>
         </template>
 
@@ -18,20 +18,33 @@
                             <template #th-contenido>Nombre</template>
                         </th-componente>
 
-                        <th-componente colspan=4>
+                        <th-componente>
+                            <template #th-contenido>Comienza - Finaliza</template>
+                        </th-componente>
+
+                        <th-componente colspan=2>
                             <template #th-contenido>Acciones</template>
                         </th-componente>
                     </template>
 
                     <template #tr>
-                        <tr v-for="(materia, index) in materias" :key="materia.id" class="border-b border-gray-300">
+                        <tr v-for="(evaluacion, index) in evaluacionesFiltradas.data" :key="evaluacion.id" class="border-b border-gray-300">
                             <td-componente>
                                 <template #td-contenido>{{ index + 1 }}</template>
                             </td-componente>
 
                             <td-componente>
                                 <template #td-contenido>
-                                    {{ materia.nombre }}
+                                    <Link :href="route('evaluaciones.show', [institucion.id, curso.id, materia.id, evaluacion.id])"
+                                        class="hover:underline">
+                                        {{ evaluacion.nombre }}
+                                    </Link>
+                                </template>
+                            </td-componente>
+
+                            <td-componente>
+                                <template #td-contenido>
+                                    {{ evaluacion.fechaHoraComienzo }} a {{ evaluacion.fechaHoraFinalizacion }}
                                 </template>
                             </td-componente>
 
@@ -46,27 +59,9 @@
 
                             <td-componente>
                                 <template #td-contenido>
-                                    <button type="button" @click="mostrarEvaluaciones(materia.id)" 
-                                        class="focus:outline-none text-white font-bold text-sm py-1 px-5 rounded-full bg-blue-500 hover:bg-blue-600 hover:shadow-lg">
-                                        Evaluaciones
-                                    </button>
-                                </template>
-                            </td-componente>
-
-                            <td-componente>
-                                <template #td-contenido>
-                                    <button type="button" @click="mostrarDocentes(materia.id)" 
-                                        class="focus:outline-none text-white font-bold text-sm py-1 px-5 rounded-full bg-pink-500 hover:bg-pink-600 hover:shadow-lg">
-                                        Docentes
-                                    </button>
-                                </template>
-                            </td-componente>
-
-                            <td-componente>
-                                <template #td-contenido>
                                     <editar>
                                         <template #contenido>
-                                            <Link :href="route('materias.edit', [institucion.id, curso.id, materia.id])">
+                                            <Link :href="route('evaluaciones.edit', [institucion.id, curso.id, materia.id, evaluacion.id])">
                                                 Editar
                                             </Link>
                                         </template>
@@ -78,7 +73,7 @@
                                 <template #td-contenido>
                                     <eliminar>
                                         <template #contenido>
-                                            <span @click="destroy(materia.id)">Eliminar</span>
+                                            <span @click="destroy(evaluacion.id)">Eliminar</span>
                                         </template>
                                     </eliminar>
                                 </template>
@@ -86,6 +81,14 @@
                         </tr>
                     </template>
                 </estructura-tabla>
+
+                <div class="flex flex-wrap my-3">
+                    <div v-for="(link, index, key) in evaluacionesFiltradas.links" :key="key">
+                        <button @click="otraPagina(link.label)" 
+                        class="mr-1 mb-1 px-4 py-3 text-sm leading-4 border border-black rounded hover:bg-white" 
+                        :class="{ 'bg-white': link.active }" v-html="link.label" />
+                    </div>
+                </div>
             </div>
         </div>
     </app-layout>
@@ -115,27 +118,36 @@
         props: {
             institucion: Object,
             curso: Object,
-            materias: Array,
+            materia: Object,
+            evaluaciones: Object,
+        },
+
+        data() {
+            return {
+                evaluacionesFiltradas: this.evaluaciones,
+                form: {
+                    page: 1,
+                }
+            }
         },
 
         methods: {
-            destroy(materia_id) {
-                if (confirm('¿Estás seguro de que deseas eliminar esta materia?')) {
-                    this.$inertia.delete(this.route('materias.destroy', [this.institucion.id, this.curso.id, materia_id]));
+            destroy(evaluacion_id) {
+                if (confirm('¿Estás seguro de que deseas eliminar esta evaluacion?')) {
+                    this.$inertia.delete(this.route('evaluaciones.destroy', [this.institucion.id, this.curso.id, this.materia.id, evaluacion_id]));
                 }
             },
 
-            mostrarDocentes(materia_id) {
-                this.$inertia.get(this.route('materias.docentes.index', [this.institucion.id, this.curso.id, materia_id]));
+            otraPagina(index) {
+                this.form.page = index
+                axios.post(this.route('evaluaciones.paginarEvaluaciones', [this.institucion.id, this.curso.id, this.materia.id]), this.form)
+                .then(response => {
+                    this.evaluacionesFiltradas = response.data
+                })
+                .catch(e => {
+                    alert('Ocurrió un error pero no es tu culpa. Mejor inténtalo mas tarde.');
+                })
             },
-
-            mostrarEvaluaciones(materia_id) {
-                this.$inertia.get(this.route('evaluaciones.index', [this.institucion.id, this.curso.id, materia_id]));
-            },
-
-            anotarse(materia_id) {
-                this.$inertia.post(this.route('materias.alumnos.store', [this.institucion.id, this.curso.id, materia_id]));
-            }
         }
     })
 </script>

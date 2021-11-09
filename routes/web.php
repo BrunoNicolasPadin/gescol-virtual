@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Cursos\CursoController;
+use App\Http\Controllers\Evaluaciones\EvaluacionController;
 use App\Http\Controllers\Instituciones\BuscadorInstitucionController;
 use App\Http\Controllers\Instituciones\InscripcionInstitucionController;
 use App\Http\Controllers\Instituciones\InstitucionController;
@@ -67,6 +68,10 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
                 ->name('materias.docentes.obtenerDocentes');
             
             Route::resource('alumnos', AlumnoMateriaController::class)->names('materias.alumnos');
+
+            Route::resource('evaluaciones', EvaluacionController::class);
+            Route::post('evaluaciones/paginarEvaluaciones', [EvaluacionController::class, 'paginarEvaluaciones'])
+                ->name('evaluaciones.paginarEvaluaciones');
         });
     });
 });
