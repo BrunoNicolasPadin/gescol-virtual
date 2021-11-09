@@ -1,8 +1,9 @@
 <template>
-    <app-layout title="Evaluaciones">
+    <app-layout title="Entregas">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Instituciones / {{ institucion.nombre }} / Cursos / {{ curso.nombre }} / Materias / {{ materia.nombre }} / Evaluaciones
+                Instituciones / {{ institucion.nombre }} / Cursos / {{ curso.nombre }} / Materias / {{ materia.nombre }} / Evaluaciones / 
+                {{ evaluacion.nombre }} / Entregas
             </h2>
         </template>
 
@@ -15,11 +16,7 @@
                         </th-componente>
 
                         <th-componente>
-                            <template #th-contenido>Nombre</template>
-                        </th-componente>
-
-                        <th-componente>
-                            <template #th-contenido>Comienza - Finaliza</template>
+                            <template #th-contenido>Alumno</template>
                         </th-componente>
 
                         <th-componente colspan=3>
@@ -28,31 +25,22 @@
                     </template>
 
                     <template #tr>
-                        <tr v-for="(evaluacion, index) in evaluacionesFiltradas.data" :key="evaluacion.id" class="border-b border-gray-300">
+                        <tr v-for="(entrega, index) in entregas" :key="entrega.id" class="border-b border-gray-300">
                             <td-componente>
                                 <template #td-contenido>{{ index + 1 }}</template>
                             </td-componente>
 
                             <td-componente>
                                 <template #td-contenido>
-                                    <Link :href="route('evaluaciones.show', [institucion.id, curso.id, materia.id, evaluacion.id])"
-                                        class="hover:underline">
-                                        {{ evaluacion.nombre }}
-                                    </Link>
+                                    {{ entrega.alumno_materia.rol_user.user.name }}
                                 </template>
                             </td-componente>
 
                             <td-componente>
                                 <template #td-contenido>
-                                    {{ evaluacion.fechaHoraComienzo }} a {{ evaluacion.fechaHoraFinalizacion }}
-                                </template>
-                            </td-componente>
-
-                            <td-componente>
-                                <template #td-contenido>
-                                    <button type="button" @click="mostrarEntregas(evaluacion.id)" 
+                                    <button type="button" @click="mostrarEntrega(entrega.id)" 
                                         class="focus:outline-none text-white font-bold text-sm py-1 px-5 rounded-full bg-blue-500 hover:bg-blue-600 hover:shadow-lg">
-                                        Entregas
+                                        Ver
                                     </button>
                                 </template>
                             </td-componente>
@@ -61,8 +49,8 @@
                                 <template #td-contenido>
                                     <editar>
                                         <template #contenido>
-                                            <Link :href="route('evaluaciones.edit', [institucion.id, curso.id, materia.id, evaluacion.id])">
-                                                Editar
+                                            <Link :href="route('entregas.edit', [institucion.id, curso.id, materia.id, evaluacion.id, entrega.id])">
+                                                Calificar
                                             </Link>
                                         </template>
                                     </editar>
@@ -73,7 +61,7 @@
                                 <template #td-contenido>
                                     <eliminar>
                                         <template #contenido>
-                                            <span @click="destroy(evaluacion.id)">Eliminar</span>
+                                            <span @click="destroy(entrega.id)">Eliminar</span>
                                         </template>
                                     </eliminar>
                                 </template>
@@ -81,14 +69,6 @@
                         </tr>
                     </template>
                 </estructura-tabla>
-
-                <div class="flex flex-wrap my-3">
-                    <div v-for="(link, index, key) in evaluacionesFiltradas.links" :key="key">
-                        <button @click="otraPagina(link.label)" 
-                        class="mr-1 mb-1 px-4 py-3 text-sm leading-4 border border-black rounded hover:bg-white" 
-                        :class="{ 'bg-white': link.active }" v-html="link.label" />
-                    </div>
-                </div>
             </div>
         </div>
     </app-layout>
@@ -119,38 +99,19 @@
             institucion: Object,
             curso: Object,
             materia: Object,
-            evaluaciones: Object,
-        },
-
-        data() {
-            return {
-                evaluacionesFiltradas: this.evaluaciones,
-                form: {
-                    page: 1,
-                }
-            }
+            evaluacion: Object,
+            entregas: Array,
         },
 
         methods: {
-            destroy(evaluacion_id) {
+            destroy(entrega_id) {
                 if (confirm('¿Estás seguro de que deseas eliminar esta evaluacion?')) {
-                    this.$inertia.delete(this.route('evaluaciones.destroy', [this.institucion.id, this.curso.id, this.materia.id, evaluacion_id]));
+                    this.$inertia.delete(this.route('entregas.destroy', [this.institucion.id, this.curso.id, this.materia.id, this.evaluacion.id, entrega_id]));
                 }
             },
 
-            otraPagina(index) {
-                this.form.page = index
-                axios.post(this.route('evaluaciones.paginarEvaluaciones', [this.institucion.id, this.curso.id, this.materia.id]), this.form)
-                .then(response => {
-                    this.evaluacionesFiltradas = response.data
-                })
-                .catch(e => {
-                    alert('Ocurrió un error pero no es tu culpa. Mejor inténtalo mas tarde.');
-                })
-            },
-
-            mostrarEntregas(evaluacion_id) {
-                this.$inertia.get(this.route('entregas.index', [this.institucion.id, this.curso.id, this.materia.id, evaluacion_id]))
+            mostrarEntrega(entrega_id) {
+                this.$inertia.get(this.route('entregas.show', [this.institucion.id, this.curso.id, this.materia.id, this.evaluacion.id, entrega_id]))
             }
         }
     })

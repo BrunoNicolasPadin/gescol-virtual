@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Archivos\ArchivoController;
 use App\Http\Controllers\Cursos\CursoController;
+use App\Http\Controllers\Entregas\EntregaController;
 use App\Http\Controllers\Evaluaciones\EvaluacionController;
 use App\Http\Controllers\Instituciones\BuscadorInstitucionController;
 use App\Http\Controllers\Instituciones\InscripcionInstitucionController;
@@ -73,6 +74,10 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
             Route::resource('evaluaciones', EvaluacionController::class);
             Route::post('evaluaciones/paginarEvaluaciones', [EvaluacionController::class, 'paginarEvaluaciones'])
                 ->name('evaluaciones.paginarEvaluaciones');
+            
+            Route::prefix('evaluaciones/{evaluacion_id}')->group(function () {
+                Route::resource('entregas', EntregaController::class);
+            });
         });
     });
 });
