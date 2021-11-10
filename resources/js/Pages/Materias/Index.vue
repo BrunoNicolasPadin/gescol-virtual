@@ -18,7 +18,7 @@
                             <template #th-contenido>Nombre</template>
                         </th-componente>
 
-                        <th-componente colspan=4>
+                        <th-componente colspan=5>
                             <template #th-contenido>Acciones</template>
                         </th-componente>
                     </template>
@@ -43,6 +43,15 @@
                                     </button>
                                 </template>
                             </td-componente> -->
+
+                            <td-componente>
+                                <template #td-contenido>
+                                    <button type="button" @click="mostrarClases(materia.id)" 
+                                        class="focus:outline-none text-white font-bold text-sm py-1 px-5 rounded-full bg-green-500 hover:bg-green-600 hover:shadow-lg">
+                                        Clases
+                                    </button>
+                                </template>
+                            </td-componente>
 
                             <td-componente>
                                 <template #td-contenido>
@@ -131,6 +140,10 @@
 
             mostrarEvaluaciones(materia_id) {
                 this.$inertia.get(this.route('evaluaciones.index', [this.institucion.id, this.curso.id, materia_id]));
+            },
+
+            mostrarClases(materia_id) {
+                this.$inertia.get(this.route('clases.index', [this.institucion.id, this.curso.id, materia_id]));
             },
 
             anotarse(materia_id) {

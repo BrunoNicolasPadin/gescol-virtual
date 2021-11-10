@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Archivos\ArchivoController;
+use App\Http\Controllers\Clases\ClaseController;
 use App\Http\Controllers\Correcciones\CorreccionController;
 use App\Http\Controllers\Cursos\CursoController;
 use App\Http\Controllers\Entregas\EntregaController;
@@ -83,6 +84,10 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
                     Route::resource('correcciones', CorreccionController::class);
                 });
             });
+
+            Route::resource('clases', ClaseController::class);
+            Route::post('clases/paginarClases', [ClaseController::class, 'paginarClases'])
+                ->name('clases.paginarClases');
         });
     });
 });
