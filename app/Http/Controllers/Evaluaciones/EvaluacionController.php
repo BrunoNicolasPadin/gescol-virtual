@@ -99,7 +99,7 @@ class EvaluacionController extends Controller
      */
     public function show($institucion_id, $curso_id, $materia_id, $id)
     {
-        $evaluacion = Evaluacion::findOrFail($id);
+        $evaluacion = Evaluacion::with('comentarios.user')->findOrFail($id);
 
         return Inertia::render('Evaluaciones/Show', [
             'institucion' => Institucion::select('id', 'nombre')
@@ -114,8 +114,16 @@ class EvaluacionController extends Controller
                 'fechaHoraComienzo' => Carbon::parse($evaluacion->fechaHoraComienzo)->format('d/m/y - H:i:s'),
                 'fechaHoraFinalizacion' => Carbon::parse($evaluacion->fechaHoraFinalizacion)->format('d/m/y - H:i:s'),
                 'archivos' => $evaluacion->archivos,
+                'comentarios' => $evaluacion->comentarios()->paginate(10),
             ],
         ]);
+    }
+
+    public function paginarComentarios(Request $request, $institucion_id, $curso_id, $materia_id, $id)
+    {
+        $evaluacion = Evaluacion::with('comentarios.user')->findOrFail($id);
+        return $evaluacion->comentarios()->paginate(1);
+
     }
 
     /**

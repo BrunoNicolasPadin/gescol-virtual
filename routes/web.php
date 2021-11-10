@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Archivos\ArchivoController;
 use App\Http\Controllers\Clases\ClaseController;
+use App\Http\Controllers\Comentarios\ComentarioController;
 use App\Http\Controllers\Correcciones\CorreccionController;
 use App\Http\Controllers\Cursos\CursoController;
 use App\Http\Controllers\Entregas\EntregaController;
@@ -80,16 +81,26 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
             Route::prefix('evaluaciones/{evaluacion_id}')->group(function () {
                 Route::resource('entregas', EntregaController::class);
 
+                Route::post('paginarComentarios', [EvaluacionController::class, 'paginarComentarios'])
+                    ->name('evaluaciones.paginarComentarios');
+
                 Route::prefix('entregas/{entrega_id}')->group(function () {
                     Route::resource('correcciones', CorreccionController::class);
+                    Route::post('paginarComentarios', [EntregaController::class, 'paginarComentarios'])
+                        ->name('entregas.paginarComentarios');
                 });
             });
 
             Route::resource('clases', ClaseController::class);
             Route::post('clases/paginarClases', [ClaseController::class, 'paginarClases'])
                 ->name('clases.paginarClases');
+            Route::prefix('clases/{clase_id}')->group(function () {
+                Route::post('paginarComentarios', [ClaseController::class, 'paginarComentarios'])
+                    ->name('clases.paginarComentarios');
+            });
         });
     });
 });
 
 Route::resource('archivos', ArchivoController::class);
+Route::resource('comentarios', ComentarioController::class);

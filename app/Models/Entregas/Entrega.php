@@ -3,6 +3,7 @@
 namespace App\Models\Entregas;
 
 use App\Models\Archivos\Archivo;
+use App\Models\Comentarios\Comentario;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Materias\AlumnoMateria;
 use App\Traits\Uuids;
@@ -31,5 +32,10 @@ class Entrega extends Model
     public function archivos()
     {
         return $this->morphMany(Archivo::class, 'fileable');
+    }
+
+    public function comentarios()
+    {
+        return $this->morphMany(Comentario::class, 'commentable')->orderBy('created_at', 'DESC');
     }
 }

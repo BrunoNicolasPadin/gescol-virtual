@@ -43,7 +43,7 @@ class EntregaController extends Controller
      */
     public function show($institucion_id, $curso_id, $materia_id, $evaluacion_id, $id)
     {
-        $entrega = Entrega::with('alumnoMateria.rolUser.user')->findOrFail($id);
+        $entrega = Entrega::with(['alumnoMateria.rolUser.user', 'comentarios.user'])->findOrFail($id);
 
         return Inertia::render('Entregas/Show', [
             'institucion' => Institucion::select('id', 'nombre')
@@ -59,8 +59,16 @@ class EntregaController extends Controller
                 'comentario' => $entrega->comentario,
                 'alumno' => $entrega->alumnoMateria->rolUser->user->name,
                 'archivos' => $entrega->archivos,
+                'comentarios' => $entrega->comentarios()->paginate(10),
             ],
         ]);
+    }
+
+    public function paginarComentarios(Request $request, $institucion_id, $curso_id, $materia_id, $evaluacion_id, $id)
+    {
+        $entrega = Entrega::with('comentarios.user')->findOrFail($id);
+        return $entrega->comentarios()->paginate(10);
+
     }
 
     /**

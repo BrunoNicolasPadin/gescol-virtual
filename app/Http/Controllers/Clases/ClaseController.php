@@ -80,7 +80,7 @@ class ClaseController extends Controller
      */
     public function show($institucion_id, $curso_id, $materia_id, $id)
     {
-        $clase = Clase::findOrFail($id);
+        $clase = Clase::with('comentarios.user')->findOrFail($id);
 
         return Inertia::render('Clases/Show', [
             'institucion' => Institucion::select('id', 'nombre')
@@ -93,8 +93,16 @@ class ClaseController extends Controller
                 'nombre' => $clase->nombre,
                 'descripcion' => $clase->descripcion,
                 'archivos' => $clase->archivos,
+                'comentarios' => $clase->comentarios()->paginate(1),
             ],
         ]);
+    }
+
+    public function paginarComentarios(Request $request, $institucion_id, $curso_id, $materia_id, $id)
+    {
+        $clase = Clase::with('comentarios.user')->findOrFail($id);
+        return $clase->comentarios()->paginate(1);
+
     }
 
     /**
