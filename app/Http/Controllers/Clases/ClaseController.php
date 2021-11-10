@@ -93,7 +93,7 @@ class ClaseController extends Controller
                 'nombre' => $clase->nombre,
                 'descripcion' => $clase->descripcion,
                 'archivos' => $clase->archivos,
-                'comentarios' => $clase->comentarios()->paginate(1),
+                'comentarios' => $clase->comentarios()->paginate(10),
             ],
         ]);
     }
@@ -101,7 +101,7 @@ class ClaseController extends Controller
     public function paginarComentarios(Request $request, $institucion_id, $curso_id, $materia_id, $id)
     {
         $clase = Clase::with('comentarios.user')->findOrFail($id);
-        return $clase->comentarios()->paginate(1);
+        return $clase->comentarios()->paginate(10);
 
     }
 

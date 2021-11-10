@@ -122,7 +122,7 @@ class EvaluacionController extends Controller
     public function paginarComentarios(Request $request, $institucion_id, $curso_id, $materia_id, $id)
     {
         $evaluacion = Evaluacion::with('comentarios.user')->findOrFail($id);
-        return $evaluacion->comentarios()->paginate(1);
+        return $evaluacion->comentarios()->paginate(10);
 
     }
 
