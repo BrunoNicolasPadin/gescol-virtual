@@ -42,6 +42,17 @@
                         </a>
                     </div>
                 </div>
+
+                <div class="my-3">
+                    <h2 class="uppercase text-xl font-semibold text-gray-700 my-2">Correcciones</h2>
+
+                    <div v-for="correccion in correcciones" :key="correccion.id" 
+                        class="bg-white border border-gray-200 p-3 text-md">
+                        <a :href="'http://127.0.0.1:8000/storage/app/Correcciones/' + correccion.archivo" target="_blank" rel="noopener noreferrer">
+                            {{ correccion.archivo }}
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </app-layout>
@@ -74,6 +85,7 @@
             materia: Object,
             evaluacion: Object,
             entrega: Object,
+            correcciones: Array,
         },
 
         data() {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Archivos;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Archivos\StoreArchivoRequest;
 use App\Models\Archivos\Archivo;
 use App\Services\Archivos\ArchivoService;
 use Illuminate\Http\Request;
@@ -44,7 +45,7 @@ class ArchivoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreArchivoRequest $request)
     {
         $archivo = new Archivo();
         $archivo->fileable_type = $request->type;

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Archivos\ArchivoController;
+use App\Http\Controllers\Correcciones\CorreccionController;
 use App\Http\Controllers\Cursos\CursoController;
 use App\Http\Controllers\Entregas\EntregaController;
 use App\Http\Controllers\Evaluaciones\EvaluacionController;
@@ -77,6 +78,10 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
             
             Route::prefix('evaluaciones/{evaluacion_id}')->group(function () {
                 Route::resource('entregas', EntregaController::class);
+
+                Route::prefix('entregas/{entrega_id}')->group(function () {
+                    Route::resource('correcciones', CorreccionController::class);
+                });
             });
         });
     });

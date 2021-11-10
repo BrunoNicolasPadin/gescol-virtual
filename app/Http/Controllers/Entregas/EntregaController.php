@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entregas;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Entregas\StoreEntregaRequest;
+use App\Models\Correcciones\Correccion;
 use App\Models\Cursos\Curso;
 use App\Models\Entregas\Entrega;
 use App\Models\Evaluaciones\Evaluacion;
@@ -51,6 +52,7 @@ class EntregaController extends Controller
                 ->findOrFail($curso_id),
             'materia' => Materia::findOrFail($materia_id),
             'evaluacion' => Evaluacion::findOrFail($evaluacion_id),
+            'correcciones' => Correccion::where('entrega_id', $id)->get(),
             'entrega' => [
                 'id' => $entrega->id,
                 'calificacion' => $entrega->calificacion,
