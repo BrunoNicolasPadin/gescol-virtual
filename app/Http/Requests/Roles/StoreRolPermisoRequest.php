@@ -24,7 +24,7 @@ class StoreRolPermisoRequest extends FormRequest
     public function rules()
     {
         return [
-            'permiso_id' => 'required|integer',
+            'permiso_id' => 'required|max:36',
         ];
     }
 }

@@ -1,8 +1,8 @@
 <template>
-    <app-layout title="Instituciones - Roles - Permisos">
+    <app-layout title="Roles - Permisos">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Instituciones / {{ institucion.nombre }} / Roles / {{ rol.name }} / Permisos
+                Instituciones / {{ institucion.nombre }} / Roles / {{ rol.nombre }} / Permisos
             </h2>
         </template>
 
@@ -10,7 +10,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div v-for="permiso in permisos" :key="permiso.id" class="bg-white rounded-md shadow-md p-2 my-3 grid grid-cols-2">
                     <div class="font-bold">
-                        {{ permiso.name }}
+                        {{ permiso.nombre }}
                     </div>
                     <div class="flex justify-end">
                         <button type="button" name="botonAgregar" @click="submit(permiso.id)"

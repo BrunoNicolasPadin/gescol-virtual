@@ -32505,10 +32505,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, {
-    title: "Instituciones - Roles - Permisos"
+    title: "Roles - Permisos"
   }, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_1, " Instituciones / " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.institucion.nombre) + " / Roles / " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.rol.name) + " / Permisos ", 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_1, " Instituciones / " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.institucion.nombre) + " / Roles / " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.rol.nombre) + " / Permisos ", 1
       /* TEXT */
       )];
     }),
@@ -32517,7 +32517,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           key: permiso.id,
           "class": "bg-white rounded-md shadow-md p-2 my-3 grid grid-cols-2"
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(permiso.name), 1
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(permiso.nombre), 1
         /* TEXT */
         ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
           type: "button",
