@@ -3,6 +3,7 @@
 use App\Http\Controllers\Archivos\ArchivoController;
 use App\Http\Controllers\Clases\ClaseController;
 use App\Http\Controllers\Comentarios\ComentarioController;
+use App\Http\Controllers\Comentarios\RespuestaController;
 use App\Http\Controllers\Correcciones\CorreccionController;
 use App\Http\Controllers\Cursos\CursoController;
 use App\Http\Controllers\Entregas\EntregaController;
@@ -103,4 +104,10 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
 });
 
 Route::resource('archivos', ArchivoController::class);
+
 Route::resource('comentarios', ComentarioController::class);
+Route::prefix('comentarios/{comentario_id}')->group(function () {
+    Route::resource('respuestas', RespuestaController::class);
+    Route::post('respuestas/paginarRespuestas', [RespuestaController::class, 'paginarRespuestas'])
+        ->name('respuestas.paginarRespuestas');
+});

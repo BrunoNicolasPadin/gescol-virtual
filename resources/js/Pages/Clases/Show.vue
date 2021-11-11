@@ -1,5 +1,5 @@
 <template>
-    <app-layout title="Materias">
+    <app-layout title="Clase">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Instituciones / {{ institucion.nombre }} / Cursos / {{ curso.nombre }} / Materias / {{ materia.nombre }} / 
@@ -66,7 +66,13 @@
                             class="bg-white p-3 border border-gray-200 rounded-sm shadow-sm my-3">
                             <p class="whitespace-pre-line text-xl font-semibold">{{ comentario.contenido }}</p>
                             <div class="grid grid-cols-2">
-                                <h2 class="mt-5 font-extralight text-sm">{{ comentario.user.name }} - {{ convertirFechaHora(comentario.updated_at)}}</h2>
+                                <h2 class="mt-5 font-extralight text-sm">
+                                    {{ comentario.user.name }} - 
+                                    {{ convertirFechaHora(comentario.updated_at)}} - 
+                                    <Link :href="route('respuestas.index', comentario.id)" class="hover:underline">
+                                        Respuestas
+                                    </Link>
+                                </h2>
                                 <div class="flex justify-end">
                                     <button type="button" @click="editarComentario(comentario.id, comentario.contenido)" 
                                         class="mr-2 focus:outline-none text-white font-bold text-sm py-0.5 px-4 rounded-full bg-yellow-500 hover:bg-yellow-600 hover:shadow-lg">
@@ -102,6 +108,7 @@
     import EstructuraInput from '@/Shared/Formulario/EstructuraInput'
     import InputComponente from '@/Shared/Formulario/InputComponente'
     import Guardar from '@/Shared/Botones/Guardar'
+    import { Link } from '@inertiajs/inertia-vue3';
 
     export default defineComponent({
         components: {
@@ -110,6 +117,7 @@
             EstructuraInput,
             InputComponente,
             Guardar,
+            Link,
         },
 
         props: {
