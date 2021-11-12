@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Roles\RolUser;
 use App\Traits\Uuids;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -61,4 +62,14 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function obtenerPermisos($permiso)
+    {
+        return $this->hasMany(RolUser::class)
+            ->join('roles', 'roles_users.rol_id', 'roles.id')
+            ->join('permisos_roles', 'roles.id', 'permisos_roles.rol_id')
+            ->join('permisos', 'permisos_roles.permiso_id', 'permisos.id')
+            ->where('permisos.nombre', $permiso)
+            ->exists();
+    }
 }
