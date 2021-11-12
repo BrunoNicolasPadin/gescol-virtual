@@ -14,6 +14,8 @@ use App\Http\Controllers\Instituciones\InstitucionController;
 use App\Http\Controllers\Materias\AlumnoMateriaController;
 use App\Http\Controllers\Materias\DocenteMateriaController;
 use App\Http\Controllers\Materias\MateriaController;
+use App\Http\Controllers\Paneles\Cursos\PanelCursoController;
+use App\Http\Controllers\Paneles\PanelController;
 use App\Http\Controllers\Roles\PermisoController;
 use App\Http\Controllers\Roles\RolController;
 use App\Http\Controllers\Roles\RolPermisoController;
@@ -110,4 +112,14 @@ Route::prefix('comentarios/{comentario_id}')->group(function () {
     Route::resource('respuestas', RespuestaController::class);
     Route::post('respuestas/paginarRespuestas', [RespuestaController::class, 'paginarRespuestas'])
         ->name('respuestas.paginarRespuestas');
+});
+
+//Panel
+Route::prefix('panel')->group(function () {
+    Route::get('', [PanelController::class, 'mostrarInicio'])->name('panel.mostrarInicio');
+    
+    Route::prefix('instituciones/{institucion_id}')->group(function () {
+        Route::get('cursos', [PanelCursoController::class, 'mostrarCursos'])->name('panel.cursos');
+    
+    });
 });

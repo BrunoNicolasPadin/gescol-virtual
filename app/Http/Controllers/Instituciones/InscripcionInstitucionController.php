@@ -51,7 +51,6 @@ class InscripcionInstitucionController extends Controller
      */
     public function edit($institucion_id, $id)
     {
-        $user = User::where('id', $id)->first();
         return Inertia::render('Instituciones/Inscripciones/Edit', [
             'institucion' => Institucion::select('id', 'nombre')
                 ->findOrFail($institucion_id),

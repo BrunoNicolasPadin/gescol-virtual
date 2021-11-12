@@ -2,7 +2,7 @@
     <app-layout title="Instituciones - Inscripcion - Agregar">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Instituciones / {{ institucion.nombre }} / Inscripcion / {{ inscripcion[0].name }}
+                Instituciones / {{ institucion.nombre }} / Inscripcion / Editar
             </h2>
         </template>
 
@@ -15,7 +15,7 @@
                                 <template #inputComponente>
                                     <select v-model="form.rol_id" autofocus>
                                         <option selected disabled value="">Seleccionar una opcion</option>
-                                        <option v-for="rol in roles" :key="rol.id" :value="rol.id">{{ rol.name }}</option>
+                                        <option v-for="rol in roles" :key="rol.id" :value="rol.id">{{ rol.nombre }}</option>
                                     </select>
                                 </template>
                             </estructura-input>
@@ -50,21 +50,19 @@
             institucion: Object,
             roles: Array,
             inscripcion: Object,
-            user_id: Number,
         },
 
         data() {
             return {
                 form: {
-                    rol_id: this.inscripcion[0].id,
-                    rol_viejo_id: this.inscripcion[0].id,
+                    rol_id: this.inscripcion.rol_id,
                 },
             }
         },
 
         methods: {
             submit() {
-                this.$inertia.put(this.route('instituciones.inscripciones.update', [this.institucion.id, this.user_id]), this.form);
+                this.$inertia.put(this.route('instituciones.inscripciones.update', [this.institucion.id, this.inscripcion.id]), this.form);
             },
         }
     })
