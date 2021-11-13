@@ -1,10 +1,10 @@
 <template>
     <app-layout title="Roles - Permisos">
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <breadcrumb ruta='' :idsArray=[] :bread='institucion.nombre' />
+            <h2 class="font-semibold text-sm text-gray-800 leading-tight">
+                {{ institucion.nombre }} / 
                 <breadcrumb ruta='roles.index' :idsArray='[institucion.id]' bread='Roles' />
-                <breadcrumb ruta='' :idsArray=[] :bread='roles.nombre' />
+                {{ rol.nombre }} / 
                 <breadcrumb ruta='rolPermisos.index' :idsArray='[institucion.id, rol.id]' bread='Permisos' />
                 Agregar
             </h2>

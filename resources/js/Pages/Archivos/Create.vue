@@ -1,8 +1,8 @@
 <template>
     <app-layout title="Archivos - Agregar">
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <breadcrumb ruta='' :idsArray=[] bread='Archivos' />
+            <h2 class="font-semibold text-sm text-gray-800 leading-tight">
+                Archivos / 
                 Agregar
             </h2>
         </template>

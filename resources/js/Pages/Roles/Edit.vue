@@ -1,7 +1,7 @@
 <template>
     <app-layout title="Instituciones - Roles - Editar">
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-sm text-gray-800 leading-tight">
                 {{ institucion.nombre }} /
                 <breadcrumb ruta='roles.index' :idsArray='[institucion.id]' bread='Roles' />
                 Editar

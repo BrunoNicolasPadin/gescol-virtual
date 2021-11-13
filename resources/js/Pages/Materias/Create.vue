@@ -1,9 +1,10 @@
 <template>
     <app-layout title="Materias - Agregar">
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <breadcrumb ruta='' :idsArray=[] :bread='institucion.nombre' />
+            <h2 class="font-semibold text-sm text-gray-800 leading-tight">
+                {{ institucion.nombre }} / 
                 <breadcrumb ruta='cursos.index' :idsArray='[institucion.id]' bread='Cursos' />
+                {{ curso.nombre }} / 
                 <breadcrumb ruta='materias.index' :idsArray='[institucion.id, curso.id]' bread='Materias' />
                 Agregar
             </h2>

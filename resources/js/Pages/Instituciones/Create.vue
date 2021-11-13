@@ -1,7 +1,7 @@
 <template>
     <app-layout title="Instituciones - Agregar">
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-sm text-gray-800 leading-tight">
                 Instituciones / Agregar
             </h2>
         </template>

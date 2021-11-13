@@ -1,11 +1,11 @@
 <template>
     <app-layout title="Evaluacion">
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <breadcrumb ruta='' :idsArray=[] :bread='institucion.nombre' />
+            <h2 class="font-semibold text-sm text-gray-800 leading-tight">
+                {{ institucion.nombre }} / 
                 <breadcrumb ruta='cursos.index' :idsArray='[institucion.id]' bread='Cursos' />
                 <breadcrumb ruta='materias.index' :idsArray='[institucion.id, curso.id]' bread='Materias' />
-                <breadcrumb ruta='' :idsArray=[] :bread='materia.nombre' />
+                {{ materia.nombre }} / 
                 <breadcrumb ruta='evaluaciones.index' :idsArray='[institucion.id, curso.id, materia.id]' bread='Evaluaciones' />
                 {{ evaluacion.nombre }}
             </h2>

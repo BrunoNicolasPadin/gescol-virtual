@@ -1,8 +1,8 @@
 <template>
     <app-layout title="Respuestas">
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <breadcrumb ruta='' :idsArray=[] bread='Respuestas' />
+            <h2 class="font-semibold text-sm text-gray-800 leading-tight">
+                Respuestas / 
                 Listar
             </h2>
         </template>
