@@ -41,6 +41,8 @@ class CorreccionController extends Controller
 
     public function store(StoreArchivoRequest $request, $institucion_id, $curso_id, $materia_id, $evaluacion_id, $entrega_id)
     {
+        $this->authorize('create', Correccion::class);
+
         $correccion = new Correccion();
         $correccion->entrega()->associate($entrega_id);
         
@@ -57,12 +59,14 @@ class CorreccionController extends Controller
             ->with('message', 'Correccion agregada');
     }
 
-    public function destroy($institucion_id, $curso_id, $materia_id, $evaluacion_id, $entrega_id, $id)
+    public function destroy($institucion_id, $curso_id, $materia_id, $evaluacion_id, $entrega_id, Correccion $correccione)
     {
-        $correccion = Correccion::findOrFail($id);
+        $this->authorize('delete', $correccione);
+
         /* Storage::disk('s3')->delete('Competencias/Escudos/' . $competencia->escudo); */
-        Storage::delete($correccion->archivo);
-        Correccion::destroy($id);
+        Storage::delete($correccione->archivo);
+        
+        $correccione->delete();
         
         return redirect()->route('entregas.show', [$institucion_id, $curso_id, $materia_id, $evaluacion_id, $entrega_id])
             ->with('message', 'Correccion eliminada');

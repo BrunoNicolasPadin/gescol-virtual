@@ -2,7 +2,7 @@
     <app-layout title="Instituciones - Roles - Agregar">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <breadcrumb ruta='' :idsArray=[] :bread='institucion.nombre' />
+                {{ institucion.nombre }} /
                 <breadcrumb ruta='roles.index' :idsArray='[institucion.id]' bread='Roles' />
                 Agregar
             </h2>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Instituciones\Institucion;
 use App\Models\Roles\RolUser;
 use App\Traits\Uuids;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -71,5 +72,10 @@ class User extends Authenticatable
             ->join('permisos', 'permisos_roles.permiso_id', 'permisos.id')
             ->where('permisos.nombre', $permiso)
             ->exists();
+    }
+
+    public function verificarInstitucionCreada()
+    {
+        return $this->hasOne(Institucion::class)->exists();
     }
 }

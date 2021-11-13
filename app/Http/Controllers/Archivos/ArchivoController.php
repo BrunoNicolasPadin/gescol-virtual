@@ -22,6 +22,8 @@ class ArchivoController extends Controller
 
     public function create(Request $request)
     {
+        $this->authorize('create', [Archivo::class, $request->type]);
+
         return Inertia::render('Archivos/Create', [
             'id' => $request->id,
             'type' => $request->type,
@@ -31,6 +33,8 @@ class ArchivoController extends Controller
 
     public function store(StoreArchivoRequest $request)
     {
+        $this->authorize('create', [Archivo::class, $request->type]);
+
         $archivo = new Archivo();
         $archivo->fileable_type = $request->type;
         $archivo->fileable_id = $request->id;
@@ -47,12 +51,13 @@ class ArchivoController extends Controller
         return back()->with('message', 'Archivo guardado');
     }
 
-    public function destroy($id)
+    public function destroy(Archivo $archivo)
     {
-        $archivo = Archivo::findOrFail($id);
+        $this->authorize('delete', $archivo);
         /* Storage::disk('s3')->delete('Competencias/Escudos/' . $competencia->escudo); */
+
         Storage::delete($archivo->archivo);
-        Archivo::destroy($id);
+        $archivo->delete();
         
         return back()->with('message', 'Archivo eliminado');
     }

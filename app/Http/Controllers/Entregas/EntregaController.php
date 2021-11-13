@@ -17,6 +17,8 @@ class EntregaController extends Controller
 {
     public function index($institucion_id, $curso_id, $materia_id, $evaluacion_id)
     {
+        $this->authorize('viewAny', Entrega::class);
+
         return Inertia::render('Entregas/Index', [
             'institucion' => Institucion::select('id', 'nombre')
                 ->findOrFail($institucion_id),

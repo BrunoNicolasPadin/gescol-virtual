@@ -12,6 +12,8 @@ class ComentarioController extends Controller
 {
     public function store(StoreComentarioRequest $request)
     {
+        $this->authorize('create', [Comentario::class, $request->type]);
+
         $comentario = new Comentario();
         $comentario->commentable_type = $request->type;
         $comentario->commentable_id = $request->id;
@@ -22,24 +24,22 @@ class ComentarioController extends Controller
         return back()->with('message', 'Comentario enviado');
     }
 
-    public function update(StoreComentarioRequest $request, $id)
+    public function update(StoreComentarioRequest $request, Comentario $comentario)
     {
-        $comentario = Comentario::findOrFail($id);
+        $this->authorize('update', $comentario);
+
         $comentario->contenido = $request->contenido;
         $comentario->save();
 
         return back()->with('message', 'Comentario actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Comentario $comentario)
     {
-        Comentario::destroy($id);
+        $this->authorize('delete', $comentario);
+
+        $comentario->delete();
+
         return back()->with('message', 'Comentario eliminado');
     }
 }

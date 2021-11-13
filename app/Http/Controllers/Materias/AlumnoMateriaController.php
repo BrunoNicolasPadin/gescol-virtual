@@ -17,6 +17,8 @@ class AlumnoMateriaController extends Controller
 
     public function store(Request $request, $institucion_id, $curso_id, $materia_id)
     {
+        $this->authorize('create', AlumnoMateria::class);
+
         $rolUser = RolUser::where('user_id', Auth::id())->first();
         $alumnoMateria = new AlumnoMateria();
         $alumnoMateria->rolUser()->associate($rolUser->id);
@@ -26,9 +28,12 @@ class AlumnoMateriaController extends Controller
         return redirect()->back()->with('message', 'Te anotaste correctamente');
     }
 
-    public function destroy($institucion_id, $curso_id, $materia_id, $id)
+    public function destroy($institucion_id, $curso_id, $materia_id, AlumnoMateria $alumno)
     {
-        AlumnoMateria::destroy($id);
+        $this->authorize('delete', $alumno);
+
+        $alumno->delete();
+
         return redirect()->back()->with('message', 'Te DESANOTASTE correctamente');
     }
 }

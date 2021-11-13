@@ -13,18 +13,15 @@ use Inertia\Inertia;
 
 class InstitucionController extends Controller
 {
-    public function index()
-    {
-        echo 'Instituciones - Index';
-    }
-
     public function create()
     {
+        $this->authorize('create', Institucion::class);
         return Inertia::render('Instituciones/Create');
     }
 
     public function store(StoreInstitucionRequest $request)
     {
+        $this->authorize('create', Institucion::class);
         $institucion = new Institucion();
         $institucion->nombre = $request->nombre;
         $institucion->claveDeAcceso = Hash::make($request->claveDeAccesoNueva);
@@ -35,34 +32,41 @@ class InstitucionController extends Controller
             ->with('message', 'Institucion creada. Agrega cursos ahora!');
     }
 
-    public function edit($id)
+    public function edit(Institucion $institucione)
     {
+        $this->authorize('update', $institucione);
+
         return Inertia::render('Instituciones/Edit', [
-            'institucion' => Institucion::findOrFail($id),
+            'institucion' => $institucione,
         ]);
     }
 
-    public function update(UpdateInstitucionRequest $request, $id)
+    public function update(UpdateInstitucionRequest $request, Institucion $institucione)
     {
-        $institucion = Institucion::findOrFail($id);
+        $this->authorize('update', $institucione);
+
         if (! $request->claveDeAccesoActual == null) {
-            if (Hash::check($request->claveDeAccesoActual, $institucion->claveDeAcceso)) {
-                $institucion->claveDeAcceso = Hash::make($request->claveDeAccesoNueva);
+            if (Hash::check($request->claveDeAccesoActual, $institucione->claveDeAcceso)) {
+                $institucione->claveDeAcceso = Hash::make($request->claveDeAccesoNueva);
             }
             return redirect()->back()
             ->with('message', 'La clave de ingreso no es la correcta');
         }
 
-        $institucion->nombre = $request->nombre;
-        $institucion->save();
+        $institucione->nombre = $request->nombre;
+        $institucione->save();
 
-        return redirect()->route('cursos.index', $institucion->id)
+        return redirect()->route('cursos.index', $institucione->id)
             ->with('message', 'Institucion actualizada');
     }
 
-    public function destroy($id)
+    public function destroy(Institucion $institucione)
     {
-        Institucion::destroy($id);
-        //Llevar a su panel
+        $this->authorize('delete', $institucione);
+
+        $institucione->delete();
+
+        return redirect()->route('instituciones.create')
+            ->with('message', 'Institucion eliminada');
     }
 }

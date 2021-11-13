@@ -19,6 +19,8 @@ class DocenteMateriaController extends Controller
 {
     public function index($institucion_id, $curso_id, $materia_id)
     {
+        $this->authorize('viewAny', DocenteMateria::class);
+
         return Inertia::render('Materias/Docentes/Index', [
             'institucion' => Institucion::select('id', 'nombre')
                 ->findOrFail($institucion_id),
@@ -33,6 +35,8 @@ class DocenteMateriaController extends Controller
 
     public function create($institucion_id, $curso_id, $materia_id)
     {
+        $this->authorize('create', DocenteMateria::class);
+
         return Inertia::render('Materias/Docentes/Create', [
             'institucion' => Institucion::select('id', 'nombre')
                 ->findOrFail($institucion_id),
@@ -52,6 +56,8 @@ class DocenteMateriaController extends Controller
 
     public function store(StoreDocenteMateriaRequest $request, $institucion_id, $curso_id, $materia_id)
     {
+        $this->authorize('create', DocenteMateria::class);
+
         for ($i = 0; $i < count($request->docentesMateria); $i++) { 
             $docenteMateria = new DocenteMateria();
             $docenteMateria->rolUser()->associate($request->docentesMateria[$i]['docente_id']);
@@ -59,14 +65,17 @@ class DocenteMateriaController extends Controller
             $docenteMateria->save();
         }
 
-        return redirect(route('materias.docentes.index'))
+        return redirect(route('materias.docentes.index', [$institucion_id, $curso_id, $materia_id]))
             ->with('message', 'Docente/s agregado/s');
     }
 
-    public function destroy($institucion_id, $curso_id, $materia_id, $id)
+    public function destroy($institucion_id, $curso_id, $materia_id, DocenteMateria $docente)
     {
-        DocenteMateria::destroy($id);
-        return redirect(route('materias.docentes.index'))
+        $this->authorize('delete', $docente);
+
+        $docente->delete();
+
+        return redirect(route('materias.docentes.index', [$institucion_id, $curso_id, $materia_id]))
             ->with('message', 'Docente eliminado');
     }
 }

@@ -16,6 +16,8 @@ class InscripcionInstitucionController extends Controller
 {
     public function create($institucion_id)
     {
+        $this->authorize('create', [RolUser::class, $institucion_id]);
+
         return Inertia::render('Instituciones/Inscripciones/Create', [
             'institucion' => Institucion::select('id', 'nombre')->findOrFail($institucion_id),
             'roles' => Rol::where('institucion_id', $institucion_id)->orderBy('nombre')->get(),
@@ -24,6 +26,8 @@ class InscripcionInstitucionController extends Controller
 
     public function store(StoreInscripcionInstitucionRequest $request, $institucion_id)
     {
+        $this->authorize('create', [RolUser::class, $institucion_id]);
+
         $rolUser = new RolUser();
         $rolUser->rol()->associate($request->rol_id);
         $rolUser->user()->associate(Auth::id());
@@ -33,30 +37,36 @@ class InscripcionInstitucionController extends Controller
             ->with('message', 'Rol asignado');
     }
 
-    public function edit($institucion_id, $id)
+    public function edit($institucion_id, RolUser $inscripcione)
     {
+        $this->authorize('update', $inscripcione);
+
         return Inertia::render('Instituciones/Inscripciones/Edit', [
             'institucion' => Institucion::select('id', 'nombre')
                 ->findOrFail($institucion_id),
             'roles' => Rol::where('institucion_id', $institucion_id)
                 ->orderBy('nombre')->get(),
-            'inscripcion' => RolUser::findOrFail($id),
+            'inscripcion' => $inscripcione,
         ]);
     }
 
-    public function update(StoreInscripcionInstitucionRequest $request, $institucion_id, $id)
+    public function update(StoreInscripcionInstitucionRequest $request, $institucion_id, RolUser $inscripcione)
     {
-        $rolUser = RolUser::findOrFail($id);
-        $rolUser->rol()->associate($request->rol_id);
-        $rolUser->save();
+        $this->authorize('update', $inscripcione);
+
+        $inscripcione->rol()->associate($request->rol_id);
+        $inscripcione->save();
 
         return redirect()->route('panel.mostrarInicio')
             ->with('message', 'Rol actualizado');
     }
 
-    public function destroy($institucion_id, $id)
+    public function destroy($institucion_id, RolUser $inscripcione)
     {
-        RolUser::destroy($id);
+        $this->authorize('delete', $inscripcione);
+
+        $inscripcione->delete();
+
         return redirect()->route('panel.mostrarInicio')
             ->with('message', 'Rol eliminado');
     }

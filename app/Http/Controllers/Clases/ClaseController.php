@@ -15,6 +15,8 @@ class ClaseController extends Controller
 {
     public function index($institucion_id, $curso_id, $materia_id)
     {
+        $this->authorize('viewAny', [Clase::class, $materia_id]);
+
         return Inertia::render('Clases/Index', [
             'institucion' => Institucion::select('id', 'nombre')
                 ->findOrFail($institucion_id),
@@ -36,6 +38,8 @@ class ClaseController extends Controller
 
     public function create($institucion_id, $curso_id, $materia_id)
     {
+        $this->authorize('create', Clase::class);
+
         return Inertia::render('Clases/Create', [
             'institucion' => Institucion::select('id', 'nombre')
                 ->findOrFail($institucion_id),
@@ -47,6 +51,8 @@ class ClaseController extends Controller
 
     public function store(StoreClaseRequest $request, $institucion_id, $curso_id, $materia_id)
     {
+        $this->authorize('create', Clase::class);
+
         $clase = new Clase();
         $clase->materia()->associate($materia_id);
         $clase->nombre = $request->nombre;
@@ -60,6 +66,7 @@ class ClaseController extends Controller
     public function show($institucion_id, $curso_id, $materia_id, $id)
     {
         $clase = Clase::with('comentarios.user')->findOrFail($id);
+        $this->authorize('view', $clase);
 
         return Inertia::render('Clases/Show', [
             'institucion' => Institucion::select('id', 'nombre')
@@ -84,21 +91,24 @@ class ClaseController extends Controller
 
     }
 
-    public function edit($institucion_id, $curso_id, $materia_id, $id)
+    public function edit($institucion_id, $curso_id, $materia_id, Clase $clase)
     {
+        $this->authorize('update', $clase);
+
         return Inertia::render('Clases/Edit', [
             'institucion' => Institucion::select('id', 'nombre')
                 ->findOrFail($institucion_id),
             'curso' => Curso::select('id', 'nombre')
                 ->findOrFail($curso_id),
             'materia' => Materia::findOrFail($materia_id),
-            'clase' => Clase::findOrFail($id),
+            'clase' => $clase,
         ]);
     }
 
-    public function update(StoreClaseRequest $request, $institucion_id, $curso_id, $materia_id, $id)
+    public function update(StoreClaseRequest $request, $institucion_id, $curso_id, $materia_id, Clase $clase)
     {
-        $clase = Clase::findOrFail($id);
+        $this->authorize('update', $clase);
+
         $clase->nombre = $request->nombre;
         $clase->descripcion = $request->descripcion;
         $clase->save();
@@ -107,9 +117,12 @@ class ClaseController extends Controller
             ->with('message', 'Clase actualizada');
     }
 
-    public function destroy($institucion_id, $curso_id, $materia_id, $id)
+    public function destroy($institucion_id, $curso_id, $materia_id, Clase $clase)
     {
-        Clase::destroy($id);
+        $this->authorize('delete', $clase);
+
+        $clase->delete();
+
         return redirect()->route('clases.index', [$institucion_id, $curso_id, $materia_id])
             ->with('message', 'Clase eliminada');
     }

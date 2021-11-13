@@ -19,7 +19,9 @@ class RolPermisoController extends Controller
 
     public function create($institucion_id, $rol_id)
     {
-       $rol = Rol::findOrFail($rol_id);
+        $this->authorize('create', Permiso::class);
+
+        $rol = Rol::findOrFail($rol_id);
         $permisos = Permiso::orderBy('nombre')->get();
         $permisosDelRolActualmente = PermisoRol::where('rol_id', $rol_id)->get();
 
@@ -39,6 +41,8 @@ class RolPermisoController extends Controller
 
     public function store(StoreRolPermisoRequest $request, $institucion_id, $rol_id)
     {
+        $this->authorize('create', Permiso::class);
+
         $permisoRol = new PermisoRol();
         $permisoRol->permiso()->associate($request->permiso_id);
         $permisoRol->rol()->associate($rol_id);
@@ -48,9 +52,12 @@ class RolPermisoController extends Controller
             ->with('message', 'Permiso agregado');
     }
 
-    public function destroy($institucion_id, $rol_id, $id)
+    public function destroy($institucion_id, $rol_id, PermisoRol $permiso)
     {
-        PermisoRol::destroy($id);
+        $this->authorize('delete', $permiso);
+
+        $permiso->delete();
+
         return redirect(route('rolPermisos.index', [$institucion_id, $rol_id]))
             ->with('message', 'Permiso eliminado');
     }

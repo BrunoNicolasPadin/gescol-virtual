@@ -17,6 +17,8 @@ class RolController extends Controller
 
     public function create($institucion_id)
     {
+        $this->authorize('create', Rol::class);
+
         return Inertia::render('Roles/Create', [
             'institucion' => Institucion::select('id', 'nombre')->findOrFail($institucion_id),
         ]);
@@ -24,6 +26,8 @@ class RolController extends Controller
 
     public function store(StoreRolRequest $request, $institucion_id)
     {
+        $this->authorize('create', Rol::class);
+
         for ($i = 0; $i < count($request->roles); $i++) { 
             $rol = new Rol();
             $rol->nombre = $request->roles[$i]['nombre'];
@@ -35,27 +39,33 @@ class RolController extends Controller
             ->with('message', 'Rol/es agregado/s');
     }
 
-    public function edit($institucion_id, $id)
+    public function edit($institucion_id, Rol $role)
     {
+        $this->authorize('update', $role);
+
         return Inertia::render('Roles/Edit', [
             'institucion' => Institucion::select('id', 'nombre')->findOrFail($institucion_id),
-            'rol' => Rol::findOrFail($id),
+            'rol' => $role,
         ]);
     }
 
-    public function update(StoreRolRequest $request, $institucion_id, $id)
+    public function update(StoreRolRequest $request, $institucion_id, Rol $role)
     {
-        $rol = Rol::findOrFail($id);
-        $rol->nombre = $request->nombre;
-        $rol->save();
+        $this->authorize('update', $role);
+
+        $role->nombre = $request->nombre;
+        $role->save();
 
         return redirect(route('roles.index', $institucion_id))
             ->with('message', 'Rol actualizado');
     }
 
-    public function destroy($institucion_id, $id)
+    public function destroy($institucion_id, Rol $role)
     {
-        Rol::destroy($id);
+        $this->authorize('delete', $role);
+
+        $role->delete();
+
         return redirect(route('roles.index', $institucion_id))
             ->with('message', 'Rol eliminado');
     }

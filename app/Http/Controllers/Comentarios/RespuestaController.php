@@ -12,11 +12,6 @@ use Inertia\Inertia;
 
 class RespuestaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index($comentario_id)
     {
         return Inertia::render('Respuestas/Index', [
@@ -48,18 +43,21 @@ class RespuestaController extends Controller
         return back()->with('message', 'Respuesta enviada');
     }
 
-    public function update(StoreComentarioRequest $request, $comentario_id, $id)
+    public function update(StoreComentarioRequest $request, $comentario_id, Respuesta $respuesta)
     {
-        $respuesta = Respuesta::findOrFail($id);
+        $this->authorize('update', $respuesta);
+
         $respuesta->contenido = $request->contenido;
         $respuesta->save();
 
         return back()->with('message', 'Respuesta actualizada');
     }
 
-    public function destroy($comentario_id, $id)
+    public function destroy($comentario_id, Respuesta $respuesta)
     {
-        Respuesta::destroy($id);
+        $this->authorize('delete', $respuesta);
+
+        $respuesta->delete();
         
         return back()->with('message', 'Respuesta eliminada');
     }

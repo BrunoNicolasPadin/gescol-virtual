@@ -24,7 +24,7 @@ class StoreArchivoRequest extends FormRequest
     public function rules()
     {
         return [
-            'archivo' => 'required',
+            'archivo' => 'required|file',
         ];
     }
 }
