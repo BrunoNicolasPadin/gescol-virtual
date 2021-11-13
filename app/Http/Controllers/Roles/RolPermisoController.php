@@ -12,9 +12,18 @@ use Inertia\Inertia;
 
 class RolPermisoController extends Controller
 {
-    public function index()
+    public function index($institucion_id, $rol_id)
     {
-        //
+        return Inertia::render('Roles/RolPermisos/Index', [
+            'institucion' => Institucion::select('id', 'nombre')
+                ->findOrFail($institucion_id),
+            'rol' => Rol::findOrFail($rol_id),
+            'permisos' => PermisoRol::where('permisos_roles.rol_id', $rol_id)
+                ->join('permisos', 'permisos_roles.permiso_id', 'permisos.id')
+                ->orderBy('permisos.nombre')
+                ->select('permisos.nombre', 'permisos_roles.id')
+                ->get(),
+        ]);
     }
 
     public function create($institucion_id, $rol_id)

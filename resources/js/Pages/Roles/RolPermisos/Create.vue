@@ -1,9 +1,9 @@
 <template>
-    <app-layout title="Roles - Permisos">
+    <app-layout title="Rol - Agregar permisos">
         <template #header>
             <h2 class="font-semibold text-sm text-gray-800 leading-tight">
                 {{ institucion.nombre }} / 
-                <breadcrumb ruta='roles.index' :idsArray='[institucion.id]' bread='Roles' />
+                <breadcrumb ruta='panel.mostrarRoles' :idsArray='[institucion.id]' bread='Roles' />
                 {{ rol.nombre }} / 
                 <breadcrumb ruta='rolPermisos.index' :idsArray='[institucion.id, rol.id]' bread='Permisos' />
                 Agregar

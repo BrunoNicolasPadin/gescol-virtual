@@ -15,6 +15,7 @@ use App\Http\Controllers\Materias\AlumnoMateriaController;
 use App\Http\Controllers\Materias\DocenteMateriaController;
 use App\Http\Controllers\Materias\MateriaController;
 use App\Http\Controllers\Paneles\PanelController;
+use App\Http\Controllers\Paneles\PanelRolController;
 use App\Http\Controllers\Roles\PermisoController;
 use App\Http\Controllers\Roles\RolController;
 use App\Http\Controllers\Roles\RolPermisoController;
@@ -120,5 +121,8 @@ Route::middleware([Authenticate::class])->group(function () {
     //Panel
     Route::prefix('panel')->group(function () {
         Route::get('', [PanelController::class, 'mostrarInicio'])->name('panel.mostrarInicio');
+        Route::prefix('instituciones/{institucion_id}')->group(function () {
+            Route::get('roles', [PanelRolController::class, 'mostrarRoles'])->name('panel.mostrarRoles');
+        });
     });
 });

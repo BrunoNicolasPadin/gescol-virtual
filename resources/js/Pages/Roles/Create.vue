@@ -3,7 +3,7 @@
         <template #header>
             <h2 class="font-semibold text-sm text-gray-800 leading-tight">
                 {{ institucion.nombre }} /
-                <breadcrumb ruta='roles.index' :idsArray='[institucion.id]' bread='Roles' />
+                <breadcrumb ruta='panel.mostrarRoles' :idsArray='[institucion.id]' bread='Roles' />
                 Agregar
             </h2>
         </template>

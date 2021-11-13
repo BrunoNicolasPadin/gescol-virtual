@@ -16,7 +16,7 @@ class PanelController extends Controller
     {
         if (Auth::user()->institucion) {
             $institucion = Institucion::where('user_id', Auth::id())->first();
-            return redirect(route('panel.cursos', $institucion->id));
+            return redirect(route('panel.mostrarRoles', $institucion->id));
         }
         return Inertia::render('Paneles/Inicio/InicioPersona', [
             'roles' => RolUser::where('user_id', Auth::id())
