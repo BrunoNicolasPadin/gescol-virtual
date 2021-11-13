@@ -15,6 +15,8 @@
         <!-- Scripts -->
         @routes
         <script src="{{ mix('js/app.js') }}" defer></script>
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4476942992988024" crossorigin="anonymous"></script>
     </head>
     <body class="font-sans antialiased">
         @inertia

@@ -2,7 +2,8 @@
     <app-layout title="Instituciones - Editar">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Instituciones / {{ institucion.nombre }} / Editar
+                <breadcrumb ruta='' :idsArray=[] bread='Instituciones' />
+                Editar
             </h2>
         </template>
 
@@ -59,6 +60,7 @@
     import EstructuraInput from '@/Shared/Formulario/EstructuraInput'
     import InputComponente from '@/Shared/Formulario/InputComponente'
     import Guardar from '@/Shared/Botones/Guardar'
+    import Breadcrumb from '@/Shared/Cabecera/Breadcrumb.vue';
 
     export default defineComponent({
         components: {
@@ -67,6 +69,7 @@
             EstructuraInput,
             InputComponente,
             Guardar,
+            Breadcrumb,
         },
 
         props: {

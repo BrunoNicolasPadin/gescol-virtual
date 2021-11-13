@@ -2,7 +2,8 @@
     <app-layout title="Respuestas">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Respuestas
+                <breadcrumb ruta='' :idsArray=[] bread='Respuestas' />
+                Listar
             </h2>
         </template>
 
@@ -88,6 +89,7 @@
     import InputComponente from '@/Shared/Formulario/InputComponente'
     import Guardar from '@/Shared/Botones/Guardar'
     import { Link } from '@inertiajs/inertia-vue3';
+    import Breadcrumb from '@/Shared/Cabecera/Breadcrumb.vue';
 
     export default defineComponent({
         components: {
@@ -97,6 +99,7 @@
             InputComponente,
             Guardar,
             Link,
+            Breadcrumb,
         },
 
         props: {

@@ -4,7 +4,7 @@
 
         <jet-banner />
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="flex flex-col min-h-screen bg-gray-100">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,15 +12,15 @@
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex-shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
+                                <Link :href="route('inicio')">
                                     <jet-application-mark class="block h-9 w-auto" />
                                 </Link>
                             </div>
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                <jet-nav-link :href="route('panel.mostrarInicio')" :active="route().current('panel.mostrarInicio')">
+                                    Panel
                                 </jet-nav-link>
                             </div>
                         </div>
@@ -142,8 +142,8 @@
                 <!-- Responsive Navigation Menu -->
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
-                        <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
+                        <jet-responsive-nav-link :href="route('panel.mostrarInicio')" :active="route().current('panel.mostrarInicio')">
+                            Panel
                         </jet-responsive-nav-link>
                     </div>
 
@@ -224,9 +224,21 @@
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="flex-grow">
+                <flash-messages />
                 <slot></slot>
             </main>
+
+            <div class="bg-gray-200">
+                <footer class="flex flex-wrap items-center justify-between p-3 m-auto">
+                    <div class="container mx-auto flex flex-col flex-wrap items-center justify-between">
+                        <div class="flex mx-auto text-gray-500 text-center">
+                            <span>Copyright © 2021 - Gescol | Todos los derechos reservados.
+                            </span>
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
     </div>
 </template>
@@ -240,6 +252,7 @@
     import JetNavLink from '@/Jetstream/NavLink.vue'
     import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue'
     import { Head, Link } from '@inertiajs/inertia-vue3';
+    import FlashMessages from '@/Shared/Messages/FlashMessages.vue'
 
     export default defineComponent({
         props: {
@@ -255,6 +268,7 @@
             JetNavLink,
             JetResponsiveNavLink,
             Link,
+            FlashMessages,
         },
 
         data() {

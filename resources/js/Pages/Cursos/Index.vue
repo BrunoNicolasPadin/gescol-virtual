@@ -2,7 +2,8 @@
     <app-layout title="Cursos">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Instituciones / {{ institucion.nombre }} / Cursos
+                <breadcrumb ruta='' :idsArray=[] :bread='institucion.nombre' />
+                Cursos
             </h2>
         </template>
 
@@ -90,6 +91,7 @@
     import Editar from '@/Shared/Botones/Editar.vue'
     import Eliminar from '@/Shared/Botones/Eliminar.vue'
     import { Link } from '@inertiajs/inertia-vue3';
+    import Breadcrumb from '@/Shared/Cabecera/Breadcrumb.vue';
 
     export default defineComponent({
         components: {
@@ -100,6 +102,7 @@
             Editar,
             Eliminar,
             Link,
+            Breadcrumb,
         },
 
         props: {

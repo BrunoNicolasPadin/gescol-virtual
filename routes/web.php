@@ -14,12 +14,12 @@ use App\Http\Controllers\Instituciones\InstitucionController;
 use App\Http\Controllers\Materias\AlumnoMateriaController;
 use App\Http\Controllers\Materias\DocenteMateriaController;
 use App\Http\Controllers\Materias\MateriaController;
-use App\Http\Controllers\Paneles\Cursos\PanelCursoController;
 use App\Http\Controllers\Paneles\PanelController;
 use App\Http\Controllers\Roles\PermisoController;
 use App\Http\Controllers\Roles\RolController;
 use App\Http\Controllers\Roles\RolPermisoController;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -35,17 +35,18 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    $check = Auth::check();
     return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
+        'canLogin' => $check = ($check === true) ? false : true,
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        /* 'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION, */
     ]);
-});
+})->name('inicio');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+/* Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->name('dashboard');
+})->name('dashboard'); */
 
 Route::get('buscador/instituciones', [BuscadorInstitucionController::class, 'mostrarBuscador'])
     ->name('instituciones.mostrarBuscador');
@@ -117,9 +118,4 @@ Route::prefix('comentarios/{comentario_id}')->group(function () {
 //Panel
 Route::prefix('panel')->group(function () {
     Route::get('', [PanelController::class, 'mostrarInicio'])->name('panel.mostrarInicio');
-    
-    Route::prefix('instituciones/{institucion_id}')->group(function () {
-        Route::get('cursos', [PanelCursoController::class, 'mostrarCursos'])->name('panel.cursos');
-    
-    });
 });

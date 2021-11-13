@@ -44,12 +44,14 @@ class RolPermisoController extends Controller
         $permisoRol->rol()->associate($rol_id);
         $permisoRol->save();
 
-        echo 'Permiso del rol - Guardado';
+        return redirect(route('rolPermisos.index', [$institucion_id, $rol_id]))
+            ->with('message', 'Permiso agregado');
     }
 
     public function destroy($institucion_id, $rol_id, $id)
     {
         PermisoRol::destroy($id);
-        echo 'Permiso del rol - Eliminado';
+        return redirect(route('rolPermisos.index', [$institucion_id, $rol_id]))
+            ->with('message', 'Permiso eliminado');
     }
 }

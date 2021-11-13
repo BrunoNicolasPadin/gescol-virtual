@@ -15,11 +15,6 @@ use Inertia\Inertia;
 
 class EntregaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index($institucion_id, $curso_id, $materia_id, $evaluacion_id)
     {
         return Inertia::render('Entregas/Index', [
@@ -35,12 +30,6 @@ class EntregaController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($institucion_id, $curso_id, $materia_id, $evaluacion_id, $id)
     {
         $entrega = Entrega::with(['alumnoMateria.rolUser.user', 'comentarios.user'])->findOrFail($id);
@@ -71,12 +60,6 @@ class EntregaController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($institucion_id, $curso_id, $materia_id, $evaluacion_id, $id)
     {
         return Inertia::render('Entregas/Edit', [
@@ -91,13 +74,6 @@ class EntregaController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(StoreEntregaRequest $request, $institucion_id, $curso_id, $materia_id, $evaluacion_id, $id)
     {
         $entrega = Entrega::findOrFail($id);
@@ -105,18 +81,14 @@ class EntregaController extends Controller
         $entrega->comentario = $request->comentario;
         $entrega->save();
 
-        echo 'Entrega - Actualizada';
+        return redirect()->route('entregas.show', [$institucion_id, $curso_id, $materia_id, $evaluacion_id, $id])
+            ->with('message', 'Entrega calificada');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($institucion_id, $curso_id, $materia_id, $evaluacion_id, $id)
     {
         Entrega::destroy($id);
-        echo 'Entrega - Eliminada';
+        return redirect()->route('entregas.index', [$institucion_id, $curso_id, $materia_id, $evaluacion_id])
+            ->with('message', 'Entrega eliminada');
     }
 }

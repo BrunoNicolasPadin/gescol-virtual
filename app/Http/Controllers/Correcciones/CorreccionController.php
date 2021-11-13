@@ -25,11 +25,6 @@ class CorreccionController extends Controller
         $this->archivoService = $archivoService;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create($institucion_id, $curso_id, $materia_id, $evaluacion_id, $entrega_id)
     {
         return Inertia::render('Correcciones/Create', [
@@ -44,12 +39,6 @@ class CorreccionController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreArchivoRequest $request, $institucion_id, $curso_id, $materia_id, $evaluacion_id, $entrega_id)
     {
         $correccion = new Correccion();
@@ -64,21 +53,18 @@ class CorreccionController extends Controller
         $correccion->archivo = $nombreArchivo;
         $correccion->save();
 
-        echo 'Correccion - Guardada';
+        return redirect()->route('entregas.show', [$institucion_id, $curso_id, $materia_id, $evaluacion_id, $entrega_id])
+            ->with('message', 'Correccion agregada');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($institucion_id, $curso_id, $materia_id, $evaluacion_id, $entrega_id, $id)
     {
         $correccion = Correccion::findOrFail($id);
         /* Storage::disk('s3')->delete('Competencias/Escudos/' . $competencia->escudo); */
         Storage::delete($correccion->archivo);
         Correccion::destroy($id);
-        echo 'Correccion - Eliminado';
+        
+        return redirect()->route('entregas.show', [$institucion_id, $curso_id, $materia_id, $evaluacion_id, $entrega_id])
+            ->with('message', 'Correccion eliminada');
     }
 }

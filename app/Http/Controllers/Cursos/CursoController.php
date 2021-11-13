@@ -15,11 +15,7 @@ class CursoController extends Controller
     {
         $this->authorizeResource(Curso::class, 'curso');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index($institucion_id)
     {
         return Inertia::render('Cursos/Index', [
@@ -33,11 +29,6 @@ class CursoController extends Controller
         return Curso::where('institucion_id', $institucion_id)->orderBy('nombre')->paginate(10);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create($institucion_id)
     {
         return Inertia::render('Cursos/Create', [
@@ -45,12 +36,6 @@ class CursoController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreCursoRequest $request, $institucion_id)
     {
         for ($i = 0; $i < count($request->cursos); $i++) { 
@@ -59,15 +44,10 @@ class CursoController extends Controller
             $curso->nombre = $request->cursos[$i]['nombre'];
             $curso->save();
         }
-        echo 'Guardado';
+        return redirect()->route('cursos.index', $institucion_id)
+            ->with('message', 'Curso registrado');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($institucion_id, $id)
     {
         return Inertia::render('Cursos/Edit', [
@@ -76,31 +56,20 @@ class CursoController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(StoreCursoRequest $request, $institucion_id, $id)
     {
         $curso = Curso::findOrFail($id);
         $curso->nombre = $request->nombre;
         $curso->save();
 
-        echo 'Actualizado';
+        return redirect()->route('cursos.index', $institucion_id)
+            ->with('message', 'Curso actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($institucion_id, $id)
     {
         Curso::destroy($id);
-        echo 'Eliminado';
+        return redirect()->route('cursos.index', $institucion_id)
+            ->with('message', 'Curso eliminado');
     }
 }

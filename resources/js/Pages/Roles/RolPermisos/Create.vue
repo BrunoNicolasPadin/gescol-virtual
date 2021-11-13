@@ -2,7 +2,11 @@
     <app-layout title="Roles - Permisos">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Instituciones / {{ institucion.nombre }} / Roles / {{ rol.nombre }} / Permisos
+                <breadcrumb ruta='' :idsArray=[] :bread='institucion.nombre' />
+                <breadcrumb ruta='roles.index' :idsArray='[institucion.id]' bread='Roles' />
+                <breadcrumb ruta='' :idsArray=[] :bread='roles.nombre' />
+                <breadcrumb ruta='rolPermisos.index' :idsArray='[institucion.id, rol.id]' bread='Permisos' />
+                Agregar
             </h2>
         </template>
 
@@ -32,6 +36,7 @@
     import InputComponente from '@/Shared/Formulario/InputComponente'
     import Guardar from '@/Shared/Botones/Guardar'
     import Agregar from '@/Shared/Botones/Agregar'
+    import Breadcrumb from '@/Shared/Cabecera/Breadcrumb.vue';
 
     export default defineComponent({
         components: {
@@ -41,6 +46,7 @@
             InputComponente,
             Guardar,
             Agregar,
+            Breadcrumb,
         },
 
         props: {

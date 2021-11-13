@@ -2,7 +2,10 @@
     <app-layout title="Materias - Docentes">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Instituciones / {{ institucion.nombre }} / Cursos / {{ curso.nombre }} / Materias / {{ materia.nombre }} / Docentes
+                <breadcrumb ruta='' :idsArray=[] :bread='institucion.nombre' />
+                <breadcrumb ruta='cursos.index' :idsArray='[institucion.id]' bread='Cursos' />
+                <breadcrumb ruta='materias.index' :idsArray='[institucion.id, curso.id]' bread='Materias' />
+                Docentes
             </h2>
         </template>
 
@@ -60,6 +63,7 @@
     import ThComponente from '@/Shared/Tabla/Th'
     import Eliminar from '@/Shared/Botones/Eliminar.vue'
     import { Link } from '@inertiajs/inertia-vue3';
+    import Breadcrumb from '@/Shared/Cabecera/Breadcrumb.vue';
 
     export default defineComponent({
         components: {
@@ -69,6 +73,7 @@
             ThComponente,
             Eliminar,
             Link,
+            Breadcrumb,
         },
 
         props: {

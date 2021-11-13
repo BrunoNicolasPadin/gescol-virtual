@@ -14,11 +14,6 @@ use Inertia\Inertia;
 
 class InscripcionInstitucionController extends Controller
 {
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create($institucion_id)
     {
         return Inertia::render('Instituciones/Inscripciones/Create', [
@@ -27,12 +22,6 @@ class InscripcionInstitucionController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreInscripcionInstitucionRequest $request, $institucion_id)
     {
         $rolUser = new RolUser();
@@ -40,15 +29,10 @@ class InscripcionInstitucionController extends Controller
         $rolUser->user()->associate(Auth::id());
         $rolUser->save();
 
-        echo 'Rol asignado al usuario';
+        return redirect()->route('panel.mostrarInicio')
+            ->with('message', 'Rol asignado');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($institucion_id, $id)
     {
         return Inertia::render('Instituciones/Inscripciones/Edit', [
@@ -60,31 +44,20 @@ class InscripcionInstitucionController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(StoreInscripcionInstitucionRequest $request, $institucion_id, $id)
     {
         $rolUser = RolUser::findOrFail($id);
         $rolUser->rol()->associate($request->rol_id);
         $rolUser->save();
 
-        echo 'Inscripcion actualizada';
+        return redirect()->route('panel.mostrarInicio')
+            ->with('message', 'Rol actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($institucion_id, $id)
     {
         RolUser::destroy($id);
-        echo 'Inscripcion eliminada';
+        return redirect()->route('panel.mostrarInicio')
+            ->with('message', 'Rol eliminado');
     }
 }

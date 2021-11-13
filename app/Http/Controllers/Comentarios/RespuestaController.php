@@ -37,12 +37,6 @@ class RespuestaController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreComentarioRequest $request, $comentario_id)
     {
         $respuesta = new Respuesta();
@@ -51,34 +45,22 @@ class RespuestaController extends Controller
         $respuesta->contenido = $request->contenido;
         $respuesta->save();
 
-        echo 'Respuesta - Store';
+        return back()->with('message', 'Respuesta enviada');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(StoreComentarioRequest $request, $comentario_id, $id)
     {
         $respuesta = Respuesta::findOrFail($id);
         $respuesta->contenido = $request->contenido;
         $respuesta->save();
 
-        echo 'Respuesta - Update';
+        return back()->with('message', 'Respuesta actualizada');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($comentario_id, $id)
     {
         Respuesta::destroy($id);
-        echo 'Respuesta - Eliminado';
+        
+        return back()->with('message', 'Respuesta eliminada');
     }
 }

@@ -10,12 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ComentarioController extends Controller
 {
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreComentarioRequest $request)
     {
         $comentario = new Comentario();
@@ -25,23 +19,16 @@ class ComentarioController extends Controller
         $comentario->user()->associate(Auth::id());
         $comentario->save();
 
-        echo 'Comentario - Guardado';
+        return back()->with('message', 'Comentario enviado');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(StoreComentarioRequest $request, $id)
     {
         $comentario = Comentario::findOrFail($id);
         $comentario->contenido = $request->contenido;
         $comentario->save();
 
-        echo 'Comentario - Actualizado';
+        return back()->with('message', 'Comentario actualizado');
     }
 
     /**
@@ -53,7 +40,6 @@ class ComentarioController extends Controller
     public function destroy($id)
     {
         Comentario::destroy($id);
-
-        echo 'Comentario - Eliminado';
+        return back()->with('message', 'Comentario eliminado');
     }
 }

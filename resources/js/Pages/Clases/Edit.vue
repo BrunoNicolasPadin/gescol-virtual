@@ -2,7 +2,12 @@
     <app-layout title="Clases - Editar">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Instituciones / {{ institucion.nombre }} / Cursos / {{ curso.nombre }} / Materias / {{ materia.nombre }} / Clases / Editar
+                <breadcrumb ruta='' :idsArray=[] :bread='institucion.nombre' />
+                <breadcrumb ruta='cursos.index' :idsArray='[institucion.id]' bread='Cursos' />
+                <breadcrumb ruta='materias.index' :idsArray='[institucion.id, curso.id]' bread='Materias' />
+                <breadcrumb ruta='' :idsArray=[] :bread='materia.nombre' />
+                <breadcrumb ruta='clases.index' :idsArray='[institucion.id, curso.id, materia.id]' bread='Clases' />
+                Editar
             </h2>
         </template>
 
@@ -43,6 +48,7 @@
     import EstructuraInput from '@/Shared/Formulario/EstructuraInput'
     import InputComponente from '@/Shared/Formulario/InputComponente'
     import Guardar from '@/Shared/Botones/Guardar'
+    import Breadcrumb from '@/Shared/Cabecera/Breadcrumb.vue';
 
     export default defineComponent({
         components: {
@@ -51,6 +57,7 @@
             EstructuraInput,
             InputComponente,
             Guardar,
+            Breadcrumb,
         },
 
         props: {

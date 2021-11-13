@@ -14,11 +14,6 @@ use Inertia\Inertia;
 
 class EvaluacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index($institucion_id, $curso_id, $materia_id)
     {
         return Inertia::render('Evaluaciones/Index', [
@@ -56,11 +51,6 @@ class EvaluacionController extends Controller
             });
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create($institucion_id, $curso_id, $materia_id)
     {
         return Inertia::render('Evaluaciones/Create', [
@@ -72,12 +62,6 @@ class EvaluacionController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreEvaluacionRequest $request, $institucion_id, $curso_id, $materia_id)
     {
         $evaluacion = new Evaluacion();
@@ -88,15 +72,10 @@ class EvaluacionController extends Controller
         $evaluacion->fechaHoraFinalizacion = Carbon::parse($request->fechaHoraFinalizacion)->format('Y-m-d H:i:s');
         $evaluacion->save();
 
-        echo 'Evaluaciones - Guardado';
+        return redirect()->route('evaluaciones.index', [$institucion_id, $curso_id, $materia_id])
+            ->with('message', 'Evaluacion agregada');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($institucion_id, $curso_id, $materia_id, $id)
     {
         $evaluacion = Evaluacion::with('comentarios.user')->findOrFail($id);
@@ -126,12 +105,6 @@ class EvaluacionController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($institucion_id, $curso_id, $materia_id, $id)
     {
         $evaluacion = Evaluacion::findOrFail($id);
@@ -152,13 +125,6 @@ class EvaluacionController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(StoreEvaluacionRequest $request, $institucion_id, $curso_id, $materia_id, $id)
     {
         $evaluacion = Evaluacion::findOrFail($id);
@@ -168,18 +134,14 @@ class EvaluacionController extends Controller
         $evaluacion->fechaHoraFinalizacion = Carbon::parse($request->fechaHoraFinalizacion)->format('Y-m-d H:i:s');
         $evaluacion->save();
 
-        echo 'Evaluaciones - Actualizada';
+        return redirect()->route('evaluaciones.show', [$institucion_id, $curso_id, $materia_id, $id])
+            ->with('message', 'Evaluacion actualizada');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($institucion_id, $curso_id, $materia_id, $id)
     {
         Evaluacion::destroy($id);
-        echo 'Evaluacion - Eliminada';
+        return redirect()->route('evaluaciones.index', [$institucion_id, $curso_id, $materia_id])
+            ->with('message', 'Evaluacion eliminada');
     }
 }

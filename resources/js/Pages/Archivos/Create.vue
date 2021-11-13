@@ -2,7 +2,8 @@
     <app-layout title="Archivos - Agregar">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Archivos / Agregar
+                <breadcrumb ruta='' :idsArray=[] bread='Archivos' />
+                Agregar
             </h2>
         </template>
 
@@ -49,6 +50,7 @@
     import EstructuraInput from '@/Shared/Formulario/EstructuraInput'
     import InputComponente from '@/Shared/Formulario/InputComponente'
     import Guardar from '@/Shared/Botones/Guardar'
+    import Breadcrumb from '@/Shared/Cabecera/Breadcrumb.vue';
 
     export default defineComponent({
         components: {
@@ -57,6 +59,7 @@
             EstructuraInput,
             InputComponente,
             Guardar,
+            Breadcrumb,
         },
 
         props: {

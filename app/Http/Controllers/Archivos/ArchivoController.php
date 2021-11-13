@@ -20,16 +20,6 @@ class ArchivoController extends Controller
         $this->archivoService = $archivoService;
     }
 
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Request $request)
     {
         return Inertia::render('Archivos/Create', [
@@ -39,12 +29,6 @@ class ArchivoController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreArchivoRequest $request)
     {
         $archivo = new Archivo();
@@ -60,22 +44,16 @@ class ArchivoController extends Controller
         $archivo->archivo = $nombreArchivo;
         $archivo->save();
 
-        echo 'Archivo - Guardado';
+        return back()->with('message', 'Archivo guardado');
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $archivo = Archivo::findOrFail($id);
         /* Storage::disk('s3')->delete('Competencias/Escudos/' . $competencia->escudo); */
         Storage::delete($archivo->archivo);
         Archivo::destroy($id);
-        echo 'Archivo - Eliminado';
+        
+        return back()->with('message', 'Archivo eliminado');
     }
 }

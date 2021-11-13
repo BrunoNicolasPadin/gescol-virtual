@@ -12,11 +12,6 @@ use Inertia\Inertia;
 
 class MateriaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index($institucion_id, $curso_id)
     {
         return Inertia::render('Materias/Index', [
@@ -30,11 +25,6 @@ class MateriaController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create($institucion_id, $curso_id)
     {
         return Inertia::render('Materias/Create', [
@@ -45,12 +35,6 @@ class MateriaController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreMateriaRequest $request, $institucion_id, $curso_id)
     {
         for ($i = 0; $i < count($request->materias); $i++) { 
@@ -60,15 +44,10 @@ class MateriaController extends Controller
             $materia->save();
         }
 
-        echo 'Materias - Guardadas';
+        return redirect(route('materias.index', [$institucion_id, $curso_id]))
+            ->with('message', 'Materia/s agregada/s');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($institucion_id, $curso_id, $id)
     {
         return Inertia::render('Materias/Edit', [
@@ -80,31 +59,20 @@ class MateriaController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(StoreMateriaRequest $request, $institucion_id, $curso_id, $id)
     {
         $materia = Materia::where('curso_id', $curso_id)->findOrFail($id);
         $materia->nombre = $request->nombre;
         $materia->save();
 
-        echo 'Materias - Actualizado';
+        return redirect(route('materias.index', [$institucion_id, $curso_id]))
+            ->with('message', 'Materia actualizada');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($institucion_id, $curso_id, $id)
     {
         Materia::destroy($id);
-        echo 'Materia - Eliminada';
+        return redirect(route('materias.index', [$institucion_id, $curso_id]))
+            ->with('message', 'Materia eliminada');
     }
 }

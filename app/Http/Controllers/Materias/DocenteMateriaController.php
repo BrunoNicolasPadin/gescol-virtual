@@ -17,11 +17,6 @@ use Spatie\Permission\Models\Role;
 
 class DocenteMateriaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index($institucion_id, $curso_id, $materia_id)
     {
         return Inertia::render('Materias/Docentes/Index', [
@@ -36,11 +31,6 @@ class DocenteMateriaController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create($institucion_id, $curso_id, $materia_id)
     {
         return Inertia::render('Materias/Docentes/Create', [
@@ -60,12 +50,6 @@ class DocenteMateriaController extends Controller
         return RolUser::where('rol_id', $request->rol_id)->with('user:id,name')->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreDocenteMateriaRequest $request, $institucion_id, $curso_id, $materia_id)
     {
         for ($i = 0; $i < count($request->docentesMateria); $i++) { 
@@ -75,18 +59,14 @@ class DocenteMateriaController extends Controller
             $docenteMateria->save();
         }
 
-        echo 'Docente de la materia - Guardado';
+        return redirect(route('materias.docentes.index'))
+            ->with('message', 'Docente/s agregado/s');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($institucion_id, $curso_id, $materia_id, $id)
     {
         DocenteMateria::destroy($id);
-        echo 'Docente materia - eliminado';
+        return redirect(route('materias.docentes.index'))
+            ->with('message', 'Docente eliminado');
     }
 }

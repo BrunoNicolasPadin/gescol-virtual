@@ -13,11 +13,6 @@ use Inertia\Inertia;
 
 class ClaseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index($institucion_id, $curso_id, $materia_id)
     {
         return Inertia::render('Clases/Index', [
@@ -39,11 +34,6 @@ class ClaseController extends Controller
             ->paginate(20);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create($institucion_id, $curso_id, $materia_id)
     {
         return Inertia::render('Clases/Create', [
@@ -55,12 +45,6 @@ class ClaseController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreClaseRequest $request, $institucion_id, $curso_id, $materia_id)
     {
         $clase = new Clase();
@@ -69,15 +53,10 @@ class ClaseController extends Controller
         $clase->descripcion = $request->descripcion;
         $clase->save();
 
-        echo 'Clase guardada';
+        return redirect()->route('clases.index', [$institucion_id, $curso_id, $materia_id])
+            ->with('message', 'Clase registrada');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($institucion_id, $curso_id, $materia_id, $id)
     {
         $clase = Clase::with('comentarios.user')->findOrFail($id);
@@ -105,12 +84,6 @@ class ClaseController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($institucion_id, $curso_id, $materia_id, $id)
     {
         return Inertia::render('Clases/Edit', [
@@ -123,13 +96,6 @@ class ClaseController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(StoreClaseRequest $request, $institucion_id, $curso_id, $materia_id, $id)
     {
         $clase = Clase::findOrFail($id);
@@ -137,18 +103,14 @@ class ClaseController extends Controller
         $clase->descripcion = $request->descripcion;
         $clase->save();
 
-        echo 'Clases - Actualizada';
+        return redirect()->route('clases.index', [$institucion_id, $curso_id, $materia_id])
+            ->with('message', 'Clase actualizada');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($institucion_id, $curso_id, $materia_id, $id)
     {
         Clase::destroy($id);
-        echo 'Clase - Eliminada';
+        return redirect()->route('clases.index', [$institucion_id, $curso_id, $materia_id])
+            ->with('message', 'Clase eliminada');
     }
 }

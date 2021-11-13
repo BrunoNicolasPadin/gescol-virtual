@@ -352,7 +352,7 @@ ul {
  */
 
 html {
-  font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 1 */
+  font-family: Roboto Condensed, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 1 */
   line-height: 1.5; /* 2 */
 }
 
@@ -1157,26 +1157,26 @@ select {
 .col-span-6 {
 	grid-column: span 6 / span 6;
 }
-.col-span-5 {
-	grid-column: span 5 / span 5;
-}
 .col-span-2 {
 	grid-column: span 2 / span 2;
 }
 .float-right {
 	float: right;
 }
+.m-auto {
+	margin: auto;
+}
 .mx-auto {
 	margin-left: auto;
 	margin-right: auto;
 }
-.my-3 {
-	margin-top: 0.75rem;
-	margin-bottom: 0.75rem;
-}
 .my-2 {
 	margin-top: 0.5rem;
 	margin-bottom: 0.5rem;
+}
+.my-3 {
+	margin-top: 0.75rem;
+	margin-bottom: 0.75rem;
 }
 .my-6 {
 	margin-top: 1.5rem;
@@ -1266,6 +1266,12 @@ select {
 .-mt-px {
 	margin-top: -1px;
 }
+.ml-auto {
+	margin-left: auto;
+}
+.mr-auto {
+	margin-right: auto;
+}
 .-mb-1 {
 	margin-bottom: -0.25rem;
 }
@@ -1283,6 +1289,9 @@ select {
 }
 .mb-5 {
 	margin-bottom: 1.25rem;
+}
+.-mt-52 {
+	margin-top: -13rem;
 }
 .block {
 	display: block;
@@ -1338,12 +1347,6 @@ select {
 .h-20 {
 	height: 5rem;
 }
-.h-screen {
-	height: 100vh;
-}
-.h-auto {
-	height: auto;
-}
 .h-3\/4 {
 	height: 75%;
 }
@@ -1352,6 +1355,12 @@ select {
 }
 .h-2 {
 	height: 0.5rem;
+}
+.h-screen {
+	height: 100vh;
+}
+.h-auto {
+	height: auto;
 }
 .min-h-screen {
 	min-height: 100vh;
@@ -1419,11 +1428,17 @@ select {
 .max-w-6xl {
 	max-width: 72rem;
 }
+.max-w-full {
+	max-width: 100%;
+}
 .flex-1 {
 	flex: 1 1 0%;
 }
 .flex-shrink-0 {
 	flex-shrink: 0;
+}
+.flex-grow {
+	flex-grow: 1;
 }
 .table-auto {
 	table-layout: auto;
@@ -1488,6 +1503,9 @@ select {
 	   -moz-user-select: none;
 	    -ms-user-select: none;
 	        user-select: none;
+}
+.resize-none {
+	resize: none;
 }
 .list-inside {
 	list-style-position: inside;
@@ -1639,6 +1657,9 @@ select {
 .border-2 {
 	border-width: 2px;
 }
+.border-0 {
+	border-width: 0px;
+}
 .border-b-2 {
 	border-bottom-width: 2px;
 }
@@ -1756,6 +1777,14 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
 }
+.bg-yellow-300 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(252, 211, 77, var(--tw-bg-opacity));
+}
+.bg-yellow-200 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(253, 230, 138, var(--tw-bg-opacity));
+}
 .bg-blue-700 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(29, 78, 216, var(--tw-bg-opacity));
@@ -1784,9 +1813,6 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(0, 0, 0, var(--tw-bg-opacity));
 }
-.bg-transparent {
-	background-color: transparent;
-}
 .bg-green-300 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(110, 231, 183, var(--tw-bg-opacity));
@@ -1803,14 +1829,31 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(248, 113, 113, var(--tw-bg-opacity));
 }
+.bg-transparent {
+	background-color: transparent;
+}
+.bg-indigo-100 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(224, 231, 255, var(--tw-bg-opacity));
+}
+.bg-green-400 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(52, 211, 153, var(--tw-bg-opacity));
+}
 .bg-opacity-25 {
 	--tw-bg-opacity: 0.25;
 }
 .bg-cover {
 	background-size: cover;
 }
+.bg-fixed {
+	background-attachment: fixed;
+}
 .bg-center {
 	background-position: center;
+}
+.bg-bottom {
+	background-position: bottom;
 }
 .bg-no-repeat {
 	background-repeat: no-repeat;
@@ -1828,20 +1871,20 @@ select {
 .p-3 {
 	padding: 0.75rem;
 }
-.p-px {
-	padding: 1px;
-}
 .p-4 {
 	padding: 1rem;
+}
+.p-1 {
+	padding: 0.25rem;
 }
 .p-2\.5 {
 	padding: 0.625rem;
 }
+.p-px {
+	padding: 1px;
+}
 .p-5 {
 	padding: 1.25rem;
-}
-.p-1 {
-	padding: 0.25rem;
 }
 .px-4 {
 	padding-left: 1rem;
@@ -1899,9 +1942,21 @@ select {
 	padding-top: 2.5rem;
 	padding-bottom: 2.5rem;
 }
+.px-5 {
+	padding-left: 1.25rem;
+	padding-right: 1.25rem;
+}
+.py-24 {
+	padding-top: 6rem;
+	padding-bottom: 6rem;
+}
 .px-8 {
 	padding-left: 2rem;
 	padding-right: 2rem;
+}
+.px-10 {
+	padding-left: 2.5rem;
+	padding-right: 2.5rem;
 }
 .py-0\.5 {
 	padding-top: 0.125rem;
@@ -1910,10 +1965,6 @@ select {
 .py-0 {
 	padding-top: 0px;
 	padding-bottom: 0px;
-}
-.px-5 {
-	padding-left: 1.25rem;
-	padding-right: 1.25rem;
 }
 .py-2\.5 {
 	padding-top: 0.625rem;
@@ -1959,9 +2010,6 @@ select {
 .pr-1 {
 	padding-right: 0.25rem;
 }
-.pl-10 {
-	padding-left: 2.5rem;
-}
 .pl-20 {
 	padding-left: 5rem;
 }
@@ -1984,7 +2032,7 @@ select {
 	vertical-align: bottom;
 }
 .font-sans {
-	font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	font-family: Roboto Condensed, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 .font-mono {
 	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -2017,9 +2065,17 @@ select {
 	font-size: 2.25rem;
 	line-height: 2.5rem;
 }
+.text-5xl {
+	font-size: 3rem;
+	line-height: 1;
+}
 .text-3xl {
 	font-size: 1.875rem;
 	line-height: 2.25rem;
+}
+.text-9xl {
+	font-size: 8rem;
+	line-height: 1;
 }
 .font-medium {
 	font-weight: 500;
@@ -2030,11 +2086,11 @@ select {
 .font-bold {
 	font-weight: 700;
 }
-.font-extralight {
-	font-weight: 200;
-}
 .font-normal {
 	font-weight: 400;
+}
+.font-extralight {
+	font-weight: 200;
 }
 .uppercase {
 	text-transform: uppercase;
@@ -2050,6 +2106,12 @@ select {
 }
 .leading-4 {
 	line-height: 1rem;
+}
+.leading-10 {
+	line-height: 2.5rem;
+}
+.leading-normal {
+	line-height: 1.5;
 }
 .leading-none {
 	line-height: 1;
@@ -2150,12 +2212,32 @@ select {
 	--tw-text-opacity: 1;
 	color: rgba(153, 27, 27, var(--tw-text-opacity));
 }
+.text-gray-50 {
+	--tw-text-opacity: 1;
+	color: rgba(249, 250, 251, var(--tw-text-opacity));
+}
+.text-gray-100 {
+	--tw-text-opacity: 1;
+	color: rgba(243, 244, 246, var(--tw-text-opacity));
+}
 .underline {
 	text-decoration: underline;
 }
 .antialiased {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+.placeholder-gray-700::-moz-placeholder {
+	--tw-placeholder-opacity: 1;
+	color: rgba(55, 65, 81, var(--tw-placeholder-opacity));
+}
+.placeholder-gray-700:-ms-input-placeholder {
+	--tw-placeholder-opacity: 1;
+	color: rgba(55, 65, 81, var(--tw-placeholder-opacity));
+}
+.placeholder-gray-700::placeholder {
+	--tw-placeholder-opacity: 1;
+	color: rgba(55, 65, 81, var(--tw-placeholder-opacity));
 }
 .placeholder-gray-600::-moz-placeholder {
 	--tw-placeholder-opacity: 1;
@@ -2239,13 +2321,13 @@ select {
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	transition-duration: 150ms;
 }
-.transition-transform {
-	transition-property: transform;
+.transition-opacity {
+	transition-property: opacity;
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	transition-duration: 150ms;
 }
-.transition-opacity {
-	transition-property: opacity;
+.transition-transform {
+	transition-property: transform;
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	transition-duration: 150ms;
 }
@@ -2304,6 +2386,10 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(249, 250, 251, var(--tw-bg-opacity));
 }
+.hover\:bg-indigo-100:hover {
+	--tw-bg-opacity: 1;
+	background-color: rgba(224, 231, 255, var(--tw-bg-opacity));
+}
 .hover\:bg-white:hover {
 	--tw-bg-opacity: 1;
 	background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
@@ -2328,10 +2414,6 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(219, 39, 119, var(--tw-bg-opacity));
 }
-.hover\:bg-gray-200:hover {
-	--tw-bg-opacity: 1;
-	background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
-}
 .hover\:bg-blue-600:hover {
 	--tw-bg-opacity: 1;
 	background-color: rgba(37, 99, 235, var(--tw-bg-opacity));
@@ -2339,6 +2421,10 @@ select {
 .hover\:bg-green-700:hover {
 	--tw-bg-opacity: 1;
 	background-color: rgba(4, 120, 87, var(--tw-bg-opacity));
+}
+.hover\:bg-gray-200:hover {
+	--tw-bg-opacity: 1;
+	background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
 }
 .hover\:text-gray-500:hover {
 	--tw-text-opacity: 1;
@@ -2398,10 +2484,6 @@ select {
 	--tw-border-opacity: 1;
 	border-color: rgba(99, 102, 241, var(--tw-border-opacity));
 }
-.focus\:border-black:focus {
-	--tw-border-opacity: 1;
-	border-color: rgba(0, 0, 0, var(--tw-border-opacity));
-}
 .focus\:border-blue-800:focus {
 	--tw-border-opacity: 1;
 	border-color: rgba(30, 64, 175, var(--tw-border-opacity));
@@ -2430,13 +2512,13 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(249, 250, 251, var(--tw-bg-opacity));
 }
-.focus\:bg-gray-200:focus {
-	--tw-bg-opacity: 1;
-	background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
-}
 .focus\:bg-white:focus {
 	--tw-bg-opacity: 1;
 	background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+}
+.focus\:bg-gray-200:focus {
+	--tw-bg-opacity: 1;
+	background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
 }
 .focus\:text-gray-700:focus {
 	--tw-text-opacity: 1;
@@ -2571,10 +2653,6 @@ select {
 		margin-left: 1.5rem;
 	}
 
-	.sm\:ml-0 {
-		margin-left: 0px;
-	}
-
 	.sm\:mb-0 {
 		margin-bottom: 0px;
 	}
@@ -2597,10 +2675,6 @@ select {
 
 	.sm\:h-10 {
 		height: 2.5rem;
-	}
-
-	.sm\:h-20 {
-		height: 5rem;
 	}
 
 	.sm\:h-screen {
@@ -2739,10 +2813,6 @@ select {
 		text-align: left;
 	}
 
-	.sm\:text-right {
-		text-align: right;
-	}
-
 	.sm\:align-middle {
 		vertical-align: middle;
 	}
@@ -2790,16 +2860,16 @@ select {
 		display: grid;
 	}
 
+	.md\:w-1\/3 {
+		width: 33.333333%;
+	}
+
 	.md\:w-auto {
 		width: auto;
 	}
 
 	.md\:w-48 {
 		width: 12rem;
-	}
-
-	.md\:w-1\/3 {
-		width: 33.333333%;
 	}
 
 	.md\:grid-cols-3 {
@@ -2856,6 +2926,10 @@ select {
 		display: none;
 	}
 
+	.lg\:w-3\/5 {
+		width: 60%;
+	}
+
 	.lg\:translate-x-0 {
 		--tw-translate-x: 0px;
 		transform: var(--tw-transform);
@@ -2878,6 +2952,22 @@ select {
 	.lg\:px-8 {
 		padding-left: 2rem;
 		padding-right: 2rem;
+	}
+
+	.lg\:px-40 {
+		padding-left: 10rem;
+		padding-right: 10rem;
+	}
+
+	.lg\:text-xl {
+		font-size: 1.25rem;
+		line-height: 1.75rem;
+	}
+}
+@media (min-width: 1280px) {
+
+	.xl\:grid-cols-2 {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 }
 

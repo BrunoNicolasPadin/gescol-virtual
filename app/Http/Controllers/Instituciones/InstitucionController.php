@@ -31,13 +31,8 @@ class InstitucionController extends Controller
         $institucion->user()->associate(Auth::id());
         $institucion->save();
 
-        //Llevar a los cursos
-        return redirect(route('instituciones.index'));
-    }
-
-    public function show($id)
-    {
-        echo 'Instituciones - Show';
+        return redirect()->route('cursos.index', $institucion->id)
+            ->with('message', 'Institucion creada. Agrega cursos ahora!');
     }
 
     public function edit($id)
@@ -54,18 +49,20 @@ class InstitucionController extends Controller
             if (Hash::check($request->claveDeAccesoActual, $institucion->claveDeAcceso)) {
                 $institucion->claveDeAcceso = Hash::make($request->claveDeAccesoNueva);
             }
-            //Avisar que la clave de acceso no coincide
+            return redirect()->back()
+            ->with('message', 'La clave de ingreso no es la correcta');
         }
 
         $institucion->nombre = $request->nombre;
         $institucion->save();
 
-        //Llevarlo a su perfil
-        return redirect(route('instituciones.index'));
+        return redirect()->route('cursos.index', $institucion->id)
+            ->with('message', 'Institucion actualizada');
     }
 
     public function destroy($id)
     {
-        echo 'Instituciones - Destroy';
+        Institucion::destroy($id);
+        //Llevar a su panel
     }
 }
