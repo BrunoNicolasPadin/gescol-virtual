@@ -12,7 +12,7 @@ class RolPermisoPolicy
 
     public function viewAny(User $user)
     {
-        if ($user->obtenerPermisos('Permiso de un rol: listar')) {
+        if ($user->obtenerPermisos('Permisos de un rol: listar')) {
             return true;
         }
         return false;
@@ -25,7 +25,7 @@ class RolPermisoPolicy
 
     public function create(User $user)
     {
-        if ($user->obtenerPermisos('Permiso de un rol: crear')) {
+        if ($user->obtenerPermisos('Permisos de un rol: crear')) {
             return true;
         }
         return false;
@@ -38,7 +38,7 @@ class RolPermisoPolicy
 
     public function delete(User $user, PermisoRol $permisoRol)
     {
-        if ($user->obtenerPermisos('Permiso de un rol: eliminar')) {
+        if ($user->obtenerPermisos('Permisos de un rol: eliminar')) {
             return true;
         }
         return false;

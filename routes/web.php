@@ -18,6 +18,7 @@ use App\Http\Controllers\Paneles\PanelController;
 use App\Http\Controllers\Roles\PermisoController;
 use App\Http\Controllers\Roles\RolController;
 use App\Http\Controllers\Roles\RolPermisoController;
+use App\Http\Middleware\Authenticate;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;

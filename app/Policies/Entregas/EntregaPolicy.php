@@ -40,7 +40,7 @@ class EntregaPolicy
 
     public function update(User $user, Entrega $entrega)
     {
-        if ($user->obtenerPermisos('Entregas: calificar')) {
+        if ($user->obtenerPermisos('Entregas: editar')) {
             return true;
         }
         return false;

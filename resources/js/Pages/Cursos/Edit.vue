@@ -2,7 +2,7 @@
     <app-layout title="Cursos - Editar">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <breadcrumb ruta='' :idsArray=[] :bread='institucion.nombre' />
+                {{ institucion.nombre }} / 
                 <breadcrumb ruta='cursos.index' :idsArray='[institucion.id]' bread='Cursos' />
                 Editar
             </h2>
