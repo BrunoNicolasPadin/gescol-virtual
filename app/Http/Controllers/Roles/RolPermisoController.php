@@ -28,7 +28,7 @@ class RolPermisoController extends Controller
 
     public function create($institucion_id, $rol_id)
     {
-        $this->authorize('create', Permiso::class);
+        $this->authorize('create', PermisoRol::class);
 
         $rol = Rol::findOrFail($rol_id);
         $permisos = Permiso::orderBy('nombre')->get();
@@ -50,7 +50,7 @@ class RolPermisoController extends Controller
 
     public function store(StoreRolPermisoRequest $request, $institucion_id, $rol_id)
     {
-        $this->authorize('create', Permiso::class);
+        $this->authorize('create', PermisoRol::class);
 
         $permisoRol = new PermisoRol();
         $permisoRol->permiso()->associate($request->permiso_id);

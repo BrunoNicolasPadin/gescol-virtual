@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Clases\Clase;
+use App\Models\Entregas\Entrega;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Instituciones\Institucion;
+use App\Observers\Clases\ClaseObserver;
+use App\Observers\Entregas\EntregaObserver;
 use App\Observers\Evaluaciones\EvaluacionObserver;
 use App\Observers\Instituciones\InstitucionObserver;
 use Illuminate\Auth\Events\Registered;
@@ -31,6 +35,8 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Clase::observe(ClaseObserver::class);
+        Entrega::observe(EntregaObserver::class);
         Evaluacion::observe(EvaluacionObserver::class);
         Institucion::observe(InstitucionObserver::class);
     }

@@ -35,7 +35,7 @@ class RolController extends Controller
             $rol->save();
         }
 
-        return redirect(route('roles.index', $institucion_id))
+        return redirect(route('panel.mostrarRoles', $institucion_id))
             ->with('message', 'Rol/es agregado/s');
     }
 
@@ -56,7 +56,7 @@ class RolController extends Controller
         $role->nombre = $request->nombre;
         $role->save();
 
-        return redirect(route('roles.index', $institucion_id))
+        return redirect(route('panel.mostrarRoles', $institucion_id))
             ->with('message', 'Rol actualizado');
     }
 
@@ -66,7 +66,7 @@ class RolController extends Controller
 
         $role->delete();
 
-        return redirect(route('roles.index', $institucion_id))
+        return redirect(route('panel.mostrarRoles', $institucion_id))
             ->with('message', 'Rol eliminado');
     }
 }

@@ -5,67 +5,41 @@ namespace App\Observers\Evaluaciones;
 use App\Models\Entregas\Entrega;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Materias\AlumnoMateria;
+use App\Notifications\Evaluaciones\EvaluacionCreada;
 
 class EvaluacionObserver
 {
-    /**
-     * Handle the Evaluacion "created" event.
-     *
-     * @param  \App\Models\Evaluaciones\Evaluacion  $evaluacion
-     * @return void
-     */
     public function created(Evaluacion $evaluacion)
     {
-        $alumnos = AlumnoMateria::where('materia_id', $evaluacion->materia_id)->get();
+        $alumnos = AlumnoMateria::where('materia_id', $evaluacion->materia_id)
+            ->with('rolUser:id,user_id', 'rolUser.user:id')
+            ->get();
+
+        $evaluacionInfo = $evaluacion->obtenerInformacionParaLaNotificacion($evaluacion->id);
+
         foreach ($alumnos as $alumno) {
             $entrega = new Entrega();
             $entrega->alumnoMateria()->associate($alumno->id);
             $entrega->evaluacion()->associate($evaluacion->id);
             $entrega->save();
+
+            $alumno->rolUser->user->notify(new EvaluacionCreada($evaluacionInfo));
         }
     }
-
-    /**
-     * Handle the Evaluacion "updated" event.
-     *
-     * @param  \App\Models\Evaluaciones\Evaluacion  $evaluacion
-     * @return void
-     */
+/* 
     public function updated(Evaluacion $evaluacion)
     {
-        //
     }
 
-    /**
-     * Handle the Evaluacion "deleted" event.
-     *
-     * @param  \App\Models\Evaluaciones\Evaluacion  $evaluacion
-     * @return void
-     */
     public function deleted(Evaluacion $evaluacion)
     {
-        //
     }
 
-    /**
-     * Handle the Evaluacion "restored" event.
-     *
-     * @param  \App\Models\Evaluaciones\Evaluacion  $evaluacion
-     * @return void
-     */
     public function restored(Evaluacion $evaluacion)
     {
-        //
     }
 
-    /**
-     * Handle the Evaluacion "force deleted" event.
-     *
-     * @param  \App\Models\Evaluaciones\Evaluacion  $evaluacion
-     * @return void
-     */
     public function forceDeleted(Evaluacion $evaluacion)
     {
-        //
-    }
+    } */
 }

@@ -14,6 +14,7 @@ use App\Http\Controllers\Instituciones\InstitucionController;
 use App\Http\Controllers\Materias\AlumnoMateriaController;
 use App\Http\Controllers\Materias\DocenteMateriaController;
 use App\Http\Controllers\Materias\MateriaController;
+use App\Http\Controllers\Notificaciones\NotificacionController;
 use App\Http\Controllers\Paneles\PanelController;
 use App\Http\Controllers\Paneles\PanelRolController;
 use App\Http\Controllers\Roles\PermisoController;
@@ -108,7 +109,7 @@ Route::middleware([Authenticate::class])->group(function () {
             });
         });
     });
-
+    //Archivos y comentarios
     Route::resource('archivos', ArchivoController::class);
 
     Route::resource('comentarios', ComentarioController::class);
@@ -125,4 +126,13 @@ Route::middleware([Authenticate::class])->group(function () {
             Route::get('roles', [PanelRolController::class, 'mostrarRoles'])->name('panel.mostrarRoles');
         });
     });
+
+    //Notificaciones
+    Route::get('notificaciones', [NotificacionController::class, 'listar'])->name('notificaciones.listar');
+    Route::get('notificaciones/contar', [NotificacionController::class, 'contarNotificacionesSinLeer'])
+        ->name('notificaciones.contarNotificacionesSinLeer');
+    Route::get('notificaciones/{notificacion_id}/marcar-como-leida', [NotificacionController::class, 'marcarComoLeida'])
+        ->name('notificaciones.marcarComoLeida');
+    Route::get('notificaciones/marcar-todas-como-leidas', [NotificacionController::class, 'marcarTodasComoLeidas'])
+        ->name('notificaciones.marcarTodasComoLeidas');
 });

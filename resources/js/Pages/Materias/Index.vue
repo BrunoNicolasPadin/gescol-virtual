@@ -21,7 +21,7 @@
                             <template #th-contenido>Nombre</template>
                         </th-componente>
 
-                        <th-componente colspan=5>
+                        <th-componente colspan=6>
                             <template #th-contenido>Acciones</template>
                         </th-componente>
                     </template>
@@ -38,14 +38,14 @@
                                 </template>
                             </td-componente>
 
-                            <!-- <td-componente>
+                            <td-componente>
                                 <template #td-contenido>
                                     <button type="button" @click="anotarse(materia.id)" 
-                                        class="focus:outline-none text-white font-bold text-sm py-1 px-5 rounded-full bg-blue-500 hover:bg-blue-600 hover:shadow-lg">
+                                        class="focus:outline-none text-white font-bold text-sm py-1 px-5 rounded-full bg-blue-800 hover:bg-blue-900 hover:shadow-lg">
                                         Anotarse
                                     </button>
                                 </template>
-                            </td-componente> -->
+                            </td-componente>
 
                             <td-componente>
                                 <template #td-contenido>

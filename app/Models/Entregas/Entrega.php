@@ -38,4 +38,14 @@ class Entrega extends Model
     {
         return $this->morphMany(Comentario::class, 'commentable')->orderBy('created_at', 'DESC');
     }
+
+    public function obtenerInformacionParaLaNotificacion($id)
+    {
+        return Entrega::select('entregas.*', 'evaluaciones.id AS evaluacion_id', 'evaluaciones.nombre AS evaluacion', 
+            'cursos.id AS curso_id', 'cursos.institucion_id', 'materias.id AS materia_id', 'materias.nombre AS materia')
+            ->join('evaluaciones', 'entregas.evaluacion_id', 'evaluaciones.id')
+            ->join('materias', 'evaluaciones.materia_id', 'materias.id')
+            ->join('cursos', 'materias.curso_id', 'cursos.id')
+            ->findOrFail($id);
+    }
 }

@@ -32,4 +32,13 @@ class Clase extends Model
     {
         return $this->morphMany(Comentario::class, 'commentable')->orderBy('created_at', 'DESC');
     }
+
+    public function obtenerInformacionParaLaNotificacion($id)
+    {
+        return Clase::select('clases.*', 'cursos.id AS curso_id', 'cursos.institucion_id', 'materias.id AS materia_id', 
+            'materias.nombre AS materia')
+            ->join('materias', 'clases.materia_id', 'materias.id')
+            ->join('cursos', 'materias.curso_id', 'cursos.id')
+            ->findOrFail($id);
+    }
 }
