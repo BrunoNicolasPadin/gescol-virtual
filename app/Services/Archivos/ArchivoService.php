@@ -2,8 +2,6 @@
 
 namespace App\Services\Archivos;
 
-use Illuminate\Support\Facades\Storage;
-
 class ArchivoService
 {
     public function subirArchivo($request, $carpeta)
@@ -13,7 +11,6 @@ class ArchivoService
         $nombreArchivo = $unique . '-' . $archivo->getClientOriginalName();
         /* $request->file('archivo')->storePubliclyAs($carpeta, $nombreArchivo, 's3'); */
         $archivo->storeAs($carpeta, $nombreArchivo);
-        Storage::disk('public')->put($nombreArchivo, $carpeta);
         return $nombreArchivo;
     }
 

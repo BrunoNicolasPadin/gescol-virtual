@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entregas;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Entregas\StoreEntregaRequest;
+use App\Models\Archivos\Archivo;
 use App\Models\Correcciones\Correccion;
 use App\Models\Cursos\Curso;
 use App\Models\Entregas\Entrega;
@@ -11,6 +12,7 @@ use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Instituciones\Institucion;
 use App\Models\Materias\Materia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class EntregaController extends Controller
@@ -87,9 +89,21 @@ class EntregaController extends Controller
             ->with('message', 'Entrega calificada');
     }
 
-    public function destroy($institucion_id, $curso_id, $materia_id, $evaluacion_id, $id)
+    public function destroy($institucion_id, $curso_id, $materia_id, $evaluacion_id, Entrega $entrega)
     {
-        Entrega::destroy($id);
+        $correcciones = Correccion::where('entrega_id', $entrega->id)->get();
+        foreach ($correcciones as $correccion) {
+            Storage::delete($correccion->archivo);
+            $correccion->delete();
+        }
+        
+        $entregaArchivos = Archivo::where('fileable_id', $entrega->id)->get();
+        foreach ($entregaArchivos as $entregaArchivo) {
+            Storage::delete($entregaArchivo->archivo);
+            $entregaArchivo->delete();
+        }
+        $entrega->delete();
+
         return redirect()->route('entregas.index', [$institucion_id, $curso_id, $materia_id, $evaluacion_id])
             ->with('message', 'Entrega eliminada');
     }

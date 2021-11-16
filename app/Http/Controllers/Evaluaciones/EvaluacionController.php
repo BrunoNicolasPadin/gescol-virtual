@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Evaluaciones;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluaciones\StoreEvaluacionRequest;
+use App\Jobs\Evaluaciones\EliminarEvaluacionJob;
 use App\Models\Cursos\Curso;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Instituciones\Institucion;
 use App\Models\Materias\Materia;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class EvaluacionController extends Controller
@@ -151,7 +153,7 @@ class EvaluacionController extends Controller
     {
         $this->authorize('delete', $evaluacione);
 
-        $evaluacione->delete();
+        EliminarEvaluacionJob::dispatch($evaluacione);
 
         return redirect()->route('evaluaciones.index', [$institucion_id, $curso_id, $materia_id])
             ->with('message', 'Evaluacion eliminada');

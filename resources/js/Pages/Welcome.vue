@@ -43,7 +43,7 @@
         <h1 class="text-5xl text-center uppercase py-6 font-semibold">Instituciones</h1>
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-x-3 py-10">
             <div class="w-full ml-auto mr-auto px-4">
-                <img alt="..." class="max-w-full rounded-lg shadow-lg" :src="'http://127.0.0.1:8000/storage/app/Inicio/materias.png'">
+                <img alt="..." class="max-w-full rounded-lg shadow-lg" :src="'http://127.0.0.1:8000/storage/Inicio/materias.png'">
             </div>
 
             <div class="mt-10 px-4">
@@ -60,7 +60,7 @@
         <h1 class="text-5xl text-center uppercase py-6 font-semibold">Docentes</h1>
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-x-3 py-10">
             <div class="w-full ml-auto mr-auto px-4">
-                <img alt="..." class="max-w-full rounded-lg shadow-lg" :src="'http://127.0.0.1:8000/storage/app/Inicio/evaluacion.png'">
+                <img alt="..." class="max-w-full rounded-lg shadow-lg" :src="'http://127.0.0.1:8000/storage/Inicio/evaluacion.png'">
             </div>
 
             <div class="mt-10 px-4">
@@ -77,7 +77,7 @@
         <h1 class="text-5xl text-center uppercase py-6 font-semibold">Alumnos</h1>
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-x-3 py-10">
             <div class="w-full ml-auto mr-auto px-4">
-                <img alt="..." class="max-w-full rounded-lg shadow-lg" :src="'http://127.0.0.1:8000/storage/app/Inicio/entrega.png'">
+                <img alt="..." class="max-w-full rounded-lg shadow-lg" :src="'http://127.0.0.1:8000/storage/Inicio/entrega.png'">
             </div>
 
             <div class="mt-10 px-4">

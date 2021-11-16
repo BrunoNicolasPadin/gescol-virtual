@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Clases;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Clases\StoreClaseRequest;
+use App\Models\Archivos\Archivo;
 use App\Models\Clases\Clase;
 use App\Models\Cursos\Curso;
 use App\Models\Instituciones\Institucion;
 use App\Models\Materias\Materia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ClaseController extends Controller
@@ -121,6 +123,11 @@ class ClaseController extends Controller
     {
         $this->authorize('delete', $clase);
 
+        $archivosClase = Archivo::where('fileable_id', $clase->id)->get();
+        foreach ($archivosClase as $archivoClase) {
+            Storage::delete($archivoClase->archivo);
+            $archivoClase->delete();
+        }
         $clase->delete();
 
         return redirect()->route('clases.index', [$institucion_id, $curso_id, $materia_id])

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Materias;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Materias\StoreMateriaRequest;
+use App\Jobs\Materias\EliminarMateriaJob;
 use App\Models\Cursos\Curso;
 use App\Models\Instituciones\Institucion;
 use App\Models\Materias\Materia;
@@ -82,7 +83,7 @@ class MateriaController extends Controller
     {
         $this->authorize('delete', $materia);
 
-        $materia->delete();
+        EliminarMateriaJob::dispatch($materia);
 
         return redirect(route('materias.index', [$institucion_id, $curso_id]))
             ->with('message', 'Materia eliminada');

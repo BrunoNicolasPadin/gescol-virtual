@@ -63,9 +63,8 @@ class CorreccionController extends Controller
     {
         $this->authorize('delete', $correccione);
 
-        /* Storage::disk('s3')->delete('Competencias/Escudos/' . $competencia->escudo); */
+        /* Storage::disk('s3')->delete('Correcciones/' . $correccione->archivo); */
         Storage::delete($correccione->archivo);
-        
         $correccione->delete();
         
         return redirect()->route('entregas.show', [$institucion_id, $curso_id, $materia_id, $evaluacion_id, $entrega_id])
