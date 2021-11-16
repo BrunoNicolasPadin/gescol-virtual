@@ -24,7 +24,6 @@ class InstitucionController extends Controller
         $this->authorize('create', Institucion::class);
         $institucion = new Institucion();
         $institucion->nombre = $request->nombre;
-        $institucion->claveDeAcceso = Hash::make($request->claveDeAccesoNueva);
         $institucion->user()->associate(Auth::id());
         $institucion->save();
 
@@ -44,14 +43,6 @@ class InstitucionController extends Controller
     public function update(UpdateInstitucionRequest $request, Institucion $institucione)
     {
         $this->authorize('update', $institucione);
-
-        if (! $request->claveDeAccesoActual == null) {
-            if (Hash::check($request->claveDeAccesoActual, $institucione->claveDeAcceso)) {
-                $institucione->claveDeAcceso = Hash::make($request->claveDeAccesoNueva);
-            }
-            return redirect()->back()
-            ->with('message', 'La clave de ingreso no es la correcta');
-        }
 
         $institucione->nombre = $request->nombre;
         $institucione->save();

@@ -19,32 +19,6 @@
                         </template>
                     </estructura-formulario>
 
-                    <estructura-formulario>
-                        <template #estructuraInput>
-                            <estructura-input nombreLabel="Clave de acceso actual" info="Rellenar solo si quiere cambiar la clave de acceso.">
-                                <template #inputComponente>
-                                    <input-componente type="password" v-model="form.claveDeAccesoActual"/>
-                                </template>
-                            </estructura-input>
-                        </template>
-                    </estructura-formulario>
-
-                    <estructura-formulario class="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-3">
-                        <template #estructuraInput>
-                            <estructura-input nombreLabel="Clave de acceso nueva" info="Rellenar solo si quiere cambiar la clave de acceso.">
-                                <template #inputComponente>
-                                    <input-componente type="password" v-model="form.claveDeAcceso"/>
-                                </template>
-                            </estructura-input>
-
-                            <estructura-input nombreLabel="Confirmar clave de acceso nueva" info="Rellenar solo si quiere cambiar la clave de acceso.">
-                                <template #inputComponente>
-                                    <input-componente type="password" v-model="form.claveDeAcceso_confirmation"/>
-                                </template>
-                            </estructura-input>
-                        </template>
-                    </estructura-formulario>
-
                     <guardar />
                 </form>
             </div>
@@ -79,9 +53,6 @@
             return {
                 form: {
                     nombre: this.institucion.nombre,
-                    claveDeAccesoActual: null,
-                    claveDeAccesoNueva: null,
-                    claveDeAccesoNueva_confirmation: null,
                 },
             }
         },

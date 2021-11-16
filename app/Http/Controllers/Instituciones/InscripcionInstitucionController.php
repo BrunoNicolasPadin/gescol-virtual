@@ -10,6 +10,7 @@ use App\Models\Roles\RolUser;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class InscripcionInstitucionController extends Controller
@@ -28,13 +29,21 @@ class InscripcionInstitucionController extends Controller
     {
         $this->authorize('create', [RolUser::class, $institucion_id]);
 
-        $rolUser = new RolUser();
-        $rolUser->rol()->associate($request->rol_id);
-        $rolUser->user()->associate(Auth::id());
-        $rolUser->save();
+        $rol = Rol::findOrFail($request->rol_id);
 
-        return redirect()->route('panel.mostrarInicio')
-            ->with('message', 'Rol asignado');
+        if (Hash::check($request->claveDeAcceso, $rol->claveDeAcceso)) {
+            $rolUser = new RolUser();
+            $rolUser->rol()->associate($request->rol_id);
+            $rolUser->user()->associate(Auth::id());
+            $rolUser->save();
+
+            return redirect()->route('panel.mostrarInicio')
+                ->with('message', 'Rol asignado');
+        }
+        else {
+            return redirect()->back()
+                ->with('message', 'Clave de acceso incorrecta');
+        }
     }
 
     public function edit($institucion_id, RolUser $inscripcione)
@@ -54,11 +63,19 @@ class InscripcionInstitucionController extends Controller
     {
         $this->authorize('update', $inscripcione);
 
-        $inscripcione->rol()->associate($request->rol_id);
-        $inscripcione->save();
+        $rol = Rol::findOrFail($request->rol_id);
 
-        return redirect()->route('panel.mostrarInicio')
-            ->with('message', 'Rol actualizado');
+        if (Hash::check($request->claveDeAcceso, $rol->claveDeAcceso)) {
+            $inscripcione->rol()->associate($request->rol_id);
+            $inscripcione->save();
+
+            return redirect()->route('panel.mostrarInicio')
+                ->with('message', 'Rol cambiado');
+        }
+        else {
+            return redirect()->back()
+                ->with('message', 'Clave de acceso incorrecta');
+        }
     }
 
     public function destroy($institucion_id, RolUser $inscripcione)

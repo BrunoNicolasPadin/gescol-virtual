@@ -13,6 +13,7 @@ class Rol extends Model
     protected $table = 'roles';
     protected $fillable = [
         'nombre',
+        'claveDeAcceso',
     ];
 
     public function institucion()

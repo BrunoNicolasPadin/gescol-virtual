@@ -25,6 +25,8 @@ class StoreRolRequest extends FormRequest
     {
         return [
             'roles.*.nombre' => 'required|string|max:255',
+            'roles.*.claveDeAcceso' => 'required|string|min:8|max:32|same:claveDeAcceso_confirmation',
+            'roles.*.claveDeAcceso_confirmation' => 'required|string|min:8|max:32',
         ];
     }
 }

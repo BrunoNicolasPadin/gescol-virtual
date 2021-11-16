@@ -12,7 +12,6 @@ class Institucion extends Model
     protected $table = 'instituciones';
     protected $fillable = [
         'nombre',
-        'claveDeAcceso',
     ];
 
     public function user()

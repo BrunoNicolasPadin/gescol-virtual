@@ -18,23 +18,6 @@
                             </estructura-input>
                         </template>
                     </estructura-formulario>
-
-                    <estructura-formulario class="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-3">
-                        <template #estructuraInput>
-                            <estructura-input nombreLabel="Clave de acceso" info="Es obligatorio.">
-                                <template #inputComponente>
-                                    <input-componente type="password" v-model="form.claveDeAcceso"/>
-                                </template>
-                            </estructura-input>
-
-                            <estructura-input nombreLabel="Confirmar clave de acceso" info="Es obligatorio.">
-                                <template #inputComponente>
-                                    <input-componente type="password" v-model="form.claveDeAcceso_confirmation"/>
-                                </template>
-                            </estructura-input>
-                        </template>
-                    </estructura-formulario>
-
                     <guardar />
                 </form>
             </div>
@@ -65,8 +48,6 @@
             return {
                 form: {
                     nombre: null,
-                    claveDeAcceso: null,
-                    claveDeAcceso_confirmation: null,
                 },
             }
         },

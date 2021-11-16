@@ -7,19 +7,15 @@ use App\Models\Permisos\Permiso;
 use App\Models\Roles\PermisoRol;
 use App\Models\Roles\Rol;
 use App\Models\Roles\RolUser;
+use Illuminate\Support\Facades\Hash;
 
 class InstitucionObserver
 {
-    /**
-     * Handle the Institucion "created" event.
-     *
-     * @param  \App\Models\Instituciones\Institucion  $institucion
-     * @return void
-     */
     public function created(Institucion $institucion)
     {
         $rol = new Rol();
         $rol->nombre = 'Institucion';
+        $rol->claveDeAcceso = Hash::make(substr(base64_encode(mt_rand()), 0, 12));
         $rol->institucion()->associate($institucion->id);
         $rol->save();
 
@@ -38,47 +34,19 @@ class InstitucionObserver
         $rolUser->save();
     }
 
-    /**
-     * Handle the Institucion "updated" event.
-     *
-     * @param  \App\Models\Instituciones\Institucion  $institucion
-     * @return void
-     */
-    public function updated(Institucion $institucion)
+    /* public function updated(Institucion $institucion)
     {
-        //
     }
 
-    /**
-     * Handle the Institucion "deleted" event.
-     *
-     * @param  \App\Models\Instituciones\Institucion  $institucion
-     * @return void
-     */
     public function deleted(Institucion $institucion)
     {
-        //
     }
 
-    /**
-     * Handle the Institucion "restored" event.
-     *
-     * @param  \App\Models\Instituciones\Institucion  $institucion
-     * @return void
-     */
     public function restored(Institucion $institucion)
     {
-        //
     }
 
-    /**
-     * Handle the Institucion "force deleted" event.
-     *
-     * @param  \App\Models\Instituciones\Institucion  $institucion
-     * @return void
-     */
     public function forceDeleted(Institucion $institucion)
     {
-        //
-    }
+    } */
 }

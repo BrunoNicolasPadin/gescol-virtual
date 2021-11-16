@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Roles;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Roles\StoreRolRequest;
+use App\Http\Requests\Roles\UpdateRolRequest;
 use App\Models\Instituciones\Institucion;
 use App\Models\Roles\Rol;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class RolController extends Controller
@@ -31,6 +33,7 @@ class RolController extends Controller
         for ($i = 0; $i < count($request->roles); $i++) { 
             $rol = new Rol();
             $rol->nombre = $request->roles[$i]['nombre'];
+            $rol->claveDeAcceso = Hash::make($request->claveDeAcceso);
             $rol->institucion()->associate($institucion_id);
             $rol->save();
         }
@@ -49,9 +52,19 @@ class RolController extends Controller
         ]);
     }
 
-    public function update(StoreRolRequest $request, $institucion_id, Rol $role)
+    public function update(UpdateRolRequest $request, $institucion_id, Rol $role)
     {
         $this->authorize('update', $role);
+
+        if (! $request->claveDeAccesoVieja == null) {
+            if (Hash::check($request->claveDeAccesoVieja, $role->claveDeAcceso)) {
+                $role->claveDeAcceso = Hash::make($request->claveDeAccesoNueva);
+            }
+            else {
+                return redirect()->back()
+                ->with('message', 'La clave de acceso actual que ingreso no es la correcta');
+            }
+        }
 
         $role->nombre = $request->nombre;
         $role->save();

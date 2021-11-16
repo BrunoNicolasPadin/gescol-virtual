@@ -22,6 +22,24 @@
                             </template>
                         </estructura-formulario>
 
+                        <estructura-formulario class="grid grid-cols-2 gap-x-3">
+                            <template #estructuraInput>
+                                <estructura-input nombreLabel="Clave de acceso para elegir rol" 
+                                    info="Es obligatorio. Los usuarios que seleccionen registrarse en tu institucion con este rol deberan ingresar 
+                                    esta clave de acceso">
+                                    <template #inputComponente>
+                                        <input-componente type="password" v-model="form.claveDeAcceso"/>
+                                    </template>
+                                </estructura-input>
+
+                                <estructura-input nombreLabel="Confirmar clave de acceso" info="Es obligatorio.">
+                                    <template #inputComponente>
+                                        <input-componente type="text" v-model="form.claveDeAcceso_confirmation"/>
+                                    </template>
+                                </estructura-input>
+                            </template>
+                        </estructura-formulario>
+
                         <estructura-formulario>
                             <template #estructuraInput>
                                 <button 
@@ -78,6 +96,8 @@
                 form: {
                     roles: [{
                         nombre: null,
+                        claveDeAcceso: null,
+                        claveDeAcceso_confirmation: null,
                     }],
                 },
             }

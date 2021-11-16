@@ -17,7 +17,6 @@ class CreateInstitucionesTable extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->index()->constrained('users')->onDelete('cascade');
             $table->string('nombre');
-            $table->string('claveDeAcceso');
             $table->timestamps();
         });
     }

@@ -23,6 +23,16 @@
                         </template>
                     </estructura-formulario>
 
+                    <estructura-formulario>
+                        <template #estructuraInput>
+                            <estructura-input nombreLabel="Clave de acceso" info="Es obligatorio.">
+                                <template #inputComponente>
+                                    <input-componente type="password" v-model="form.claveDeAcceso"/>
+                                </template>
+                            </estructura-input>
+                        </template>
+                    </estructura-formulario>
+
                     <guardar />
                 </form>
             </div>
@@ -59,6 +69,7 @@
             return {
                 form: {
                     rol_id: this.inscripcion.rol_id,
+                    claveDeAcceso: null,
                 },
             }
         },

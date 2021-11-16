@@ -17,6 +17,7 @@ class CreateRolesTable extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('institucion_id')->index()->constrained('instituciones')->onDelete('cascade');
             $table->string('nombre');
+            $table->string('claveDeAcceso');
             $table->timestamps();
         });
     }

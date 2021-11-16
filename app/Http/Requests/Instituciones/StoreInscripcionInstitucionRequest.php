@@ -6,25 +6,16 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreInscripcionInstitucionRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
-            'rol_id' => 'required|max:36',
+            'rol_id' => 'required|max:36|string',
+            'claveDeAcceso' => 'required|min:8|max:32|string'
         ];
     }
 }

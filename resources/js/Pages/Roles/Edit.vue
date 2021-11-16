@@ -18,6 +18,29 @@
                                     <input-componente type="text" v-model="form.nombre" autofocus/>
                                 </template>
                             </estructura-input>
+
+                            <estructura-input nombreLabel="Clave de acceso acutla" info="Es obligatorio SOLO si deseas cambiar tu clave de acceso.">
+                                <template #inputComponente>
+                                    <input-componente type="password" v-model="form.claveDeAccesoVieja"/>
+                                </template>
+                            </estructura-input>
+
+                            <estructura-formulario class="grid grid-cols-2 gap-x-3">
+                            <template #estructuraInput>
+                                <estructura-input nombreLabel="Clave de acceso para elegir rol" 
+                                    info="Es obligatorio SOLO si deseas cambiar tu clave de acceso">
+                                    <template #inputComponente>
+                                        <input-componente type="password" v-model="form.claveDeAccesoNueva"/>
+                                    </template>
+                                </estructura-input>
+
+                                <estructura-input nombreLabel="Confirmar clave de acceso" info="Es obligatorio SOLO si deseas cambiar tu clave de acceso">
+                                    <template #inputComponente>
+                                        <input-componente type="text" v-model="form.claveDeAccesoNueva_confirmation"/>
+                                    </template>
+                                </estructura-input>
+                            </template>
+                        </estructura-formulario>
                         </template>
                     </estructura-formulario>
                     <guardar />
@@ -55,6 +78,9 @@
             return {
                 form: {
                     nombre: this.rol.nombre,
+                    claveDeAccesoVieja: null,
+                    claveDeAccesoNueva: null,
+                    claveDeAccesoNueva_confirmation: null,
                 },
             }
         },
