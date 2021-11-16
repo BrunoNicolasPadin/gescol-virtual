@@ -32,7 +32,9 @@ use App\Policies\Materias\DocentePolicy;
 use App\Policies\Materias\MateriaPolicy;
 use App\Policies\Roles\RolPermisoPolicy;
 use App\Policies\Roles\RolPolicy;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
@@ -69,6 +71,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        VerifyEmail::toMailUsing(function ($notifiable, $url) {
+            return (new MailMessage)
+                ->subject('Verificar email')
+                ->line('Haz click en el boton de abajo para verificar tu email.')
+                ->action('Verificar email', $url);
+        });
     }
 }

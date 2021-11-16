@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Instituciones\Institucion;
 use App\Models\Roles\RolUser;
 use App\Traits\Uuids;
+use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,7 +22,6 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use Uuids;
-    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
