@@ -92,7 +92,9 @@ Route::middleware([Authenticate::class])->group(function () {
 
     Route::resource('instituciones', InstitucionController::class)->except(['index', 'show']);
     Route::prefix('instituciones/{institucion_id}')->group(function () {
-        Route::resource('inscripciones', InscripcionInstitucionController::class)->names('instituciones.inscripciones');
+        Route::resource('inscripciones', InscripcionInstitucionController::class)
+            ->except(['index', 'show'])
+            ->names('instituciones.inscripciones');
         
         Route::resource('roles', RolController::class)->except(['index', 'show']);
         

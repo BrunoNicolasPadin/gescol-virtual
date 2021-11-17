@@ -1,5 +1,5 @@
 <template>
-    <app-layout title="Instituciones - Inscripcion - Agregar">
+    <app-layout title="Institución - Inscribirse">
         <template #header>
             <h2 class="font-semibold text-sm text-gray-800 leading-tight">
                 <breadcrumb ruta='panel.mostrarInicio' :idsArray=[] bread='Panel / Tus roles' />
@@ -8,7 +8,7 @@
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <form method="post" @submit.prevent="submit">
                     <estructura-formulario>
                         <template #estructuraInput>

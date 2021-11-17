@@ -7,9 +7,7 @@ use App\Http\Requests\Instituciones\StoreInscripcionInstitucionRequest;
 use App\Models\Instituciones\Institucion;
 use App\Models\Roles\Rol;
 use App\Models\Roles\RolUser;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
@@ -20,13 +18,18 @@ class InscripcionInstitucionController extends Controller
         $this->authorize('create', [RolUser::class, $institucion_id]);
 
         return Inertia::render('Instituciones/Inscripciones/Create', [
-            'institucion' => Institucion::select('id', 'nombre')->findOrFail($institucion_id),
-            'roles' => Rol::where('institucion_id', $institucion_id)->orderBy('nombre')->get(),
+            'institucion' => Institucion::select('id', 'nombre')
+                ->findOrFail($institucion_id),
+            'roles' => Rol::where('institucion_id', $institucion_id)
+                ->orderBy('nombre')
+                ->get(),
         ]);
     }
 
-    public function store(StoreInscripcionInstitucionRequest $request, $institucion_id)
-    {
+    public function store(
+        StoreInscripcionInstitucionRequest $request,
+        $institucion_id
+    ) {
         $this->authorize('create', [RolUser::class, $institucion_id]);
 
         $rol = Rol::findOrFail($request->rol_id);
@@ -40,10 +43,8 @@ class InscripcionInstitucionController extends Controller
             return redirect()->route('panel.mostrarInicio')
                 ->with('message', 'Rol asignado');
         }
-        else {
-            return redirect()->back()
-                ->with('message', 'Clave de acceso incorrecta');
-        }
+        return redirect()->back()
+            ->with('message', 'Clave de acceso incorrecta');
     }
 
     public function edit($institucion_id, RolUser $inscripcione)
@@ -59,8 +60,11 @@ class InscripcionInstitucionController extends Controller
         ]);
     }
 
-    public function update(StoreInscripcionInstitucionRequest $request, $institucion_id, RolUser $inscripcione)
-    {
+    public function update(
+        StoreInscripcionInstitucionRequest $request,
+        $institucion_id,
+        RolUser $inscripcione
+    ) {
         $this->authorize('update', $inscripcione);
 
         $rol = Rol::findOrFail($request->rol_id);
@@ -72,10 +76,8 @@ class InscripcionInstitucionController extends Controller
             return redirect()->route('panel.mostrarInicio')
                 ->with('message', 'Rol cambiado');
         }
-        else {
-            return redirect()->back()
-                ->with('message', 'Clave de acceso incorrecta');
-        }
+        return redirect()->back()
+            ->with('message', 'Clave de acceso incorrecta');
     }
 
     public function destroy($institucion_id, RolUser $inscripcione)

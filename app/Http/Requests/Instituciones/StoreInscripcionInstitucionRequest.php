@@ -15,7 +15,7 @@ class StoreInscripcionInstitucionRequest extends FormRequest
     {
         return [
             'rol_id' => 'required|max:36|string',
-            'claveDeAcceso' => 'required|min:8|max:32|string'
+            'claveDeAcceso' => 'required|min:8|max:32|string',
         ];
     }
 }

@@ -1,7 +1,7 @@
 <template>
-    <app-layout>
+    <app-layout title="Instituciones - Buscador">
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <estructura-buscador :titulo="'Instituciones'">
                     <template #buscador-input>
                         <input class="text-2xl placeholder-gray-600 text-gray-800 pb-4 pt-5 pl-20 pr-4 rounded w-full border-b-4 focus:outline-none focus:border-blue-800" 

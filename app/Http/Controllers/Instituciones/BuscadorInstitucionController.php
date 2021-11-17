@@ -24,8 +24,8 @@ class BuscadorInstitucionController extends Controller
     public function obtenerInstituciones($request)
     {
         return Institucion::when($request->nombre, function ($query, $nombre) {
-                $query->where('nombre', 'LIKE', '%'.$nombre.'%');
-            })
+            $query->where('nombre', 'LIKE', '%'.$nombre.'%');
+        })
             ->orderBy('nombre')
             ->paginate(10);
     }
