@@ -1,5 +1,5 @@
 <template>
-    <app-layout title="Instituciones - Roles - Agregar">
+    <app-layout title="Roles - Agregar">
         <template #header>
             <h2 class="font-semibold text-sm text-gray-800 leading-tight">
                 {{ institucion.nombre }} /
@@ -22,11 +22,11 @@
                             </template>
                         </estructura-formulario>
 
-                        <estructura-formulario class="grid grid-cols-2 gap-x-3">
+                        <estructura-formulario class="grid grid-cols-1 md:grid-cols-2 gap-x-3">
                             <template #estructuraInput>
                                 <estructura-input nombreLabel="Clave de acceso para elegir rol" 
-                                    info="Es obligatorio. Los usuarios que seleccionen registrarse en tu institucion con este rol deberan ingresar 
-                                    esta clave de acceso">
+                                    info="Es obligatorio. Los usuarios que decidan registrarse en tu institución con este rol deberán ingresar 
+                                    esta clave de acceso.">
                                     <template #inputComponente>
                                         <input-componente type="password" v-model="form.claveDeAcceso"/>
                                     </template>

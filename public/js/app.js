@@ -33620,7 +33620,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, {
-    title: "Instituciones - Roles - Agregar"
+    title: "Roles - Agregar"
   }, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.institucion.nombre) + " / ", 1
@@ -33674,12 +33674,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }, 1024
         /* DYNAMIC_SLOTS */
         ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_formulario, {
-          "class": "grid grid-cols-2 gap-x-3"
+          "class": "grid grid-cols-1 md:grid-cols-2 gap-x-3"
         }, {
           estructuraInput: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
             return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_input, {
               nombreLabel: "Clave de acceso para elegir rol",
-              info: "Es obligatorio. Los usuarios que seleccionen registrarse en tu institucion con este rol deberan ingresar \n                                    esta clave de acceso"
+              info: "Es obligatorio. Los usuarios que decidan registrarse en tu institución con este rol deberán ingresar \n                                    esta clave de acceso."
             }, {
               inputComponente: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                 return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_input_componente, {
@@ -33785,7 +33785,7 @@ var _hoisted_3 = {
   "class": "py-12"
 };
 var _hoisted_4 = {
-  "class": "max-w-7xl mx-auto sm:px-6 lg:px-8"
+  "class": "max-w-7xl mx-auto px-4 lg:px-8"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_breadcrumb = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("breadcrumb");
@@ -33801,7 +33801,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, {
-    title: "Instituciones - Roles - Editar"
+    title: "Roles - Editar"
   }, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.institucion.nombre) + " / ", 1
@@ -33841,8 +33841,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             _: 1
             /* STABLE */
 
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_input, {
-            nombreLabel: "Clave de acceso acutla",
+          })];
+        }),
+        _: 1
+        /* STABLE */
+
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_formulario, null, {
+        estructuraInput: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_input, {
+            nombreLabel: "Clave de acceso actual",
             info: "Es obligatorio SOLO si deseas cambiar tu clave de acceso."
           }, {
             inputComponente: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -33859,47 +33866,47 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             _: 1
             /* STABLE */
 
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_formulario, {
-            "class": "grid grid-cols-2 gap-x-3"
+          })];
+        }),
+        _: 1
+        /* STABLE */
+
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_formulario, {
+        "class": "grid grid-cols-1 md:grid-cols-2 gap-x-3"
+      }, {
+        estructuraInput: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_input, {
+            nombreLabel: "Clave de acceso para elegir rol",
+            info: "Es obligatorio SOLO si deseas cambiar tu clave de acceso"
           }, {
-            estructuraInput: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_input, {
-                nombreLabel: "Clave de acceso para elegir rol",
-                info: "Es obligatorio SOLO si deseas cambiar tu clave de acceso"
-              }, {
-                inputComponente: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_input_componente, {
-                    type: "password",
-                    modelValue: _ctx.form.claveDeAccesoNueva,
-                    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-                      return _ctx.form.claveDeAccesoNueva = $event;
-                    })
-                  }, null, 8
-                  /* PROPS */
-                  , ["modelValue"])];
-                }),
-                _: 1
-                /* STABLE */
+            inputComponente: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_input_componente, {
+                type: "password",
+                modelValue: _ctx.form.claveDeAccesoNueva,
+                "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+                  return _ctx.form.claveDeAccesoNueva = $event;
+                })
+              }, null, 8
+              /* PROPS */
+              , ["modelValue"])];
+            }),
+            _: 1
+            /* STABLE */
 
-              }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_input, {
-                nombreLabel: "Confirmar clave de acceso",
-                info: "Es obligatorio SOLO si deseas cambiar tu clave de acceso"
-              }, {
-                inputComponente: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_input_componente, {
-                    type: "text",
-                    modelValue: _ctx.form.claveDeAccesoNueva_confirmation,
-                    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-                      return _ctx.form.claveDeAccesoNueva_confirmation = $event;
-                    })
-                  }, null, 8
-                  /* PROPS */
-                  , ["modelValue"])];
-                }),
-                _: 1
-                /* STABLE */
-
-              })];
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_input, {
+            nombreLabel: "Confirmar clave de acceso",
+            info: "Es obligatorio SOLO si deseas cambiar tu clave de acceso"
+          }, {
+            inputComponente: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_input_componente, {
+                type: "text",
+                modelValue: _ctx.form.claveDeAccesoNueva_confirmation,
+                "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+                  return _ctx.form.claveDeAccesoNueva_confirmation = $event;
+                })
+              }, null, 8
+              /* PROPS */
+              , ["modelValue"])];
             }),
             _: 1
             /* STABLE */

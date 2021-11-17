@@ -1,5 +1,5 @@
 <template>
-    <app-layout title="Instituciones - Roles - Editar">
+    <app-layout title="Roles - Editar">
         <template #header>
             <h2 class="font-semibold text-sm text-gray-800 leading-tight">
                 {{ institucion.nombre }} /
@@ -9,7 +9,7 @@
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <form method="post" @submit.prevent="submit">
                     <estructura-formulario>
                         <template #estructuraInput>
@@ -18,31 +18,36 @@
                                     <input-componente type="text" v-model="form.nombre" autofocus/>
                                 </template>
                             </estructura-input>
+                        </template>
+                    </estructura-formulario>
 
-                            <estructura-input nombreLabel="Clave de acceso acutla" info="Es obligatorio SOLO si deseas cambiar tu clave de acceso.">
+                    <estructura-formulario>
+                        <template #estructuraInput>
+                            <estructura-input nombreLabel="Clave de acceso actual" info="Es obligatorio SOLO si deseas cambiar tu clave de acceso.">
                                 <template #inputComponente>
                                     <input-componente type="password" v-model="form.claveDeAccesoVieja"/>
                                 </template>
                             </estructura-input>
-
-                            <estructura-formulario class="grid grid-cols-2 gap-x-3">
-                            <template #estructuraInput>
-                                <estructura-input nombreLabel="Clave de acceso para elegir rol" 
-                                    info="Es obligatorio SOLO si deseas cambiar tu clave de acceso">
-                                    <template #inputComponente>
-                                        <input-componente type="password" v-model="form.claveDeAccesoNueva"/>
-                                    </template>
-                                </estructura-input>
-
-                                <estructura-input nombreLabel="Confirmar clave de acceso" info="Es obligatorio SOLO si deseas cambiar tu clave de acceso">
-                                    <template #inputComponente>
-                                        <input-componente type="text" v-model="form.claveDeAccesoNueva_confirmation"/>
-                                    </template>
-                                </estructura-input>
-                            </template>
-                        </estructura-formulario>
                         </template>
                     </estructura-formulario>
+
+                    <estructura-formulario class="grid grid-cols-1 md:grid-cols-2 gap-x-3">
+                        <template #estructuraInput>
+                            <estructura-input nombreLabel="Clave de acceso para elegir rol" 
+                                info="Es obligatorio SOLO si deseas cambiar tu clave de acceso">
+                                <template #inputComponente>
+                                    <input-componente type="password" v-model="form.claveDeAccesoNueva"/>
+                                </template>
+                            </estructura-input>
+
+                            <estructura-input nombreLabel="Confirmar clave de acceso" info="Es obligatorio SOLO si deseas cambiar tu clave de acceso">
+                                <template #inputComponente>
+                                    <input-componente type="text" v-model="form.claveDeAccesoNueva_confirmation"/>
+                                </template>
+                            </estructura-input>
+                        </template>
+                    </estructura-formulario>
+
                     <guardar />
                 </form>
             </div>

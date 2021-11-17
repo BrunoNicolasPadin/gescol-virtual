@@ -2,7 +2,6 @@
 
 namespace App\Policies\Roles;
 
-use App\Models\Roles\Rol;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -10,35 +9,24 @@ class RolPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user)
-    {
-        //
-    }
-
-    public function view(User $user, Rol $rol)
-    {
-        //
-    }
-
     public function create(User $user)
     {
-        if ($user->obtenerPermisos('Roles: crear')) {
-            return true;
-        }
-        return false;
+        return $this->verificarPermiso($user, 'Roles: crear');
     }
 
-    public function update(User $user, $role)
+    public function update(User $user)
     {
-        if ($user->obtenerPermisos('Roles: editar')) {
-            return true;
-        }
-        return false;
+        return $this->verificarPermiso($user, 'Roles: editar');
     }
 
-    public function delete(User $user, Rol $rol)
+    public function delete(User $user)
     {
-        if ($user->obtenerPermisos('Roles: eliminar')) {
+        return $this->verificarPermiso($user, 'Roles: eliminar');
+    }
+
+    public function verificarPermiso($user, $permiso)
+    {
+        if ($user->obtenerPermisos($permiso)) {
             return true;
         }
         return false;

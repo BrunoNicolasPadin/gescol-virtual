@@ -12,17 +12,13 @@ use Inertia\Inertia;
 
 class RolController extends Controller
 {
-    public function index()
-    {
-        //
-    }
-
     public function create($institucion_id)
     {
         $this->authorize('create', Rol::class);
 
         return Inertia::render('Roles/Create', [
-            'institucion' => Institucion::select('id', 'nombre')->findOrFail($institucion_id),
+            'institucion' => Institucion::select('id', 'nombre')
+                ->findOrFail($institucion_id),
         ]);
     }
 
@@ -30,7 +26,7 @@ class RolController extends Controller
     {
         $this->authorize('create', Rol::class);
 
-        for ($i = 0; $i < count($request->roles); $i++) { 
+        for ($i = 0; $i < count($request->roles); $i++) {
             $rol = new Rol();
             $rol->nombre = $request->roles[$i]['nombre'];
             $rol->claveDeAcceso = Hash::make($request->claveDeAcceso);
@@ -39,7 +35,7 @@ class RolController extends Controller
         }
 
         return redirect(route('panel.mostrarRoles', $institucion_id))
-            ->with('message', 'Rol/es agregado/s');
+            ->with('message', 'Roles agregados');
     }
 
     public function edit($institucion_id, Rol $role)
@@ -47,28 +43,35 @@ class RolController extends Controller
         $this->authorize('update', $role);
 
         return Inertia::render('Roles/Edit', [
-            'institucion' => Institucion::select('id', 'nombre')->findOrFail($institucion_id),
+            'institucion' => Institucion::select('id', 'nombre')
+                ->findOrFail($institucion_id),
             'rol' => $role,
         ]);
     }
 
-    public function update(UpdateRolRequest $request, $institucion_id, Rol $role)
-    {
+    public function update(
+        UpdateRolRequest $request,
+        $institucion_id,
+        Rol $role
+    ) {
         $this->authorize('update', $role);
-
-        if (! $request->claveDeAccesoVieja == null) {
-            if (Hash::check($request->claveDeAccesoVieja, $role->claveDeAcceso)) {
+        /* Verificar si coincide la clave de acceso actual con la ingresada */
+        if (! $request->claveDeAccesoVieja === null) {
+            if (Hash::check(
+                $request->claveDeAccesoVieja,
+                $role->claveDeAcceso
+            )) {
                 $role->claveDeAcceso = Hash::make($request->claveDeAccesoNueva);
-            }
-            else {
+            } else {
                 return redirect()->back()
-                ->with('message', 'La clave de acceso actual que ingreso no es la correcta');
+                    ->with(
+                        'message',
+                        'La clave de acceso actual ingresada no es la correcta'
+                    );
             }
         }
-
         $role->nombre = $request->nombre;
         $role->save();
-
         return redirect(route('panel.mostrarRoles', $institucion_id))
             ->with('message', 'Rol actualizado');
     }
