@@ -15,7 +15,9 @@ class EvaluacionObserver
             ->with('rolUser:id,user_id', 'rolUser.user:id')
             ->get();
 
-        $evaluacionInfo = $evaluacion->obtenerInformacionParaLaNotificacion($evaluacion->id);
+        $evaluacionInfo = $evaluacion->obtenerInformacionParaLaNotificacion(
+            $evaluacion->id
+        );
 
         foreach ($alumnos as $alumno) {
             $entrega = new Entrega();
@@ -23,23 +25,9 @@ class EvaluacionObserver
             $entrega->evaluacion()->associate($evaluacion->id);
             $entrega->save();
 
-            $alumno->rolUser->user->notify(new EvaluacionCreada($evaluacionInfo));
+            $alumno->rolUser->user->notify(
+                new EvaluacionCreada($evaluacionInfo)
+            );
         }
     }
-/* 
-    public function updated(Evaluacion $evaluacion)
-    {
-    }
-
-    public function deleted(Evaluacion $evaluacion)
-    {
-    }
-
-    public function restored(Evaluacion $evaluacion)
-    {
-    }
-
-    public function forceDeleted(Evaluacion $evaluacion)
-    {
-    } */
 }

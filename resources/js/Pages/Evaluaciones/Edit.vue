@@ -13,7 +13,7 @@
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto px-8">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <form method="post" @submit.prevent="submit">
                     <estructura-formulario>
                         <template #estructuraInput>

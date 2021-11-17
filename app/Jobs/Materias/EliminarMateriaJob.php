@@ -57,6 +57,7 @@ class EliminarMateriaJob implements ShouldQueue
             $entrega->delete();
         }
     }
+
     public function eliminarClases()
     {
         $clases = Clase::select('id')->where('materia_id', $this->materia->id)

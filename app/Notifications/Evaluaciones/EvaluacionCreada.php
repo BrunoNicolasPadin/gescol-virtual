@@ -4,8 +4,6 @@ namespace App\Notifications\Evaluaciones;
 
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class EvaluacionCreada extends Notification
@@ -22,13 +20,13 @@ class EvaluacionCreada extends Notification
         return ['database'];
     }
 
-    public function toMail($notifiable)
+    /* public function toMail($notifiable)
     {
         return (new MailMessage)
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
-    }
+    } */
 
     public function toArray($notifiable)
     {
@@ -39,8 +37,12 @@ class EvaluacionCreada extends Notification
             'materia' => $this->evaluacion->materia,
             'id' => $this->evaluacion->id,
             'nombre' => $this->evaluacion->nombre,
-            'comienzo' => Carbon::parse($this->evaluacion->fechaHoraComienzo)->format('d/m/y - H:i:s'),
-            'finalizacion' => Carbon::parse($this->evaluacion->fechaHoraFinalizacion)->format('d/m/y - H:i:s'),
+            'comienzo' => Carbon::parse(
+                $this->evaluacion->fechaHoraComienzo
+            )->format('d/m/y - H:i:s'),
+            'finalizacion' => Carbon::parse(
+                $this->evaluacion->fechaHoraFinalizacion
+            )->format('d/m/y - H:i:s'),
         ];
     }
 }

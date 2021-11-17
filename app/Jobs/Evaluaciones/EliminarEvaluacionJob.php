@@ -6,7 +6,6 @@ use App\Models\Archivos\Archivo;
 use App\Models\Correcciones\Correccion;
 use App\Models\Entregas\Entrega;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -26,28 +25,37 @@ class EliminarEvaluacionJob implements ShouldQueue
 
     public function handle()
     {
-        $entregas = Entrega::where('evaluacion_id', $this->evaluacion->id)->get();
+        $entregas = Entrega::where('evaluacion_id', $this->evaluacion->id)
+            ->get();
+
+        $this->eliminarEntregasCorrecciones($entregas);
+        $this->eliminarArchivos($this->evaluacion->id);
+        $this->evaluacion->delete();
+    }
+
+    public function eliminarEntregasCorrecciones($entregas)
+    {
         foreach ($entregas as $entrega) {
-            
-            $correcciones = Correccion::where('entrega_id', $entrega->id)->get();
+            $correcciones = Correccion::where('entrega_id', $entrega->id)
+                ->get();
+
             foreach ($correcciones as $correccion) {
                 Storage::delete($correccion->archivo);
                 $correccion->delete();
             }
-
-            $archivosEntrega = Archivo::where('fileable_id', $entrega->id)->get();
-            foreach ($archivosEntrega as $archivoEntrega) {
-                Storage::delete($archivoEntrega->archivo);
-                $archivoEntrega->delete();
-            }
+            $this->eliminarArchivos($entrega->id);
             $entrega->delete();
         }
-        
-        $archivosEvaluacion = Archivo::where('fileable_id', $this->evaluacion->id)->get();
-        foreach ($archivosEvaluacion as $archivoEvaluacion) {
-            Storage::delete($archivoEvaluacion->archivo);
-            $archivoEvaluacion->delete();
+    }
+
+    public function eliminarArchivos($fileable_id)
+    {
+        $archivos = Archivo::where('fileable_id', $fileable_id)
+            ->get();
+
+        foreach ($archivos as $archivo) {
+            Storage::delete($archivo->archivo);
+            $archivo->delete();
         }
-        $this->evaluacion->delete();
     }
 }

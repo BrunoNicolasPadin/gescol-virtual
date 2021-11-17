@@ -12,7 +12,7 @@
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <estructura-tabla>
                     <template #head>
                         <th-componente>
@@ -140,7 +140,7 @@
 
         methods: {
             destroy(evaluacion_id) {
-                if (confirm('¿Estás seguro de que deseas eliminar esta evaluacion?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar esta evaluación?')) {
                     this.$inertia.delete(this.route('evaluaciones.destroy', [this.institucion.id, this.curso.id, this.materia.id, evaluacion_id]));
                 }
             },

@@ -32,13 +32,19 @@ class Evaluacion extends Model
 
     public function comentarios()
     {
-        return $this->morphMany(Comentario::class, 'commentable')->orderBy('created_at', 'DESC');
+        return $this->morphMany(Comentario::class, 'commentable')
+            ->orderBy('created_at', 'DESC');
     }
 
     public function obtenerInformacionParaLaNotificacion($id)
     {
-        return Evaluacion::select('evaluaciones.*', 'cursos.id AS curso_id', 'cursos.institucion_id', 'materias.id AS materia_id', 
-            'materias.nombre AS materia')
+        return Evaluacion::select(
+            'evaluaciones.*',
+            'cursos.id AS curso_id',
+            'cursos.institucion_id',
+            'materias.id AS materia_id',
+            'materias.nombre AS materia'
+        )
             ->join('materias', 'evaluaciones.materia_id', 'materias.id')
             ->join('cursos', 'materias.curso_id', 'cursos.id')
             ->findOrFail($id);
