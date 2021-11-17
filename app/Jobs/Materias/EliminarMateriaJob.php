@@ -8,7 +8,6 @@ use App\Models\Correcciones\Correccion;
 use App\Models\Entregas\Entrega;
 use App\Models\Evaluaciones\Evaluacion;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -28,47 +27,55 @@ class EliminarMateriaJob implements ShouldQueue
 
     public function handle()
     {
-        //Evaluaciones, archivos, entregas, archivos, correcciones
+        $evaluaciones = Evaluacion::select('id')
+            ->where('materia_id', $this->materia->id)
+            ->get();
 
-        $evaluaciones = Evaluacion::select('id')->where('materia_id', $this->materia->id)->get();
         foreach ($evaluaciones as $evaluacion) {
-            
-            $entregas = Entrega::where('evaluacion_id', $evaluacion->id)->get();
-            foreach ($entregas as $entrega) {
-                
-                $correcciones = Correccion::where('entrega_id', $entrega->id)->get();
-                foreach ($correcciones as $correccion) {
-                    Storage::delete($correccion->archivo);
-                    $correccion->delete();
-                }
+            $entregas = Entrega::where('evaluacion_id', $evaluacion->id)
+                ->get();
 
-                $archivosEntrega = Archivo::where('fileable_id', $entrega->id)->get();
-                foreach ($archivosEntrega as $archivoEntrega) {
-                    Storage::delete($archivoEntrega->archivo);
-                    $archivoEntrega->delete();
-                }
-                $entrega->delete();
-            }
-            
-            $archivosEvaluacion = Archivo::where('fileable_id', $evaluacion->id)->get();
-            foreach ($archivosEvaluacion as $archivoEvaluacion) {
-                Storage::delete($archivoEvaluacion->archivo);
-                $archivoEvaluacion->delete();
-            }
+            $this->eliminarEntregasCorrecciones($entregas);
+            $this->eliminarArchivos($evaluacion->id);
             $evaluacion->delete();
         }
-        
-        $clases = Clase::select('id')->where('materia_id', $this->materia->id)->get();
-        foreach ($clases as $clase) {
-            
-            $archivosClase = Archivo::where('fileable_id', $clase->id)->get();
-            foreach ($archivosClase as $archivoClase) {
-                Storage::delete($archivoClase->archivo);
-                $archivoClase->delete();
+        $this->eliminarClases();
+        $this->materia->delete();
+    }
+
+    public function eliminarEntregasCorrecciones($entregas)
+    {
+        foreach ($entregas as $entrega) {
+            $correcciones = Correccion::where('entrega_id', $entrega->id)
+                ->get();
+
+            foreach ($correcciones as $correccion) {
+                Storage::delete($correccion->archivo);
+                $correccion->delete();
             }
+            $this->eliminarArchivos($entrega->id);
+            $entrega->delete();
+        }
+    }
+    public function eliminarClases()
+    {
+        $clases = Clase::select('id')->where('materia_id', $this->materia->id)
+            ->get();
+
+        foreach ($clases as $clase) {
+            $this->eliminarArchivos($clase->id);
             $clase->delete();
         }
+    }
 
-        $this->materia->delete();
+    public function eliminarArchivos($fileable_id)
+    {
+        $archivos = Archivo::where('fileable_id', $fileable_id)
+            ->get();
+
+        foreach ($archivos as $archivo) {
+            Storage::delete($archivo->archivo);
+            $archivo->delete();
+        }
     }
 }

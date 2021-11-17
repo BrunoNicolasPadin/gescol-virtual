@@ -19,7 +19,7 @@ class CursoController extends Controller
                 ->findOrFail($institucion_id),
             'cursos' => Curso::where('institucion_id', $institucion_id)
                 ->orderBy('nombre')
-                ->paginate(1),
+                ->paginate(10),
         ]);
     }
 
@@ -27,7 +27,7 @@ class CursoController extends Controller
     {
         return Curso::where('institucion_id', $institucion_id)
             ->orderBy('nombre')
-            ->paginate(1);
+            ->paginate(10);
     }
 
     public function create($institucion_id)

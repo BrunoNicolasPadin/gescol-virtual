@@ -107,7 +107,7 @@ Route::middleware([Authenticate::class])->group(function () {
             ->name('cursos.paginarCursos');
         
         Route::prefix('cursos/{curso_id}')->group(function () {
-            Route::resource('materias', MateriaController::class);
+            Route::resource('materias', MateriaController::class)->except(['show']);
             
             Route::prefix('materias/{materia_id}')->group(function () {
                 Route::resource('docentes', DocenteMateriaController::class)->names('materias.docentes');

@@ -8,7 +8,6 @@ use App\Jobs\Materias\EliminarMateriaJob;
 use App\Models\Cursos\Curso;
 use App\Models\Instituciones\Institucion;
 use App\Models\Materias\Materia;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class MateriaController extends Controller
@@ -40,11 +39,14 @@ class MateriaController extends Controller
         ]);
     }
 
-    public function store(StoreMateriaRequest $request, $institucion_id, $curso_id)
-    {
+    public function store(
+        StoreMateriaRequest $request,
+        $institucion_id,
+        $curso_id
+    ) {
         $this->authorize('create', Materia::class);
 
-        for ($i = 0; $i < count($request->materias); $i++) { 
+        for ($i = 0; $i < count($request->materias); $i++) {
             $materia = new Materia();
             $materia->curso()->associate($curso_id);
             $materia->nombre = $request->materias[$i]['nombre'];
@@ -52,7 +54,7 @@ class MateriaController extends Controller
         }
 
         return redirect(route('materias.index', [$institucion_id, $curso_id]))
-            ->with('message', 'Materia/s agregada/s');
+            ->with('message', 'Materias agregadas');
     }
 
     public function edit($institucion_id, $curso_id, Materia $materia)
@@ -68,8 +70,12 @@ class MateriaController extends Controller
         ]);
     }
 
-    public function update(StoreMateriaRequest $request, $institucion_id, $curso_id, Materia $materia)
-    {
+    public function update(
+        StoreMateriaRequest $request,
+        $institucion_id,
+        $curso_id,
+        Materia $materia
+    ) {
         $this->authorize('update', $materia);
 
         $materia->nombre = $request->nombre;
