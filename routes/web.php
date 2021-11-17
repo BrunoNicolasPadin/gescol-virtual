@@ -114,7 +114,9 @@ Route::middleware([Authenticate::class])->group(function () {
                 Route::post('roles/docentes', [DocenteMateriaController::class, 'obtenerDocentes'])
                     ->name('materias.docentes.obtenerDocentes');
                 
-                Route::resource('alumnos', AlumnoMateriaController::class)->names('materias.alumnos');
+                Route::resource('alumnos', AlumnoMateriaController::class)
+                    ->except(['index', 'create', 'show', 'edit', 'update'])
+                    ->names('materias.alumnos');
 
                 Route::resource('evaluaciones', EvaluacionController::class);
                 Route::post('evaluaciones/paginarEvaluaciones', [EvaluacionController::class, 'paginarEvaluaciones'])

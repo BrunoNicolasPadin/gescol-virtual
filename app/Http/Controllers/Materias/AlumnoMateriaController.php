@@ -5,18 +5,15 @@ namespace App\Http\Controllers\Materias;
 use App\Http\Controllers\Controller;
 use App\Models\Materias\AlumnoMateria;
 use App\Models\Roles\RolUser;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AlumnoMateriaController extends Controller
 {
-    public function index($institucion_id, $curso_id, $materia_id)
-    {
-        //
-    }
-
-    public function store(Request $request, $institucion_id, $curso_id, $materia_id)
-    {
+    public function store(
+        $institucion_id,
+        $curso_id,
+        $materia_id
+    ) {
         $this->authorize('create', AlumnoMateria::class);
 
         $rolUser = RolUser::where('user_id', Auth::id())->first();
@@ -25,15 +22,20 @@ class AlumnoMateriaController extends Controller
         $alumnoMateria->materia()->associate($materia_id);
         $alumnoMateria->save();
 
-        return redirect()->back()->with('message', 'Te anotaste correctamente');
+        return redirect(route('materias.index', [$institucion_id, $curso_id]))
+            ->with('message', 'Te anotaste correctamente');
     }
 
-    public function destroy($institucion_id, $curso_id, $materia_id, AlumnoMateria $alumno)
-    {
+    public function destroy(
+        $institucion_id,
+        $curso_id,
+        $materia_id,
+        AlumnoMateria $alumno
+    ) {
         $this->authorize('delete', $alumno);
-
         $alumno->delete();
 
-        return redirect()->back()->with('message', 'Te DESANOTASTE correctamente');
+        return redirect(route('materias.index', [$institucion_id, $curso_id]))
+            ->with('message', 'Te desanotaste correctamente');
     }
 }
