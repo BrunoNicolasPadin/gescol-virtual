@@ -19,7 +19,7 @@
         </button> -->
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <div class="my-6">
                     <h2 class="uppercase text-xl font-semibold text-gray-700 my-2">Información</h2>
 
