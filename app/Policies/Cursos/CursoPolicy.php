@@ -2,7 +2,6 @@
 
 namespace App\Policies\Cursos;
 
-use App\Models\Cursos\Curso;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -10,44 +9,29 @@ class CursoPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
     public function viewAny(User $user)
     {
-        if ($user->obtenerPermisos('Cursos: listar')) {
-            return true;
-        }
-        return false;
-    }
-
-    public function view(User $user, Curso $curso)
-    {
-        //
+        return $this->verificarPermiso($user, 'Cursos: listar');
     }
 
     public function create(User $user)
     {
-        if ($user->obtenerPermisos('Cursos: crear')) {
-            return true;
-        }
-        return false;
+        return $this->verificarPermiso($user, 'Cursos: crear');
     }
 
-    public function update(User $user, Curso $curso)
+    public function update(User $user)
     {
-        if ($user->obtenerPermisos('Cursos: editar')) {
-            return true;
-        }
-        return false;
+        return $this->verificarPermiso($user, 'Cursos: editar');
     }
 
-    public function delete(User $user, Curso $curso)
+    public function delete(User $user)
     {
-        if ($user->obtenerPermisos('Cursos: eliminar')) {
+        return $this->verificarPermiso($user, 'Cursos: eliminar');
+    }
+
+    public function verificarPermiso($user, $permiso)
+    {
+        if ($user->obtenerPermisos($permiso)) {
             return true;
         }
         return false;

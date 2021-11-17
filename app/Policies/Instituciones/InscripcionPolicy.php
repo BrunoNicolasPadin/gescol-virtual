@@ -10,16 +10,6 @@ class InscripcionPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user)
-    {
-        //
-    }
-
-    public function view(User $user, RolUser $rolUser)
-    {
-        //
-    }
-
     public function create(User $user, $institucion_id)
     {
         if (RolUser::where('user_id', $user->id)
@@ -33,16 +23,15 @@ class InscripcionPolicy
 
     public function update(User $user, RolUser $rolUser)
     {
-        if ($user->obtenerPermisos('Inscripciones: editar')) {
-            return true;
-        }
-        if ($user->id == $rolUser->user_id) {
-            return true;
-        }
-        return false;
+        return $this->verificarPermiso($user, $rolUser, 'Inscripciones: editar');
     }
 
     public function delete(User $user, RolUser $rolUser)
+    {
+        return $this->verificarPermiso($user, $rolUser, 'Inscripciones: eliminar');
+    }
+
+    public function verificarPermiso($user, $rolUser, $permiso)
     {
         if ($user->obtenerPermisos('Inscripciones: eliminar')) {
             return true;

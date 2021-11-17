@@ -102,7 +102,7 @@ Route::middleware([Authenticate::class])->group(function () {
             Route::resource('permisos', RolPermisoController::class)->names('rolPermisos');
         });
 
-        Route::resource('cursos', CursoController::class);
+        Route::resource('cursos', CursoController::class)->except(['show']);
         Route::post('cursos/paginarCursos', [CursoController::class, 'paginarCursos'])
             ->name('cursos.paginarCursos');
         
