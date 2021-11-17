@@ -18,7 +18,7 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <div class="my-6">
-                    <h2 class="uppercase text-xl font-semibold text-gray-700 my-2">Informacion</h2>
+                    <h2 class="uppercase text-xl font-semibold text-gray-700 my-2">Información</h2>
 
                     <div class="bg-white border border-gray-200 p-3 text-lg">
                         <span class="font-semibold">Nombre</span>:
@@ -206,7 +206,7 @@
             },
 
             eliminarComentario(comentario_id) {
-                if (confirm('¿Estás seguro de que deseas eliminar esta comentario?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar estw comentario?')) {
                     this.$inertia.delete(this.route('comentarios.destroy', comentario_id))
                 }
             }

@@ -19,7 +19,7 @@
                 <form method="post" @submit.prevent="submit">
                     <estructura-formulario>
                         <template #estructuraInput>
-                            <estructura-input nombreLabel="Calificacion" info="No es obligatorio.">
+                            <estructura-input nombreLabel="Calificación" info="No es obligatorio.">
                                 <template #inputComponente>
                                     <input-componente type="text" v-model="form.calificacion" autofocus/>
                                 </template>

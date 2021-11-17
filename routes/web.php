@@ -126,7 +126,8 @@ Route::middleware([Authenticate::class])->group(function () {
                     ->name('evaluaciones.paginarEvaluaciones');
                 
                 Route::prefix('evaluaciones/{evaluacion_id}')->group(function () {
-                    Route::resource('entregas', EntregaController::class);
+                    Route::resource('entregas', EntregaController::class)
+                        ->except(['create', 'store']);
 
                     Route::post('paginarComentarios', [EvaluacionController::class, 'paginarComentarios'])
                         ->name('evaluaciones.paginarComentarios');

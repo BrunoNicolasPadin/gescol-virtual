@@ -3,8 +3,6 @@
 namespace App\Notifications\Entregas;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class EntregaCalificada extends Notification
@@ -21,13 +19,13 @@ class EntregaCalificada extends Notification
         return ['database'];
     }
 
-    public function toMail($notifiable)
+    /* public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
-    }
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
+    } */
 
     public function toArray($notifiable)
     {

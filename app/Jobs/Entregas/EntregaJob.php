@@ -4,7 +4,6 @@ namespace App\Jobs\Entregas;
 
 use App\Mail\Entregas\EntregaCalificada;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -31,6 +30,7 @@ class EntregaJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->alumno->rolUser->user->email)->send(new EntregaCalificada($this->entregaInfo));
+        Mail::to($this->alumno->rolUser->user->email)
+            ->send(new EntregaCalificada($this->entregaInfo));
     }
 }
