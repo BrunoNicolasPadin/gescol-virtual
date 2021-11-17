@@ -12,7 +12,7 @@
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <estructura-tabla>
                     <template #head>
                         <th-componente>
@@ -87,7 +87,7 @@
 
         methods: {
             destroy(docente_id) {
-                if (confirm('¿Estás seguro de que deseas eliminar este docente para esta esta materia?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar este docente para esta materia?')) {
                     this.$inertia.delete(this.route('materias.docentes.destroy', [this.institucion.id, this.curso.id, this.materia.id, docente_id]));
                 }
             },

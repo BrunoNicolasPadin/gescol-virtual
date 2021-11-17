@@ -2,7 +2,6 @@
 
 namespace App\Policies\Materias;
 
-use App\Models\Materias\DocenteMateria;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -12,48 +11,29 @@ class DocentePolicy
 
     public function viewAny(User $user)
     {
-        if ($user->obtenerPermisos('Docentes: listar')) {
-            return true;
-        }
-        return false;
-    }
-
-    public function view(User $user, DocenteMateria $docenteMateria)
-    {
-        //
+        return $this->verificarPermiso($user, 'Docentes: listar');
     }
 
     public function create(User $user)
     {
-        if ($user->obtenerPermisos('Docentes: crear')) {
+        return $this->verificarPermiso($user, 'Docentes: crear');
+    }
+
+    public function update(User $user)
+    {
+        return $this->verificarPermiso($user, 'Docentes: editar');
+    }
+
+    public function delete(User $user)
+    {
+        return $this->verificarPermiso($user, 'Docentes: eliminar');
+    }
+
+    public function verificarPermiso($user, $permiso)
+    {
+        if ($user->obtenerPermisos($permiso)) {
             return true;
         }
         return false;
-    }
-
-    public function update(User $user, DocenteMateria $docenteMateria)
-    {
-        if ($user->obtenerPermisos('Docentes: editar')) {
-            return true;
-        }
-        return false;
-    }
-
-    public function delete(User $user, DocenteMateria $docenteMateria)
-    {
-        if ($user->obtenerPermisos('Docentes: eliminar')) {
-            return true;
-        }
-        return false;
-    }
-
-    public function restore(User $user, DocenteMateria $docenteMateria)
-    {
-        //
-    }
-
-    public function forceDelete(User $user, DocenteMateria $docenteMateria)
-    {
-        //
     }
 }

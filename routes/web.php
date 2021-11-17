@@ -110,7 +110,10 @@ Route::middleware([Authenticate::class])->group(function () {
             Route::resource('materias', MateriaController::class)->except(['show']);
             
             Route::prefix('materias/{materia_id}')->group(function () {
-                Route::resource('docentes', DocenteMateriaController::class)->names('materias.docentes');
+                Route::resource('docentes', DocenteMateriaController::class)
+                    ->except(['show', 'edit', 'update'])
+                    ->names('materias.docentes');
+
                 Route::post('roles/docentes', [DocenteMateriaController::class, 'obtenerDocentes'])
                     ->name('materias.docentes.obtenerDocentes');
                 

@@ -22280,7 +22280,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     destroy: function destroy(docente_id) {
-      if (confirm('¿Estás seguro de que deseas eliminar este docente para esta esta materia?')) {
+      if (confirm('¿Estás seguro de que deseas eliminar este docente para esta materia?')) {
         this.$inertia["delete"](this.route('materias.docentes.destroy', [this.institucion.id, this.curso.id, this.materia.id, docente_id]));
       }
     }
@@ -30882,7 +30882,7 @@ var _hoisted_3 = {
   "class": "py-12"
 };
 var _hoisted_4 = {
-  "class": "max-w-7xl mx-auto sm:px-6 lg:px-8"
+  "class": "max-w-7xl mx-auto px-4 lg:px-8"
 };
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
@@ -30921,7 +30921,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, {
-    title: "Materias - Docentes - Agregar"
+    title: "Docentes - Agregar"
   }, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.institucion.nombre) + " / ", 1
@@ -31098,7 +31098,7 @@ var _hoisted_2 = {
   "class": "py-12"
 };
 var _hoisted_3 = {
-  "class": "max-w-7xl mx-auto sm:px-6 lg:px-8"
+  "class": "max-w-7xl mx-auto px-4 lg:px-8"
 };
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("#");

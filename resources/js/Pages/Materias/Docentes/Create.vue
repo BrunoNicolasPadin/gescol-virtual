@@ -1,5 +1,5 @@
 <template>
-    <app-layout title="Materias - Docentes - Agregar">
+    <app-layout title="Docentes - Agregar">
         <template #header>
             <h2 class="font-semibold text-sm text-gray-800 leading-tight">
                 {{ institucion.nombre }} / 
@@ -13,7 +13,7 @@
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <form method="post" @submit.prevent="submit">
                     <estructura-formulario>
                         <template #estructuraInput>
