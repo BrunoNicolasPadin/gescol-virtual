@@ -9,7 +9,7 @@
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <form method="post" @submit.prevent="submit">
                     <div v-for="(form, index) in form.roles" :key="index" class="w-full">
                         <estructura-formulario>

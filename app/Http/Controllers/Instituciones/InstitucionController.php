@@ -6,9 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Instituciones\StoreInstitucionRequest;
 use App\Http\Requests\Instituciones\UpdateInstitucionRequest;
 use App\Models\Instituciones\Institucion;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class InstitucionController extends Controller
@@ -28,7 +26,7 @@ class InstitucionController extends Controller
         $institucion->save();
 
         return redirect()->route('cursos.index', $institucion->id)
-            ->with('message', 'Institucion creada. Agrega cursos ahora!');
+            ->with('message', 'Institución creada. Ahora agregar tus cursos');
     }
 
     public function edit(Institucion $institucione)
@@ -40,15 +38,17 @@ class InstitucionController extends Controller
         ]);
     }
 
-    public function update(UpdateInstitucionRequest $request, Institucion $institucione)
-    {
+    public function update(
+        UpdateInstitucionRequest $request,
+        Institucion $institucione
+    ) {
         $this->authorize('update', $institucione);
 
         $institucione->nombre = $request->nombre;
         $institucione->save();
 
         return redirect()->route('cursos.index', $institucione->id)
-            ->with('message', 'Institucion actualizada');
+            ->with('message', 'Institución actualizada');
     }
 
     public function destroy(Institucion $institucione)
@@ -58,6 +58,6 @@ class InstitucionController extends Controller
         $institucione->delete();
 
         return redirect()->route('instituciones.create')
-            ->with('message', 'Institucion eliminada');
+            ->with('message', 'Institución eliminada');
     }
 }

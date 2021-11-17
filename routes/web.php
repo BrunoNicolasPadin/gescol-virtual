@@ -90,7 +90,7 @@ Route::middleware([Authenticate::class])->group(function () {
     Route::post('buscador/instituciones/filtrar', [BuscadorInstitucionController::class, 'filtrarInstituciones'])
         ->name('instituciones.filtrarInstituciones');
 
-    Route::resource('instituciones', InstitucionController::class);
+    Route::resource('instituciones', InstitucionController::class)->except(['index', 'show']);
     Route::prefix('instituciones/{institucion_id}')->group(function () {
         Route::resource('inscripciones', InscripcionInstitucionController::class)->names('instituciones.inscripciones');
         

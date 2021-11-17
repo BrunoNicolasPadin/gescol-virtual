@@ -15,7 +15,8 @@ class InstitucionObserver
     {
         $rol = new Rol();
         $rol->nombre = 'Institucion';
-        $rol->claveDeAcceso = Hash::make(substr(base64_encode(mt_rand()), 0, 12));
+        $rol->claveDeAcceso =
+            Hash::make(substr(base64_encode(mt_rand()), 0, 12));
         $rol->institucion()->associate($institucion->id);
         $rol->save();
 

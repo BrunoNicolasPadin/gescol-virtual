@@ -12,26 +12,29 @@ class institucionPolicy
 
     public function create(User $user)
     {
-        if ($user->institucion == false) {
+        if ($user->institucion === false) {
             return false;
         }
-        if ($user->institucion == true && $user->verificarInstitucionCreada() == false) {
+        if ($user->institucion === true
+            && $user->verificarInstitucionCreada() === false) {
             return true;
         }
         return false;
     }
 
-    public function edit(User $user, $institucione)
+    public function edit(User $user, Institucion $institucion)
     {
-        if ($user->id == $institucione->user_id) {
-            return true;
-        }
-        return false;
+        return $this->chequearUsuario($user, $institucion);
     }
 
     public function delete(User $user, Institucion $institucion)
     {
-        if ($user->id == $institucion->user_id) {
+        return $this->chequearUsuario($user, $institucion);
+    }
+
+    public function chequearUsuario($user, $institucion)
+    {
+        if ($user->id === $institucion->user_id) {
             return true;
         }
         return false;
