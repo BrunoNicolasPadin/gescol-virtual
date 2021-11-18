@@ -100,7 +100,7 @@ Route::middleware([Authenticate::class])->group(function () {
         
         Route::prefix('roles/{rol_id}')->group(function () {
             Route::resource('permisos', RolPermisoController::class)
-                ->except(['index', 'show', 'edit', 'update'])
+                ->except(['show', 'edit', 'update'])
                 ->names('rolPermisos');
         });
 
@@ -152,7 +152,7 @@ Route::middleware([Authenticate::class])->group(function () {
         });
     });
     //Archivos y comentarios
-    Route::resource('archivos', ArchivoController::class);
+    Route::resource('archivos', ArchivoController::class)->except(['index', 'edit', 'update']);
 
     Route::resource('comentarios', ComentarioController::class);
     Route::prefix('comentarios/{comentario_id}')->group(function () {

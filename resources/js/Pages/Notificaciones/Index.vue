@@ -7,7 +7,7 @@
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <estructura-notificacion :notificacion_id='notificacion.id'
                     v-for="notificacion in notificaciones" :key="notificacion.id">
                     <template #notificacion>

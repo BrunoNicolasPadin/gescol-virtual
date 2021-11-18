@@ -15,7 +15,6 @@ class ArchivoController extends Controller
     protected $archivoService;
 
     public function __construct(ArchivoService $archivoService)
-
     {
         $this->archivoService = $archivoService;
     }
@@ -38,11 +37,12 @@ class ArchivoController extends Controller
         $archivo = new Archivo();
         $archivo->fileable_type = $request->type;
         $archivo->fileable_id = $request->id;
-        
+
         $nombreArchivo = null;
         if ($request->hasFile('archivo')) {
             $carpeta = $request->carpeta;
-            $nombreArchivo = $this->archivoService->subirArchivo($request, $carpeta);
+            $nombreArchivo = $this->archivoService
+                ->subirArchivo($request, $carpeta);
         }
 
         $archivo->archivo = $nombreArchivo;
@@ -54,11 +54,10 @@ class ArchivoController extends Controller
     public function destroy(Archivo $archivo)
     {
         $this->authorize('delete', $archivo);
-        /* Storage::disk('s3')->delete('Competencias/Escudos/' . $competencia->escudo); */
 
         Storage::delete($archivo->archivo);
         $archivo->delete();
-        
+
         return back()->with('message', 'Archivo eliminado');
     }
 }
