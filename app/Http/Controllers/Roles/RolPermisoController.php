@@ -32,11 +32,12 @@ class RolPermisoController extends Controller
 
         $rol = Rol::findOrFail($rol_id);
         $permisos = Permiso::orderBy('nombre')->get();
-        $permisosDelRolActualmente = PermisoRol::where('rol_id', $rol_id)->get();
+        $permisosDelRolActualmente = PermisoRol::where('rol_id', $rol_id)
+            ->get();
 
         foreach ($permisosDelRolActualmente as $permisoRol) {
-            $permisos = $permisos->filter(function ($item) use($permisoRol) {
-                return $item->id != $permisoRol->permiso_id;
+            $permisos = $permisos->filter(function ($item) use ($permisoRol) {
+                return $item->id !== $permisoRol->permiso_id;
             });
         }
 
@@ -48,8 +49,11 @@ class RolPermisoController extends Controller
         ]);
     }
 
-    public function store(StoreRolPermisoRequest $request, $institucion_id, $rol_id)
-    {
+    public function store(
+        StoreRolPermisoRequest $request,
+        $institucion_id,
+        $rol_id
+    ) {
         $this->authorize('create', PermisoRol::class);
 
         $permisoRol = new PermisoRol();

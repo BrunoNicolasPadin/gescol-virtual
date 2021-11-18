@@ -2,7 +2,6 @@
 
 namespace App\Policies\Roles;
 
-use App\Models\Roles\PermisoRol;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -12,45 +11,24 @@ class RolPermisoPolicy
 
     public function viewAny(User $user)
     {
-        if ($user->obtenerPermisos('Permisos de un rol: listar')) {
-            return true;
-        }
-        return false;
-    }
-
-    public function view(User $user, PermisoRol $permisoRol)
-    {
-        //
+        return $this->verificarPermiso($user, 'Permisos de un rol: listar');
     }
 
     public function create(User $user)
     {
-        if ($user->obtenerPermisos('Permisos de un rol: crear')) {
+        return $this->verificarPermiso($user, 'Permisos de un rol: crear');
+    }
+
+    public function delete(User $user)
+    {
+        return $this->verificarPermiso($user, 'Permisos de un rol: eliminar');
+    }
+
+    public function verificarPermiso($user, $permiso)
+    {
+        if ($user->obtenerPermisos($permiso)) {
             return true;
         }
         return false;
-    }
-
-    public function update(User $user, PermisoRol $permisoRol)
-    {
-        //
-    }
-
-    public function delete(User $user, PermisoRol $permisoRol)
-    {
-        if ($user->obtenerPermisos('Permisos de un rol: eliminar')) {
-            return true;
-        }
-        return false;
-    }
-
-    public function restore(User $user, PermisoRol $permisoRol)
-    {
-        //
-    }
-
-    public function forceDelete(User $user, PermisoRol $permisoRol)
-    {
-        //
     }
 }

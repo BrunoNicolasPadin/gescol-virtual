@@ -1,5 +1,5 @@
 <template>
-    <app-layout title="Rol - Agregar permisos">
+    <app-layout title="Permisos del rol - Agregar">
         <template #header>
             <h2 class="font-semibold text-sm text-gray-800 leading-tight">
                 {{ institucion.nombre }} / 
@@ -11,7 +11,7 @@
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <div v-for="permiso in permisos" :key="permiso.id" class="bg-white rounded-md shadow-md p-2 my-3 grid grid-cols-2">
                     <div class="font-bold">
                         {{ permiso.nombre }}

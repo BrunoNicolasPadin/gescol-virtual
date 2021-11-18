@@ -99,7 +99,9 @@ Route::middleware([Authenticate::class])->group(function () {
         Route::resource('roles', RolController::class)->except(['index', 'show']);
         
         Route::prefix('roles/{rol_id}')->group(function () {
-            Route::resource('permisos', RolPermisoController::class)->names('rolPermisos');
+            Route::resource('permisos', RolPermisoController::class)
+                ->except(['index', 'show', 'edit', 'update'])
+                ->names('rolPermisos');
         });
 
         Route::resource('cursos', CursoController::class)->except(['show']);
