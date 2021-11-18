@@ -13,7 +13,7 @@
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto px-8">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <form method="post" @submit.prevent="submit">
                     <estructura-formulario>
                         <template #estructuraInput>
@@ -27,7 +27,7 @@
 
                     <estructura-formulario>
                         <template #estructuraInput>
-                            <estructura-input nombreLabel="Descripcion" info="Es obligatorio.">
+                            <estructura-input nombreLabel="Descripción" info="Es obligatorio.">
                                 <template #inputComponente>
                                     <textarea v-model="form.descripcion" cols="131" rows="10"></textarea>
                                 </template>

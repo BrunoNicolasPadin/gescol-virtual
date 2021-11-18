@@ -20,20 +20,4 @@ class ClaseObserver
             $alumno->rolUser->user->notify(new ClaseCreada($claseInfo));
         }
     }
-
-    /* public function updated(Clase $clase)
-    {
-    }
-
-    public function deleted(Clase $clase)
-    {
-    }
-
-    public function restored(Clase $clase)
-    {
-    }
-
-    public function forceDeleted(Clase $clase)
-    {
-    } */
 }

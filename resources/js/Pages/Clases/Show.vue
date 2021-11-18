@@ -17,9 +17,9 @@
         </button> -->
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <div class="my-3">
-                    <h2 class="uppercase text-xl font-semibold text-gray-700 my-2">Informacion</h2>
+                    <h2 class="uppercase text-xl font-semibold text-gray-700 my-2">Información</h2>
 
                     <div class="bg-white shadow-md border border-gray-200 p-3 text-lg">
                         <span class="font-semibold">Nombre</span>:
@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="bg-white shadow-md border border-gray-200 p-3 text-lg">
-                        <span class="font-semibold">Descripcion</span>:
+                        <span class="font-semibold">Descripción</span>:
                         <p class="whitespace-pre-line text-base">{{ clase.descripcion }}</p>
                     </div>
                 </div>

@@ -31,12 +31,12 @@
                     </div>
 
                     <div class="bg-white border border-gray-200 p-3 text-lg">
-                        <span class="font-semibold">Finalizacion</span>:
+                        <span class="font-semibold">Finalización</span>:
                         <span>{{ evaluacion.fechaHoraFinalizacion }}</span>
                     </div>
 
                     <div class="bg-white border border-gray-200 p-3 text-lg">
-                        <span class="font-semibold">Descripcion</span>:
+                        <span class="font-semibold">Descripción</span>:
                         <p class="whitespace-pre-line">{{ evaluacion.descripcion }}</p>
                     </div>
                 </div>

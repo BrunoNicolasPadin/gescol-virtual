@@ -31,8 +31,12 @@ class ClaseController extends Controller
         ]);
     }
 
-    public function paginarClases(Request $request, $institucion_id, $curso_id, $materia_id)
-    {
+    public function paginarClases(
+        Request $request,
+        $institucion_id,
+        $curso_id,
+        $materia_id
+    ) {
         return Clase::where('materia_id', $materia_id)
             ->orderBy('created_at', 'ASC')
             ->paginate(20);
@@ -51,8 +55,12 @@ class ClaseController extends Controller
         ]);
     }
 
-    public function store(StoreClaseRequest $request, $institucion_id, $curso_id, $materia_id)
-    {
+    public function store(
+        StoreClaseRequest $request,
+        $institucion_id,
+        $curso_id,
+        $materia_id
+    ) {
         $this->authorize('create', Clase::class);
 
         $clase = new Clase();
@@ -61,8 +69,9 @@ class ClaseController extends Controller
         $clase->descripcion = $request->descripcion;
         $clase->save();
 
-        return redirect()->route('clases.index', [$institucion_id, $curso_id, $materia_id])
-            ->with('message', 'Clase registrada');
+        return redirect()->route('clases.index', [
+            $institucion_id, $curso_id, $materia_id,
+        ])->with('message', 'Clase registrada');
     }
 
     public function show($institucion_id, $curso_id, $materia_id, $id)
@@ -86,15 +95,23 @@ class ClaseController extends Controller
         ]);
     }
 
-    public function paginarComentarios(Request $request, $institucion_id, $curso_id, $materia_id, $id)
-    {
+    public function paginarComentarios(
+        Request $request,
+        $institucion_id,
+        $curso_id,
+        $materia_id,
+        $id
+    ) {
         $clase = Clase::with('comentarios.user')->findOrFail($id);
         return $clase->comentarios()->paginate(10);
-
     }
 
-    public function edit($institucion_id, $curso_id, $materia_id, Clase $clase)
-    {
+    public function edit(
+        $institucion_id,
+        $curso_id,
+        $materia_id,
+        Clase $clase
+    ) {
         $this->authorize('update', $clase);
 
         return Inertia::render('Clases/Edit', [
@@ -107,20 +124,30 @@ class ClaseController extends Controller
         ]);
     }
 
-    public function update(StoreClaseRequest $request, $institucion_id, $curso_id, $materia_id, Clase $clase)
-    {
+    public function update(
+        StoreClaseRequest $request,
+        $institucion_id,
+        $curso_id,
+        $materia_id,
+        Clase $clase
+    ) {
         $this->authorize('update', $clase);
 
         $clase->nombre = $request->nombre;
         $clase->descripcion = $request->descripcion;
         $clase->save();
 
-        return redirect()->route('clases.index', [$institucion_id, $curso_id, $materia_id])
-            ->with('message', 'Clase actualizada');
+        return redirect()->route('clases.index', [
+            $institucion_id, $curso_id, $materia_id,
+        ])->with('message', 'Clase actualizada');
     }
 
-    public function destroy($institucion_id, $curso_id, $materia_id, Clase $clase)
-    {
+    public function destroy(
+        $institucion_id,
+        $curso_id,
+        $materia_id,
+        Clase $clase
+    ) {
         $this->authorize('delete', $clase);
 
         $archivosClase = Archivo::where('fileable_id', $clase->id)->get();
@@ -130,7 +157,8 @@ class ClaseController extends Controller
         }
         $clase->delete();
 
-        return redirect()->route('clases.index', [$institucion_id, $curso_id, $materia_id])
-            ->with('message', 'Clase eliminada');
+        return redirect()->route('clases.index', [
+            $institucion_id, $curso_id, $materia_id,
+        ])->with('message', 'Clase eliminada');
     }
 }

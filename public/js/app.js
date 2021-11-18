@@ -27090,7 +27090,7 @@ var _hoisted_3 = {
   "class": "py-12"
 };
 var _hoisted_4 = {
-  "class": "max-w-7xl mx-auto px-8"
+  "class": "max-w-7xl mx-auto px-4 lg:px-8"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_breadcrumb = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("breadcrumb");
@@ -27170,7 +27170,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_formulario, null, {
         estructuraInput: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_input, {
-            nombreLabel: "Descripcion",
+            nombreLabel: "Descripción",
             info: "Es obligatorio."
           }, {
             inputComponente: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -27227,7 +27227,7 @@ var _hoisted_3 = {
   "class": "py-12"
 };
 var _hoisted_4 = {
-  "class": "max-w-7xl mx-auto px-8"
+  "class": "max-w-7xl mx-auto px-4 lg:px-8"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_breadcrumb = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("breadcrumb");
@@ -27307,7 +27307,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_formulario, null, {
         estructuraInput: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_input, {
-            nombreLabel: "Descripcion",
+            nombreLabel: "Descripción",
             info: "Es obligatorio."
           }, {
             inputComponente: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -27361,7 +27361,7 @@ var _hoisted_2 = {
   "class": "py-12"
 };
 var _hoisted_3 = {
-  "class": "max-w-7xl mx-auto sm:px-6 lg:px-8"
+  "class": "max-w-7xl mx-auto px-4 lg:px-8"
 };
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("#");
@@ -27592,7 +27592,7 @@ var _hoisted_2 = {
   "class": "py-12"
 };
 var _hoisted_3 = {
-  "class": "max-w-7xl mx-auto sm:px-6 lg:px-8"
+  "class": "max-w-7xl mx-auto px-4 lg:px-8"
 };
 var _hoisted_4 = {
   "class": "my-3"
@@ -27600,7 +27600,7 @@ var _hoisted_4 = {
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
   "class": "uppercase text-xl font-semibold text-gray-700 my-2"
-}, "Informacion", -1
+}, "Información", -1
 /* HOISTED */
 );
 
@@ -27625,7 +27625,7 @@ var _hoisted_10 = {
 
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "font-semibold"
-}, "Descripcion", -1
+}, "Descripción", -1
 /* HOISTED */
 );
 
@@ -29365,7 +29365,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_formulario, null, {
         estructuraInput: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_input, {
-            nombreLabel: "Descripcion",
+            nombreLabel: "Descripción",
             info: "Es obligatorio."
           }, {
             inputComponente: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -29549,7 +29549,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_formulario, null, {
         estructuraInput: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_estructura_input, {
-            nombreLabel: "Descripcion",
+            nombreLabel: "Descripción",
             info: "Es obligatorio."
           }, {
             inputComponente: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -29915,7 +29915,7 @@ var _hoisted_12 = {
 
 var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "font-semibold"
-}, "Finalizacion", -1
+}, "Finalización", -1
 /* HOISTED */
 );
 
@@ -29927,7 +29927,7 @@ var _hoisted_15 = {
 
 var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "font-semibold"
-}, "Descripcion", -1
+}, "Descripción", -1
 /* HOISTED */
 );
 

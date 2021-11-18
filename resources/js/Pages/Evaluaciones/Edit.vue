@@ -43,7 +43,7 @@
 
                     <estructura-formulario>
                         <template #estructuraInput>
-                            <estructura-input nombreLabel="Descripcion" info="Es obligatorio.">
+                            <estructura-input nombreLabel="Descripción" info="Es obligatorio.">
                                 <template #inputComponente>
                                     <textarea v-model="form.descripcion" cols="131" rows="10"></textarea>
                                 </template>
