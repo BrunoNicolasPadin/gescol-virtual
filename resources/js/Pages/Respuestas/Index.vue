@@ -8,7 +8,7 @@
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <div class="my-6">
                     <div class="bg-white p-3 border border-gray-200 rounded-sm shadow-sm my-3">
                         <p class="whitespace-pre-line text-xl font-semibold">{{ comentario.contenido }}</p>

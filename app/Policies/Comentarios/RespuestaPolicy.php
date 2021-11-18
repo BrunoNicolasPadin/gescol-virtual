@@ -10,47 +10,37 @@ class RespuestaPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user)
-    {
-        //
-    }
-
-    public function view(User $user, Respuesta $respuesta)
-    {
-        //
-    }
-
-    public function create(User $user)
-    {
-        //
-    }
-
     public function update(User $user, Respuesta $respuesta)
     {
-        if ($user->id == $respuesta->user_id) {
-            return true;
-        }
-        return false;
+        return $this->verificarUsuario(
+            $user,
+            $respuesta,
+            'Respuestas: editar'
+        );
     }
 
     public function delete(User $user, Respuesta $respuesta)
     {
+        return $this->verificarUsuario(
+            $user,
+            $respuesta,
+            'Respuestas: eliminar'
+        );
+    }
+
+    public function verificarUsuario($user, $respuesta, $permiso)
+    {
         if ($user->id == $respuesta->user_id) {
             return true;
         }
-        if ($user->obtenerPermisos('Respuestas: eliminar')) {
+        return $this->verificarPermiso($user, $permiso);
+    }
+
+    public function verificarPermiso($user, $permiso)
+    {
+        if ($user->obtenerPermisos($permiso)) {
             return true;
         }
         return false;
-    }
-
-    public function restore(User $user, Respuesta $respuesta)
-    {
-        //
-    }
-
-    public function forceDelete(User $user, Respuesta $respuesta)
-    {
-        //
     }
 }

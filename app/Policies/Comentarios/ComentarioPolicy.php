@@ -10,42 +10,37 @@ class ComentarioPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user)
-    {
-        //
-    }
+    protected $models = [
+        'App\Models\Evaluaciones\Evaluacion',
+        'App\Models\Entregas\Entrega',
+        'App\Models\Clases\Clase',
+    ];
 
-    public function view(User $user, Comentario $comentario)
-    {
-        //
-    }
+    protected $permisosCrear = [
+        'Comentarios en evaluaciones: crear',
+        'Comentarios en entregas: crear',
+        'Comentarios en clases: crear',
+    ];
+
+    protected $permisosEliminar = [
+        'Comentarios en evaluaciones: eliminar',
+        'Comentarios en entregas: eliminar',
+        'Comentarios en clases: eliminar',
+    ];
 
     public function create(User $user, $type)
     {
-        if ($type == 'App\Models\Evaluaciones\Evaluacion') {
-            if ($user->obtenerPermisos('Comentarios en evaluaciones: crear')) {
-                return true;
-            }
-            return false;
-        }
-        if ($type == 'App\Models\Entregas\Entrega') {
-            if ($user->obtenerPermisos('Comentarios en entregas: crear')) {
-                return true;
-            }
-            return false;
-        }
-        if ($type == 'App\Models\Clases\Clase') {
-            if ($user->obtenerPermisos('Comentarios en clases: crear')) {
-                return true;
-            }
-            return false;
-        }
-        return false;
+        return $this->verificarType(
+            $type,
+            $user,
+            $this->models,
+            $this->permisosCrear
+        );
     }
 
     public function update(User $user, Comentario $comentario)
     {
-        if ($user->id == $comentario->user_id) {
+        if ($user->id === $comentario->user_id) {
             return true;
         }
         return false;
@@ -53,37 +48,33 @@ class ComentarioPolicy
 
     public function delete(User $user, Comentario $comentario)
     {
-        if ($user->id == $comentario->user_id) {
+        if ($user->id === $comentario->user_id) {
             return true;
         }
-        if ($comentario->commentable_type == 'App\Models\Evaluaciones\Evaluacion') {
-            if ($user->obtenerPermisos('Comentarios en evaluaciones: eliminar')) {
-                return true;
+
+        return $this->verificarType(
+            $comentario->commentable_type,
+            $user,
+            $this->models,
+            $this->permisosEliminar
+        );
+    }
+
+    public function verificarType($comentario_type, $user, $models, $permisos)
+    {
+        for ($i = 0; $i < count($models); $i++) {
+            if ($comentario_type === $models[$i]) {
+                return $this->verificarPermiso($user, $permisos[$i]);
             }
-            return false;
-        }
-        if ($comentario->commentable_type == 'App\Models\Entregas\Entrega') {
-            if ($user->obtenerPermisos('Comentarios en entregas: eliminar')) {
-                return true;
-            }
-            return false;
-        }
-        if ($comentario->commentable_type == 'App\Models\Clases\Clase') {
-            if ($user->obtenerPermisos('Comentarios en clases: eliminar')) {
-                return true;
-            }
-            return false;
         }
         return false;
     }
 
-    public function restore(User $user, Comentario $comentario)
+    public function verificarPermiso($user, $permiso)
     {
-        //
-    }
-
-    public function forceDelete(User $user, Comentario $comentario)
-    {
-        //
+        if ($user->obtenerPermisos($permiso)) {
+            return true;
+        }
+        return false;
     }
 }

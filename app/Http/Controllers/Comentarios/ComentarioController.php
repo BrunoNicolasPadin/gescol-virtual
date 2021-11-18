@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Comentarios;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Comentarios\StoreComentarioRequest;
 use App\Models\Comentarios\Comentario;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ComentarioController extends Controller
@@ -24,8 +23,10 @@ class ComentarioController extends Controller
         return back()->with('message', 'Comentario enviado');
     }
 
-    public function update(StoreComentarioRequest $request, Comentario $comentario)
-    {
+    public function update(
+        StoreComentarioRequest $request,
+        Comentario $comentario
+    ) {
         $this->authorize('update', $comentario);
 
         $comentario->contenido = $request->contenido;

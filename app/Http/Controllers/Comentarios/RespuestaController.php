@@ -15,7 +15,8 @@ class RespuestaController extends Controller
     public function index($comentario_id)
     {
         return Inertia::render('Respuestas/Index', [
-            'comentario' => Comentario::with('user:id,name')->findOrFail($comentario_id),
+            'comentario' => Comentario::with('user:id,name')
+                ->findOrFail($comentario_id),
             'respuestas' => Respuesta::where('comentario_id', $comentario_id)
                 ->with('user:id,name')
                 ->orderBy('created_at', 'DESC')
@@ -29,7 +30,6 @@ class RespuestaController extends Controller
             ->with('user:id,name')
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
-
     }
 
     public function store(StoreComentarioRequest $request, $comentario_id)
@@ -43,8 +43,11 @@ class RespuestaController extends Controller
         return back()->with('message', 'Respuesta enviada');
     }
 
-    public function update(StoreComentarioRequest $request, $comentario_id, Respuesta $respuesta)
-    {
+    public function update(
+        StoreComentarioRequest $request,
+        $comentario_id,
+        Respuesta $respuesta
+    ) {
         $this->authorize('update', $respuesta);
 
         $respuesta->contenido = $request->contenido;
@@ -58,7 +61,7 @@ class RespuestaController extends Controller
         $this->authorize('delete', $respuesta);
 
         $respuesta->delete();
-        
+
         return back()->with('message', 'Respuesta eliminada');
     }
 }

@@ -33376,7 +33376,7 @@ var _hoisted_2 = {
   "class": "py-12"
 };
 var _hoisted_3 = {
-  "class": "max-w-7xl mx-auto sm:px-6 lg:px-8"
+  "class": "max-w-7xl mx-auto px-4 lg:px-8"
 };
 var _hoisted_4 = {
   "class": "my-6"
