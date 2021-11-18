@@ -3,11 +3,13 @@
 namespace App\Models\Instituciones;
 
 use App\Traits\Uuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Institucion extends Model
 {
     use Uuids;
+    use HasFactory;
 
     protected $table = 'instituciones';
     protected $fillable = [

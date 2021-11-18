@@ -31,7 +31,7 @@ class InstitucionController extends Controller
 
     public function edit(Institucion $institucione)
     {
-        $this->authorize('update', $institucione);
+        $this->authorize('edit', $institucione);
 
         return Inertia::render('Instituciones/Edit', [
             'institucion' => $institucione,
@@ -42,7 +42,7 @@ class InstitucionController extends Controller
         UpdateInstitucionRequest $request,
         Institucion $institucione
     ) {
-        $this->authorize('update', $institucione);
+        $this->authorize('edit', $institucione);
 
         $institucione->nombre = $request->nombre;
         $institucione->save();

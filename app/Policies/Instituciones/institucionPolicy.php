@@ -12,10 +12,10 @@ class institucionPolicy
 
     public function create(User $user)
     {
-        if ($user->institucion === false) {
+        if ($user->institucion === 0) {
             return false;
         }
-        if ($user->institucion === true
+        if ($user->institucion === 1
             && $user->verificarInstitucionCreada() === false) {
             return true;
         }
