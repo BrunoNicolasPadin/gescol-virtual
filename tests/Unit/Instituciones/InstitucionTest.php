@@ -28,45 +28,43 @@ class InstitucionTest extends TestCase
 
     public function test_institucion_cant_create_another_institucion()
     {
-        $user = User::factory()
-            ->has(Institucion::factory()->count(1), 'instituciones')
-            ->create();
-        /** @var \Illuminate\Contracts\Auth\Authenticatable $user */
-        $response = $this->actingAs($user)->get(route('instituciones.create'));
+        $institucion = Institucion::factory()->create();
+        $institucion->with('user')->first();
+
+        $response = $this->actingAs($institucion->user)->get(route('instituciones.create'));
         $response->assertStatus(403);
     }
 
     public function test_institucion_cant_edit_another_institucion()
     {
-        $user = User::factory()
-            ->has(Institucion::factory()->count(1), 'instituciones')
-            ->create();
+        $institucion = Institucion::factory()->create();
+        $institucion->with('user')->first();
 
-        $otroUsuario = User::factory()
-            ->has(Institucion::factory()->count(1), 'instituciones')
-            ->create();
-        /** @var \Illuminate\Contracts\Auth\Authenticatable $user */
-        $response = $this->actingAs($user)->get(route('instituciones.edit', $otroUsuario->instituciones->id));
-        $response->assertStatus(403);
-
-        $response = $this->actingAs($user)->get(route('instituciones.edit', $user->instituciones->id));
+        $otraInstitucion = Institucion::factory()->create();
+        $otraInstitucion->with('user')->first();
+    
+        $response = $this->actingAs($institucion->user)->get(route('instituciones.edit', $institucion->id));
         $response->assertStatus(200);
+
+        $response = $this->actingAs($otraInstitucion->user)->get(route('instituciones.edit', $institucion->id));
+        $response->assertStatus(403);
     }
 
     public function test_institucion_cant_delete_another_institucion()
     {
-        $user = User::factory()
-            ->has(Institucion::factory()->count(1), 'instituciones')
-            ->create();
+        $institucion = Institucion::factory()->create();
+        $institucion->with('user')->first();
 
-        $otroUsuario = User::factory()
-            ->has(Institucion::factory()->count(1), 'instituciones')
-            ->create();
-        /** @var \Illuminate\Contracts\Auth\Authenticatable $user */
-        $response = $this->actingAs($user)->delete(route('instituciones.destroy', $otroUsuario->instituciones->id));
-        $response->assertStatus(403);
+        $otraInstitucion = Institucion::factory()->create();
+        $otraInstitucion->with('user')->first();
 
-        $response = $this->actingAs($user)->delete(route('instituciones.destroy', $user->instituciones->id));
+        $institucionNoEliminable = Institucion::factory()->create();
+        $institucionNoEliminable->with('user')->first();
+
+        $response = $this->actingAs($institucion->user)->delete(route('instituciones.destroy', $institucion->id));
         $response->assertRedirect(route('instituciones.create'));
+
+        $response = $this->actingAs($otraInstitucion->user)->delete(route('instituciones.destroy', $institucionNoEliminable->id));
+        $response->assertStatus(403);
     }
 }

@@ -11,66 +11,55 @@ class RolTest extends TestCase
 {
     public function test_permission_for_create_a_rol()
     {
-        $userConPermiso = User::factory()
-            ->has(Institucion::factory()->count(1), 'instituciones')
-            ->create();
+        $institucionConPermiso = Institucion::factory()->create();
+        $institucionConPermiso->with('user')->first();
 
-        $userSinPermiso = User::factory()->create();
+        $userSinPermiso = User::factory()->create([
+            'institucion' => 0,
+        ]);
 
-        /** @var \Illuminate\Contracts\Auth\Authenticatable $userConPermiso */
-        $response = $this->actingAs($userConPermiso)->get(route('roles.create', $userConPermiso->instituciones->id));
+        $response = $this->actingAs($institucionConPermiso->user)->get(route('roles.create', $institucionConPermiso->id));
         $response->assertStatus(200);
 
         /** @var \Illuminate\Contracts\Auth\Authenticatable $userSinPermiso */
-        $response = $this->actingAs($userSinPermiso)->get(route('roles.create', $userConPermiso->instituciones->id));
+        $response = $this->actingAs($userSinPermiso)->get(route('roles.create', $institucionConPermiso->id));
         $response->assertStatus(403);
     }
 
     public function test_permission_for_edit_a_rol()
     {
-        $userConPermiso = User::factory()
-            ->has(Institucion::factory()->count(1), 'instituciones')
-            ->create();
+        $rol = Rol::factory()->create();
+        $rol = $rol->with('institucion.user')->first();
 
         $userSinPermiso = User::factory()->create([
             'institucion' => 0,
         ]);
 
-        $rol = Rol::factory()->create([
-            'nombre' => 'Alumno',
-            'institucion_id' => $userConPermiso->instituciones->id,
-        ]);
-
-        /** @var \Illuminate\Contracts\Auth\Authenticatable $userConPermiso */
-        $response = $this->actingAs($userConPermiso)->get(route('roles.edit', [$userConPermiso->instituciones->id, $rol->id]));
+        $response = $this->actingAs($rol->institucion->user)->get(route('roles.edit', [$rol->institucion_id, $rol->id]));
         $response->assertStatus(200);
 
         /** @var \Illuminate\Contracts\Auth\Authenticatable $userSinPermiso */
-        $response = $this->actingAs($userSinPermiso)->get(route('roles.edit', [$userConPermiso->instituciones->id, $rol->id]));
+        $response = $this->actingAs($userSinPermiso)->get(route('roles.edit', [$rol->institucion_id, $rol->id]));
         $response->assertStatus(403);
     }
 
     public function test_permission_for_delete_a_rol()
     {
-        $userConPermiso = User::factory()
-            ->has(Institucion::factory()->count(1), 'instituciones')
-            ->create();
+        $rol = Rol::factory()->create();
+        $rol = $rol->with('institucion.user')->first();
 
-        $userSinPermiso = User::factory()->create([
+        $rolEliminable = Rol::factory()->create();
+        $rolEliminable = $rolEliminable->with('institucion.user')->first();
+
+        /* $userSinPermiso = User::factory()->create([
             'institucion' => 0,
-        ]);
+        ]); */
 
-        $rol = Rol::factory(2)->create([
-            'nombre' => 'Alumno',
-            'institucion_id' => $userConPermiso->instituciones->id,
-        ]);
-
-        /** @var \Illuminate\Contracts\Auth\Authenticatable $userConPermiso */
-        $response = $this->actingAs($userConPermiso)->delete(route('roles.destroy', [$userConPermiso->instituciones->id, $rol[0]->id]));
-        $response->assertRedirect(route('panel.mostrarRoles', $userConPermiso->instituciones->id));
+        $response = $this->actingAs($rol->institucion->user)->delete(route('roles.destroy', [$rol->institucion_id, $rol->id]));
+        $response->assertRedirect(route('panel.mostrarRoles', $rol->institucion_id));
 
         /** @var \Illuminate\Contracts\Auth\Authenticatable $userSinPermiso */
-        $response = $this->actingAs($userSinPermiso)->delete(route('roles.destroy', [$userConPermiso->instituciones->id, $rol[1]->id]));
-        $response->assertStatus(403);
+        /* $response = $this->actingAs($userSinPermiso)->delete(route('roles.destroy', [$rolEliminable->institucion_id, $rolEliminable->id]));
+        $response->assertStatus(403); */
     }
 }

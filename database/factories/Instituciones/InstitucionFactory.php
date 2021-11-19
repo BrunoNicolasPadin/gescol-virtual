@@ -14,7 +14,7 @@ class InstitucionFactory extends Factory
     {
         return [
             'nombre' => $this->faker->name(),
-            'user_id' => User::factory(),
+            'user_id' => User::factory()->create(),
         ];
     }
 }

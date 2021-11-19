@@ -80,8 +80,8 @@ class User extends Authenticatable
         return $this->hasOne(Institucion::class)->exists();
     }
 
-    public function instituciones()
+    public function rolUser()
     {
-        return $this->hasOne(Institucion::class);
+        return $this->hasOne(RolUser::class, 'user_id');
     }
 }
