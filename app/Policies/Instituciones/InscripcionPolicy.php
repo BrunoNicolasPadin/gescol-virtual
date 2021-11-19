@@ -33,7 +33,7 @@ class InscripcionPolicy
 
     public function verificarPermiso($user, $rolUser, $permiso)
     {
-        if ($user->obtenerPermisos('Inscripciones: eliminar')) {
+        if ($user->obtenerPermisos($permiso)) {
             return true;
         }
         if ($user->id == $rolUser->user_id) {

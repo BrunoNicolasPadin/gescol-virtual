@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Roles;
 
 use App\Models\Instituciones\Institucion;
 use App\Models\Roles\Rol;
