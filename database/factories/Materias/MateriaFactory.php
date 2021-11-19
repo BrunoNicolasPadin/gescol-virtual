@@ -1,20 +1,20 @@
 <?php
 
-namespace Database\Factories\Cursos;
+namespace Database\Factories\Materias;
 
 use App\Models\Cursos\Curso;
-use App\Models\Instituciones\Institucion;
+use App\Models\Materias\Materia;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CursoFactory extends Factory
+class MateriaFactory extends Factory
 {
-    protected $model = Curso::class;
+    protected $model = Materia::class;
 
     public function definition()
     {
         return [
             'nombre' => $this->faker->name(),
-            'institucion_id' => Institucion::factory(),
+            'curso_id' => Curso::factory(),
         ];
     }
 }
