@@ -46,7 +46,7 @@
 
                     <div v-for="archivo in evaluacion.archivos" :key="archivo.id" 
                         class="bg-white border border-gray-200 p-3 text-md">
-                        <a :href="'http://127.0.0.1:8000/storage/app/Evaluaciones/' + archivo.archivo" target="_blank" rel="noopener noreferrer">
+                        <a :href="'storage/app/public/Evaluaciones/' + archivo.archivo" target="_blank" rel="noopener noreferrer">
                             {{ archivo.archivo }}
                         </a>
                     </div>

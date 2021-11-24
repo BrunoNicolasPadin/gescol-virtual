@@ -44,7 +44,7 @@
 
                     <div v-for="archivo in entrega.archivos" :key="archivo.id" 
                         class="bg-white border border-gray-200 p-3 text-md">
-                        <a :href="'http://127.0.0.1:8000/storage/app/Entregas/' + archivo.archivo" target="_blank" rel="noopener noreferrer">
+                        <a :href="'storage/Entregas/' + archivo.archivo" target="_blank" rel="noopener noreferrer">
                             {{ archivo.archivo }}
                         </a>
                     </div>
@@ -55,7 +55,7 @@
 
                     <div v-for="correccion in correcciones" :key="correccion.id" 
                         class="bg-white border border-gray-200 p-3 text-md">
-                        <a :href="'http://127.0.0.1:8000/storage/app/Correcciones/' + correccion.archivo" target="_blank" rel="noopener noreferrer">
+                        <a :href="'storage/Correcciones/' + correccion.archivo" target="_blank" rel="noopener noreferrer">
                             {{ correccion.archivo }}
                         </a>
                     </div>

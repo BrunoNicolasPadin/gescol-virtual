@@ -27710,7 +27710,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           key: archivo.id,
           "class": "bg-white border border-gray-200 p-3 text-md"
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-          href: 'http://127.0.0.1:8000/storage/app/Clases/' + archivo.archivo,
+          href: 'storage/Clases/' + archivo.archivo,
           target: "_blank",
           rel: "noopener noreferrer"
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(archivo.archivo), 9
@@ -29062,7 +29062,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           key: archivo.id,
           "class": "bg-white border border-gray-200 p-3 text-md"
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-          href: 'http://127.0.0.1:8000/storage/app/Entregas/' + archivo.archivo,
+          href: 'storage/Entregas/' + archivo.archivo,
           target: "_blank",
           rel: "noopener noreferrer"
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(archivo.archivo), 9
@@ -29075,7 +29075,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           key: correccion.id,
           "class": "bg-white border border-gray-200 p-3 text-md"
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-          href: 'http://127.0.0.1:8000/storage/app/Correcciones/' + correccion.archivo,
+          href: 'storage/Correcciones/' + correccion.archivo,
           target: "_blank",
           rel: "noopener noreferrer"
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(correccion.archivo), 9
@@ -30014,7 +30014,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           key: archivo.id,
           "class": "bg-white border border-gray-200 p-3 text-md"
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-          href: 'http://127.0.0.1:8000/storage/app/Evaluaciones/' + archivo.archivo,
+          href: 'storage/app/public/Evaluaciones/' + archivo.archivo,
           target: "_blank",
           rel: "noopener noreferrer"
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(archivo.archivo), 9
@@ -34388,19 +34388,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     alt: "...",
     "class": "max-w-full rounded-lg shadow-lg",
-    src: 'http://127.0.0.1:8000/storage/Inicio/materias.png'
+    src: 'storage/Inicio/materias.png'
   }, null, 8
   /* PROPS */
   , _hoisted_14)]), _hoisted_15])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     alt: "...",
     "class": "max-w-full rounded-lg shadow-lg",
-    src: 'http://127.0.0.1:8000/storage/Inicio/evaluacion.png'
+    src: 'storage/Inicio/evaluacion.png'
   }, null, 8
   /* PROPS */
   , _hoisted_20)]), _hoisted_21])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     alt: "...",
     "class": "max-w-full rounded-lg shadow-lg",
-    src: 'http://127.0.0.1:8000/storage/Inicio/entrega.png'
+    src: 'storage/Inicio/entrega.png'
   }, null, 8
   /* PROPS */
   , _hoisted_26)]), _hoisted_27])]), _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [_hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
